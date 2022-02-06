@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Chicago";
+  src: url("/fonts/ChicagoFLF.woff2") format("woff2"),
+    url("/fonts/ChicagoFLF.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+.shadow-mac-os {
+  box-shadow: inset -1px -1px 0 0 #000,inset 1px 1px 0 0 #fff,5px 5px 0 rgba(0,0,0,.2);
+}
+
+.close-btn {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAGCAYAAAAL+1RLAAAAMUlEQVQImV2NwQ0AIBDCuv8GTFsfJ2p8kBAKAUAAFR2LmoJhpi5/8Da6uI0D1PRkKwvsoDssfqmQWwAAAABJRU5ErkJggg==) no-repeat 50%
+}
+
+.cursor-grab {
+  cursor:url('/img/cursors/hand2.png'), auto;
+}
+
+.cursor-point {
+  cursor:url('/img/cursors/hand.png'), auto;
+}
+
+.cursor-default {
+  cursor:url('/img/cursors/arrow.png'), auto;
+}
+
+.select-none {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
+.bg-tile-1 {
+  background-image: url('/img/background/tile-1.png');
+}
+
+.bg-tile-2 {
+  background-image: url('/img/background/tile-2.png');
+}
+
+.bg-tile-3 {
+  background-image: url('/img/background/poolside-fm-pacific-breeze.png');
+}
+
+.os-window *::-webkit-scrollbar {
+  width: 14px;
+
+}
+
+.os-window *::-webkit-scrollbar-track {
+  background-color: #ccc; 
+  border-left: 1px solid #000;
+}
+
+.os-window *::-webkit-scrollbar-thumb {
+  /* TODO: Make scrollbar like mac os */
+  width: 14px!important;
+  height: 40px!important;
+  right: 0!important;
+  background: url('/img/scrollbar.svg') no-repeat 50% #fff !important;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: pixelated;
+  border-radius: 0!important;
+  opacity: 1;
+  border-top: 1px solid #000;
+  border-left: 1px solid #000;
+  border-bottom: 1px solid #000;
+  cursor:url('/img/cursors/hand2.png'), auto;
+}
+
+.os-window *::-webkit-scrollbar-button {
+  display:none;
+}
