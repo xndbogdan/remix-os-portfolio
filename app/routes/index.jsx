@@ -1,3 +1,5 @@
+import Draggable from 'react-draggable';
+
 export default function Index() {
   const currentDateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
   const currentDate = new Date()
@@ -12,29 +14,31 @@ export default function Index() {
         <div className="text-xs font-bold border-l border-black pl-2 py-1 sm:pr-2">{currentDate.toLocaleTimeString("en-US")}</div>
         <div className="text-xs font-bold border-l border-black pl-2 py-1 hidden sm:block">{currentDate.toLocaleDateString("en-US", currentDateOptions)}</div>
       </div>
-     
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto">
-
-          <div className="p-1 border border-black mt-4 bg-gray-mac shadow-mac-os os-window">
-            <div className="flex flex-row items-center pb-1">
-              <div className="close-btn h-4 w-4 border border-black mr-2 hover:invert hover:bg-white cursor-point"></div>
-              <div className="flex-1 flex flex-col justify-between cursor-grab h-2">
-                <div className="border-t border-black"></div>
-                <div className="border-t border-black"></div>
-                <div className="border-t border-black"></div>
+          <Draggable handle=".handle">
+            <div className="p-1 border border-black mt-4 bg-gray-mac shadow-mac-os os-window">
+              <div className="flex flex-row items-center pb-1">
+                <div className="close-btn h-4 w-4 border border-black mr-2 hover:invert hover:bg-white cursor-point"></div>
+                <div className="flex-1 flex flex-col justify-between cursor-grab h-2 handle">
+                  <div className="border-t border-black"></div>
+                  <div className="border-t border-black"></div>
+                  <div className="border-t border-black"></div>
+                </div>
+                <div className="text-xs ml-2 font-bold">Remix OS</div>
               </div>
-              <div className="text-xs ml-2 font-bold">Remix OS</div>
+              <div className="bg-white p-2 overflow-y-auto border border-black text-sm">
+                <p>I'm Bogdan, an independent full-stack developer from Bucharest.</p>
+                <p>I'm interested in Laravel, Vue, Tailwind, music production, and goofy projects, like this one.</p>
+              </div>
             </div>
-            <div className="bg-white p-2 overflow-y-auto border border-black text-sm">
-              <p>I'm Bogdan, an independent full-stack developer from Bucharest.</p>
-              <p>I'm interested in Laravel, Vue, Tailwind, music production, and goofy projects, like this one.</p>
-            </div>
-          </div>
-
+          </Draggable>
         </div>
       </div>
+
+      
     </div>
-   
+
   );
 }
