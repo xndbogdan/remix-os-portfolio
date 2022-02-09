@@ -27,7 +27,7 @@ class MusicPlayer extends React.Component {
             <div className="bg-gray-900 h-8 border-2 border-gray-600 text-blue-300 px-2 flex items-center my-2" ref={this.displayTextContainer}>
                 <a target="_blank" href={this.state.selectedTrack.permalink_url} className="opacity-75 truncate cursor-point" ref={this.displayText}>{this.state.display}</a>
             </div>
-            <p className="text-xs">Station: {this.state.selectedPlaylist.name}</p>
+            <p className="text-sm">Station: {this.state.selectedPlaylist.name}</p>
             <div className="w-full h-2 bg-black cursor-point" ref={this.progressBarContainer} onMouseUp={this.updateSongPosition}>
                 <div ref={this.progressBar} className="bg-blue-300 h-2 pointer-events-none" style={{width:this.state.trackProgress}}></div>
             </div>

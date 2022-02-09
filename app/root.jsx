@@ -27,7 +27,7 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body className="select-none cursor-default">
+      <body className="select-none cursor-default overflow-x-hidden">
         <Outlet />
         <ScrollRestoration />
         <Scripts />
