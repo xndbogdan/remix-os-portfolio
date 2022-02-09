@@ -8,11 +8,7 @@ class Clock extends React.Component {
         };
     }
     render() {
-        return (
-        <p className="App-clock">
-            {this.state.time}
-        </p>
-        );
+        return (<span>{this.state.time}</span>);
     }
 
     componentDidMount() {

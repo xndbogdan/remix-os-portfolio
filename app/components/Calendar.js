@@ -8,11 +8,7 @@ class Calendar extends React.Component {
         };
     }
     render() {
-        return (
-        <p className="App-clock">
-            {this.state.date}
-        </p>
-        );
+        return (<span>{this.state.date}</span>);
     }
 
     componentDidMount() {
