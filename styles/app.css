@@ -65,13 +65,13 @@
 
 .os-window *::-webkit-scrollbar-thumb {
   /* TODO: Make scrollbar like mac os */
-  width: 14px!important;
-  height: 40px!important;
+  width: 14px;
+  height: 40px;
   right: 0!important;
-  background: url('/img/scrollbar.svg') no-repeat 50% #fff !important;
+  background: url('/img/scrollbar.svg') no-repeat 50% #fff ;
   image-rendering: -webkit-optimize-contrast;
   image-rendering: pixelated;
-  border-radius: 0!important;
+  border-radius: 0;
   opacity: 1;
   border-top: 1px solid #000;
   border-left: 1px solid #000;
@@ -79,6 +79,10 @@
   cursor:url('/img/cursors/hand2.png'), auto;
 }
 
-.os-window *::-webkit-scrollbar-button {
-  display:none;
+.scrollbars-hidden::-webkit-scrollbar {
+  display:none!important;
+}
+
+.scrollbars-hidden {
+  scrollbar-width: none!important;
 }
