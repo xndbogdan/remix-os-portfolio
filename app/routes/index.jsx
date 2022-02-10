@@ -169,7 +169,7 @@ export default function Index() {
                 <p className="mt-2">This is a realty ecommerce platform. Built with Laravel and Vue.js.</p>
 
                 <p className="mt-2"><a className="text-blue-700 hover:text-blue-700" target="_blank" href="https://demo.oxplay.com/">• Oxplay</a> - Website</p>
-                <p>Professional gaming platform built with Nuxt, Laravel and Lumen frameworks.</p>
+                <p>White-label gaming platform built with Nuxt, Laravel and Lumen frameworks.</p>
 
                 <p className="mt-2"><a className="text-blue-700 hover:text-blue-700" target="_blank" href="https://github.com/xndbogdan/laravel-ray-legacy">• Laravel Ray Legacy</a> - Laravel Plugin</p>
                 <a href="https://packagist.org/packages/xndbogdan/laravel-ray-legacy" rel="nofollow">
