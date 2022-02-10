@@ -52,6 +52,7 @@ class Desktop extends React.Component {
                                         <div className="bg-white p-2 overflow-y-auto border border-black text-sm">
                                             <p>I'm Bogdan, an independent full-stack developer from Bucharest.</p>
                                             <p>Big fan of Laravel, Vue and Tailwind.</p>
+                                            <p className="mt-2">This project was made using Remix.<br/>It's still under development.</p>
                                         </div>
                                     </div>
                                 </Draggable>
