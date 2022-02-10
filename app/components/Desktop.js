@@ -15,7 +15,7 @@ class Desktop extends React.Component {
     render() {
         return (
             <div className="flex-1 min-h-screen font-chicago">
-                <div className="w-full border-b border-black px-2 flex flex-row bg-gray-mac">
+                <div className="w-full border-b border-black px-2 flex flex-row bg-gray-mac z-50">
                     <div className="border-r border-black text-xs font-bold pr-2 flex flex-row items-center py-1 cursor-point">
                         <span>Remix OS</span>
                         <img className="inline ml-1" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAADCAYAAABbNsX4AAAAHElEQVQImWNkYGD4z4AGQIIggCwBE0OSYGBgAABmWAMBPlQzgwAAAABJRU5ErkJggg==" height="3" width="auto"></img>
@@ -28,16 +28,30 @@ class Desktop extends React.Component {
                     <span>Remix Alpha Release v0.1</span>
                     <span>Evaluation Copy</span>
                 </div>
-                <div className="w-screen absolute p-1">
-                    DESKTOP ICONS PLACEHOLDER
+                <div className="w-screen flex flex-wrap absolute p-2">
+                    <div className="w-full">DESKTOP ICONS PLACEHOLDER</div>
+                    <div class="w-full flex flex-wrap space-x-4">
+                        <Draggable handle=".handle">
+                            <div className="w-8 flex flex-col handle">
+                                <div className="w-8 h-8 bg-black"></div>
+                                <span className="text-xs">APP NAME</span>
+                            </div>
+                        </Draggable>
+                        <Draggable handle=".handle">
+                            <div className="w-8 flex flex-col handle">
+                                <div className="w-8 h-8 bg-black"></div>
+                                <span className="text-xs">APP NAME</span>
+                            </div>
+                        </Draggable>
+                    </div>
                 </div>
-                <div className="w-screen absolute">
+                <div className="w-screen absolute pointer-events-none z-0">
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <div className="max-w-4xl mx-auto">
                             <div className="flex flex-wrap justify-center md:justify-between items-start">
 
                                 <Draggable handle=".handle">
-                                    <div className="p-1 border border-black mt-4 bg-gray-mac shadow-mac-os os-window w-full max-w-sm">
+                                    <div className="p-1 border border-black mt-4 bg-gray-mac shadow-mac-os os-window w-full max-w-sm pointer-events-auto">
                                         <div className="flex flex-row items-center pb-1">
                                             <div className="close-btn h-4 w-4 border border-black mr-2 hover:invert hover:bg-white cursor-point"></div>
                                             <div className="flex-1 flex handle h-4 items-center">
@@ -49,7 +63,7 @@ class Desktop extends React.Component {
                                             </div>
                                             <div className="text-xs ml-2 font-bold handle cursor-grab">Remix OS</div>
                                         </div>
-                                        <div className="bg-white p-2 overflow-y-auto border border-black text-sm">
+                                        <div className="bg-white p-2 overflow-y-auto border border-black text-sm select-full">
                                             <p>I'm Bogdan, an independent full-stack developer from Bucharest.</p>
                                             <p>Big fan of Laravel, Vue and Tailwind.</p>
                                             <p className="mt-2">This project was made using Remix.<br/>It's still under development.</p>
@@ -58,7 +72,7 @@ class Desktop extends React.Component {
                                 </Draggable>
 
                                 <Draggable handle=".handle">
-                                    <div className="p-1 border border-black mt-4 bg-gray-mac shadow-mac-os os-window w-full max-w-sm">
+                                    <div className="p-1 border border-black mt-4 bg-gray-mac shadow-mac-os os-window w-full max-w-sm pointer-events-auto">
                                         <div className="flex flex-row items-center pb-1">
                                             <div className="close-btn h-4 w-4 border border-black mr-2 hover:invert hover:bg-white cursor-point"></div>
                                             <div className="flex-1 flex handle h-4 items-center">
@@ -75,7 +89,7 @@ class Desktop extends React.Component {
                                 </Draggable>
 
                                 <Draggable handle=".handle">
-                                    <div className="p-1 border border-black mt-4 bg-gray-mac shadow-mac-os os-window w-full max-w-sm">
+                                    <div className="p-1 border border-black mt-4 bg-gray-mac shadow-mac-os os-window w-full max-w-sm pointer-events-auto">
                                         <div className="flex flex-row items-center pb-1">
                                             <div className="close-btn h-4 w-4 border border-black mr-2 hover:invert hover:bg-white cursor-point"></div>
                                             <div className="flex-1 flex handle h-4 items-center">
@@ -87,7 +101,7 @@ class Desktop extends React.Component {
                                             </div>
                                             <div className="text-xs ml-2 font-bold handle cursor-grab">Remix OS</div>
                                         </div>
-                                        <div className="bg-white p-2 overflow-y-auto border border-black text-sm max-h-80">
+                                        <div className="bg-white p-2 overflow-y-auto border border-black text-sm max-h-80 select-full">
 
                                             <p className="text-lg mb-2">Projects</p>
                                             <p className="mb-2 text-red-600">Note: The list of projects is longer but not all can be mentioned due to NDAs or due to the projects not being public yet. Most of my private projects are made using Laravel and Vue.js</p>
@@ -126,7 +140,7 @@ class Desktop extends React.Component {
                                 </Draggable>
 
                                 <Draggable handle=".handle">
-                                    <div className="p-1 border border-black mt-4 bg-gray-mac shadow-mac-os os-window w-full max-w-sm">
+                                    <div className="p-1 border border-black mt-4 bg-gray-mac shadow-mac-os os-window w-full max-w-sm pointer-events-auto">
                                         <div className="flex flex-row items-center pb-1">
                                             <div className="close-btn h-4 w-4 border border-black mr-2 hover:invert hover:bg-white cursor-point"></div>
                                             <div className="flex-1 flex handle h-4 items-center">
@@ -145,7 +159,7 @@ class Desktop extends React.Component {
                                 </Draggable>
 
                                 <Draggable handle=".handle">
-                                    <div className="p-1 border border-black mt-4 bg-gray-mac shadow-mac-os os-window w-full max-w-sm">
+                                    <div className="p-1 border border-black mt-4 bg-gray-mac shadow-mac-os os-window w-full max-w-sm pointer-events-auto">
                                         <div className="flex flex-row items-center pb-1">
                                             <div className="close-btn h-4 w-4 border border-black mr-2 hover:invert hover:bg-white cursor-point"></div>
                                             <div className="flex-1 flex handle h-4 items-center">
@@ -157,7 +171,7 @@ class Desktop extends React.Component {
                                             </div>
                                             <div className="text-xs ml-2 font-bold handle cursor-grab">Remix OS</div>
                                         </div>
-                                        <div className="bg-white p-2 overflow-y-auto max-h-80 border border-black text-sm">
+                                        <div className="bg-white p-2 overflow-y-auto max-h-80 border border-black text-sm select-full">
 
                                             <p className="text-lg mb-2">Resume</p>
                                             <p className="mb-2 text-base">• About me</p>
@@ -193,7 +207,7 @@ class Desktop extends React.Component {
                                 </Draggable>
 
                                 <Draggable handle=".handle">
-                                    <div className="p-1 border border-black mt-4 bg-gray-mac shadow-mac-os os-window w-full mb-16 max-w-sm">
+                                    <div className="p-1 border border-black mt-4 bg-gray-mac shadow-mac-os os-window w-full mb-16 max-w-sm pointer-events-auto">
                                         <div className="flex flex-row items-center pb-1">
                                             <div className="close-btn h-4 w-4 border border-black mr-2 hover:invert hover:bg-white cursor-point"></div>
                                             <div className="flex-1 flex handle h-4 items-center">
@@ -205,7 +219,7 @@ class Desktop extends React.Component {
                                             </div>
                                             <div className="text-xs ml-2 font-bold handle cursor-grab">Remix OS</div>
                                         </div>
-                                        <div className="bg-white p-2 overflow-y-auto border border-black text-sm max-h-80">
+                                        <div className="bg-white p-2 overflow-y-auto border border-black text-sm max-h-80 select-full">
 
                                             <p className="text-lg mb-2">Credits</p>
                                             <p><a target="_blank" href="https://remix.run" className="text-blue-700 hover:text-blue-800">• Remix framework</a>, for making this project possible.</p>
