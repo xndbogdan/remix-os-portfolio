@@ -200,7 +200,7 @@ export default function Index() {
           </Draggable>
 
           <Draggable handle=".handle">
-            <div className="p-1 border border-black mt-4 bg-gray-mac shadow-mac-os os-window w-full mb-16">
+            <div className="p-1 border border-black mt-4 bg-gray-mac shadow-mac-os os-window w-full">
               <div className="flex flex-row items-center pb-1">
                 <div className="close-btn h-4 w-4 border border-black mr-2 hover:invert hover:bg-white cursor-point"></div>
                 <div className="flex-1 flex handle h-4 items-center">
@@ -243,6 +243,28 @@ export default function Index() {
 
                 <p className="mt-2"><span className="text-blue-700">Independent Contractor</span> (Aug 2019 - Present day)</p>
                 <p>Switched to contracting to enjoy the freedom of remote work and a larger variety of projects.</p>
+              </div>
+            </div>
+          </Draggable>
+
+          <Draggable handle=".handle">
+            <div className="p-1 border border-black mt-4 bg-gray-mac shadow-mac-os os-window w-full mb-16">
+              <div className="flex flex-row items-center pb-1">
+                <div className="close-btn h-4 w-4 border border-black mr-2 hover:invert hover:bg-white cursor-point"></div>
+                <div className="flex-1 flex handle h-4 items-center">
+                  <div className="flex-1 flex flex-col justify-between cursor-grab h-2">
+                    <div className="border-t border-black"></div>
+                    <div className="border-t border-black"></div>
+                    <div className="border-t border-black"></div>
+                  </div>
+                </div>
+                <div className="text-xs ml-2 font-bold handle cursor-grab">Remix OS</div>
+              </div>
+              <div className="bg-white p-2 overflow-y-auto border border-black text-sm max-h-80">
+
+                <p className="text-lg mb-2">Credits</p>
+                <p><a target="_blank" href="https://remix.run" className="text-blue-700 hover:text-blue-800">• Remix framework</a>, for making this project possible.</p>
+                <p><a target="_blank" href="https://poolsuite.net/" className="text-blue-700 hover:text-blue-800">• Poolsuite</a>, for inspiring this project's design and providing awesome music playlists.</p>
               </div>
             </div>
           </Draggable>
