@@ -1,12 +1,13 @@
-# fly.toml file generated for remixos on 2022-02-10T18:39:14+02:00
+# fly.toml file generated for dawn-glitter-8072 on 2022-02-10T20:46:49+02:00
 
-app = "remixos"
+app = "dawn-glitter-8072"
 
 kill_signal = "SIGINT"
 kill_timeout = 5
 processes = []
 
 [env]
+  PORT = "8080"
 
 [experimental]
   allowed_public_ports = []
@@ -14,7 +15,7 @@ processes = []
 
 [[services]]
   http_checks = []
-  internal_port = 8000
+  internal_port = 8080
   processes = ["app"]
   protocol = "tcp"
   script_checks = []
