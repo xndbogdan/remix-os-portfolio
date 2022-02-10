@@ -14,7 +14,7 @@ class Desktop extends React.Component {
     }
     render() {
         return (
-            <div className="bg-tile-3 flex-1 min-h-screen font-chicago">
+            <div className="flex-1 min-h-screen font-chicago">
                 <div className="w-full border-b border-black px-2 flex flex-row bg-gray-mac">
                     <div className="border-r border-black text-xs font-bold pr-2 flex flex-row items-center py-1 cursor-point">
                         <span>Remix OS</span>
