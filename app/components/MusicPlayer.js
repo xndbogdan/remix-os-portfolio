@@ -19,7 +19,6 @@ class MusicPlayer extends React.Component {
         this.displayTextContainer = React.createRef()
         this.progressBar = React.createRef()
         this.progressBarContainer = React.createRef()
-        console.log(this.state)
     }
     render(props) {
         return (

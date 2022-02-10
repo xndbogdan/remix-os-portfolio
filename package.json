@@ -20,7 +20,8 @@
     "react-draggable": "^4.4.4",
     "react-player": "^2.9.0",
     "remix": "^1.1.3",
-    "soundcloud": "^3.3.2"
+    "soundcloud": "^3.3.2",
+    "three": "^0.137.5"
   },
   "devDependencies": {
     "@remix-run/dev": "^1.1.3",
