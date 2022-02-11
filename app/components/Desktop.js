@@ -25,7 +25,7 @@ class Desktop extends React.Component {
                     <div className="text-xs border-l border-black pl-2 py-1 hidden sm:block"><Calendar /></div>
                 </div>
                 <div className="fixed bottom-0 right-0 text-white p-2 text-sm flex flex-col items-end">
-                    <span>Remix Alpha Release v0.1</span>
+                    <span>Remix OS Alpha Release v0.1</span>
                     <span>Evaluation Copy</span>
                 </div>
                 <div className="w-screen flex flex-wrap absolute p-2">
