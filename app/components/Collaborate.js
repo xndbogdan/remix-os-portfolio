@@ -14,7 +14,7 @@ class Collaborate extends React.Component {
     render() {
 			return (
 				<div className="flex flex-wrap items-center">
-                    <p className="text-lg font-bold">Let's build something together!</p>
+                    <p className="text-lg">Let's build something together!</p>
 					<div className="w-1/3 md:w-2/6 justify-center items-center">
 						<img className="h-16 w-auto mx-auto" src="/img/globe.gif"/>
 					</div>

@@ -16,13 +16,13 @@ class Desktop extends React.Component {
         return (
             <div className="flex-1 min-h-screen font-chicago">
                 <div className="w-full border-b border-black px-2 flex flex-row bg-gray-mac z-50">
-                    <div className="border-r border-black text-xs font-bold pr-2 flex flex-row items-center py-1 cursor-point">
+                    <div className="border-r border-black text-xs pr-2 flex flex-row items-center py-1 cursor-point">
                         <span>Remix OS</span>
                         <img className="inline ml-1" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAADCAYAAABbNsX4AAAAHElEQVQImWNkYGD4z4AGQIIggCwBE0OSYGBgAABmWAMBPlQzgwAAAABJRU5ErkJggg==" height="3" width="auto"></img>
                     </div>
                     <div className="flex-1 py-1"></div>
-                    <div className="text-xs font-bold border-l border-black pl-2 py-1 sm:pr-2"><Clock /></div>
-                    <div className="text-xs font-bold border-l border-black pl-2 py-1 hidden sm:block"><Calendar /></div>
+                    <div className="text-xs border-l border-black pl-2 py-1 sm:pr-2"><Clock /></div>
+                    <div className="text-xs border-l border-black pl-2 py-1 hidden sm:block"><Calendar /></div>
                 </div>
                 <div className="fixed bottom-0 right-0 text-white p-2 text-sm flex flex-col items-end">
                     <span>Remix Alpha Release v0.1</span>
@@ -61,7 +61,7 @@ class Desktop extends React.Component {
                                                     <div className="border-t border-black"></div>
                                                 </div>
                                             </div>
-                                            <div className="text-xs ml-2 font-bold handle cursor-grab">Remix OS</div>
+                                            <div className="text-xs ml-2 handle cursor-grab">Remix OS</div>
                                         </div>
                                         <div className="bg-white p-2 overflow-y-auto border border-black text-sm select-full">
                                             <p>I'm Bogdan, an independent full-stack developer from Bucharest.</p>
@@ -82,7 +82,7 @@ class Desktop extends React.Component {
                                                     <div className="border-t border-black"></div>
                                                 </div>
                                             </div>
-                                            <div className="text-xs ml-2 font-bold handle cursor-grab">Remix OS</div>
+                                            <div className="text-xs ml-2 handle cursor-grab">Remix OS</div>
                                         </div>
                                         <MusicPlayer tracklist={this.props.tracklist} />
                                     </div>
@@ -99,7 +99,7 @@ class Desktop extends React.Component {
                                                     <div className="border-t border-black"></div>
                                                 </div>
                                             </div>
-                                            <div className="text-xs ml-2 font-bold handle cursor-grab">Remix OS</div>
+                                            <div className="text-xs ml-2 handle cursor-grab">Remix OS</div>
                                         </div>
                                         <div className="bg-white p-2 overflow-y-auto border border-black text-sm max-h-80 select-full">
 
@@ -150,7 +150,7 @@ class Desktop extends React.Component {
                                                     <div className="border-t border-black"></div>
                                                 </div>
                                             </div>
-                                            <div className="text-xs ml-2 font-bold handle cursor-grab">Remix OS</div>
+                                            <div className="text-xs ml-2 handle cursor-grab">Remix OS</div>
                                         </div>
                                         <div className="p-2 overflow-y-auto bordertext-sm">
                                             <Collaborate />
@@ -169,7 +169,7 @@ class Desktop extends React.Component {
                                                     <div className="border-t border-black"></div>
                                                 </div>
                                             </div>
-                                            <div className="text-xs ml-2 font-bold handle cursor-grab">Remix OS</div>
+                                            <div className="text-xs ml-2 handle cursor-grab">Remix OS</div>
                                         </div>
                                         <div className="bg-white p-2 overflow-y-auto max-h-80 border border-black text-sm select-full">
 
@@ -216,7 +216,7 @@ class Desktop extends React.Component {
                                                     <div className="border-t border-black"></div>
                                                 </div>
                                             </div>
-                                            <div className="text-xs ml-2 font-bold handle cursor-grab">Remix OS</div>
+                                            <div className="text-xs ml-2 handle cursor-grab">Remix OS</div>
                                         </div>
                                         <div className="bg-white p-2 overflow-y-auto border border-black text-sm max-h-80 select-full">
 
