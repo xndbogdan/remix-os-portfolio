@@ -3,11 +3,13 @@ import React, { useRef } from 'react';
 class MusicPlayer extends React.Component {
     constructor(props) {
         super(props);
+        const randomTrackIndex = Math.floor(Math.random() * this.props.tracklist.payload[0].tracks_in_order.length);
         this.state = {
             tracklist: this.props.tracklist,
             selectedPlaylist: this.props.tracklist.payload[0],
-            trackIndex: 0,
-            selectedTrack: this.props.tracklist.payload[0].tracks_in_order[0],
+            selectedPlaylistLength: this.props.tracklist.payload[0].tracks_in_order.length,
+            trackIndex: randomTrackIndex,
+            selectedTrack: this.props.tracklist.payload[0].tracks_in_order[randomTrackIndex],
             display: 'Player Offline',
             isPlaying: false,
             trackProgress: 0,
@@ -53,6 +55,7 @@ class MusicPlayer extends React.Component {
 					</svg>
                 </button>
             </div>
+            <div>Track {this.state.trackIndex} of {this.state.selectedPlaylistLength}</div>
             <audio ref={this.audio} onEnded={this.nextTrack} onTimeUpdate={this.updateTrackProgress} src={'https://api.poolsidefm.workers.dev/v2/get_sc_mp3_stream?track_id=' + this.state.selectedTrack.soundcloud_id}></audio>
         </div>
         );
