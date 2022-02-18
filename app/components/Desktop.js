@@ -85,7 +85,7 @@ class Desktop extends React.Component {
                                         <div className="bg-white p-2 overflow-y-auto border border-black text-sm select-full">
                                             <p>I'm Bogdan, an independent full-stack developer from Bucharest.</p>
                                             <p>Big fan of Laravel, Vue and Tailwind.</p>
-                                            <p className="mt-2">This project was made using Remix.<br/>It's still under development.</p>
+                                            <p className="mt-2">This project was made using Remix. It combines React and Node.<br/>It's still under development.</p>
                                             <p className="mt-2">You should try moving the windows around and playing some music. Maybe fax me your music playlist while you're at it.</p>
                                         </div>
                                     </div>
@@ -191,6 +191,8 @@ class Desktop extends React.Component {
                                             <p className="text-gray-800">• Let the user close windows, and reopen them through the desktop icons</p>
                                             <p className="text-gray-800">• Let the user minimize windows to an applications dock</p>
                                             <p className="text-lg mb-2 mt-4">Changelog</p>
+                                            <p className="text-blue-700 hover:text-blue-800">• 18/02/2022 - Changed the date.</p>
+                                            <p>The year was changed to something more appropriate. Be careful, Y2K is coming!</p>
                                             <p className="text-blue-700 hover:text-blue-800">• 13/02/2022 - Added window focus.</p>
                                             <p>If you click on a window, it will now be placed in front of the others, as it's focused, just as it would on any sane operating system.</p>
                                         </div>
