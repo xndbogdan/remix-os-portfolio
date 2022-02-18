@@ -27,12 +27,9 @@ class Resume extends React.Component {
                 <p>Started working on Artmark since it's beginning, to the end. Worked solo on many internal projects.</p>
                 <p>Gained valuable experience with Laravel, Laravel Nova (also building Resource Tools), Laravel Scout, Vue.js, Vuex, Websockets, AWS services and Elasticsearch.</p>
 
-                <p className="mt-2"><span className="text-blue-700">Full Stack Web Developer</span> at <a href="https://meevo.ca/" target="_blank">Meevo Digital</a> (Nov 2019 - Dec 2019)</p>
-                <p>Web development agency outsourcing for big clients like Capgemini.</p>
-                <p>Gained in-depth knowledge on wordpress development and sage theme builder.</p>
-
-                <p className="mt-2"><span className="text-blue-700">Independent Contractor</span> (Aug 2019 - Present day)</p>
+                <p className="mt-2"><span className="text-blue-700">Independent Contractor</span> (Nov 2019 - Present day)</p>
                 <p>Switched to contracting to enjoy the freedom of remote work and a larger variety of projects.</p>
+                <p>Worked with various clients on public and internal applications.</p>
             </div>
         );
     }
