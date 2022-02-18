@@ -2,9 +2,11 @@ import React from 'react';
 
 class Calendar extends React.Component {
     constructor(props) {
+        let currentDate = new Date();
+        currentDate.setFullYear(currentDate.getFullYear() - 30);
         super(props);
         this.state = {
-            date: new Date().toLocaleDateString("en-US", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
+            date: currentDate.toLocaleDateString("en-US", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
         };
     }
     render() {
@@ -22,8 +24,10 @@ class Calendar extends React.Component {
     }
 
     tick() {
+        let currentDate = new Date();
+        currentDate.setFullYear(currentDate.getFullYear() - 30);
         this.setState({
-            date: new Date().toLocaleDateString("en-US", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
+            date: currentDate.toLocaleDateString("en-US", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
         });
     }
 
