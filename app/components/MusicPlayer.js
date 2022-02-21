@@ -81,6 +81,11 @@ class MusicPlayer extends React.Component {
     }
 
     updateTrackProgress = (event) => {
+        if(this.props.closed) {
+            if(this.state.isPlaying) {
+                this.togglePlay()
+            }
+        }
         const currentTime = event.target.currentTime
         const duration = event.target.duration
         this.setState({

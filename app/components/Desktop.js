@@ -138,7 +138,7 @@ class Desktop extends React.Component {
                                             </div>
                                             <div className="text-xs ml-2 handle cursor-grab">Remix OS</div>
                                         </div>
-                                        <MusicPlayer tracklist={this.props.tracklist} />
+                                        <MusicPlayer tracklist={this.props.tracklist} closed={this.state.windows[1].closed}/>
                                     </div>
                                 </Draggable>
 
@@ -225,6 +225,8 @@ class Desktop extends React.Component {
                                             <p className="text-gray-800"><span className="text-green-500">✓</span> Let the user close windows, and reopen them through the desktop icons</p>
                                             <p className="text-gray-800">• Let the user minimize windows to an applications dock</p>
                                             <p className="text-lg mb-2 mt-4">Changelog</p>
+                                            <p className="text-blue-700 hover:text-blue-800">• 21/02/2022 - Fixed music player bug.</p>
+                                            <p>Fixed a bug where the music player would continue playing even if it was closed.</p>
                                             <p className="text-blue-700 hover:text-blue-800">• 20/02/2022 - Close and re-open windows.</p>
                                             <p>The user can now close windows and open them by clicking the desktop icons.</p>
                                             <p className="text-blue-700 hover:text-blue-800">• 18/02/2022 - Changed the date.</p>
