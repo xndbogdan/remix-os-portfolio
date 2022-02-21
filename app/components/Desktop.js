@@ -1,6 +1,7 @@
 import React from 'react';
 import Draggable from 'react-draggable';
 import { ResizableBox } from 'react-resizable';
+import {isMobile} from 'react-device-detect';
 import MusicPlayer from '~/components/MusicPlayer';
 import Collaborate from '~/components/Collaborate';
 import Clock from '~/components/Clock';
@@ -35,7 +36,9 @@ class Desktop extends React.Component {
             resumeTab: 0,
         };
         this.iconTimeout = null;
+        console.log('asd')
     }
+
     render() {
         const resumeTab = this.state.resumeTab
         let resumeContent;
@@ -100,7 +103,7 @@ class Desktop extends React.Component {
                     </div>
                 </div>
                 <div className="w-screen absolute pointer-events-none z-0">
-                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
                         <div className="max-w-4xl mx-auto">
                             <div className="flex flex-wrap justify-center md:justify-between items-start">
 
@@ -122,6 +125,7 @@ class Desktop extends React.Component {
                                             <p>Big fan of Laravel, Vue and Tailwind.</p>
                                             <p className="mt-2">This project was made using Remix. It combines React and Node.<br/>It's still under development.</p>
                                             <p className="mt-2">You should try moving the windows around and playing some music. Maybe fax me your music playlist while you're at it.</p>
+                                            <p className="mt-2">Close this window if you are on a mobile device</p>
                                         </div>
                                     </div>
                                 </Draggable>
@@ -288,8 +292,7 @@ class Desktop extends React.Component {
             if (index === iconIndex) {
                 let clicks = visibleIcons[index].clicks
                 visibleIcons[index] = { ...window, focused: true, clicks: clicks+1}
-                
-                if(clicks == 1) {
+                if(clicks == 1 || isMobile) {
                     /* An icon was double clicked
                      * We need to reset the iconns state and show the window corresponding to the double clicked icon
                      */
@@ -349,6 +352,17 @@ class Desktop extends React.Component {
     }
 
     componentDidMount() {
+        if (isMobile) {
+            let visibleWindows = this.state.windows
+            visibleWindows.forEach((window, index) => {
+                if(index == 0) {
+                    return;
+                }
+                visibleWindows[index] = { ...window, closed: true}
+                this.setState({ windows: visibleWindows })
+                return
+            });
+        }
         this.intervalID = setInterval(
             () => this.tick(),
             1000
