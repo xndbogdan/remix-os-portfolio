@@ -48,40 +48,39 @@ class Desktop extends React.Component {
                     <span>Evaluation Copy</span>
                 </div>
                 <div className="w-screen flex flex-wrap absolute p-2">
-                    <div className="w-full flex flex-wrap">
+                    <div className="w-full grid grid-cols-3 gap-4 max-w-sm">
                         <Draggable handle=".handle">
-                            <div className="flex flex-col handle mx-4 my-2">
+                            <div className="flex flex-col handle mx-4 my-2 items-center">
                                 <img src="/icons/Notes_Black.png" className="w-10 h-10 mx-auto pointer-events-none"/>
                                 <span className="text-xs">Presentation.rtf</span>
                             </div>
                         </Draggable>
                         <Draggable handle=".handle">
-                            <div className="flex flex-col handle mx-4 my-2">
+                            <div className="flex flex-col handle mx-4 my-2 items-center">
                                 <img src="/icons/Play_Blue.png" className="w-10 h-10 mx-auto pointer-events-none"/>
                                 <span className="text-xs">Music Player</span>
                             </div>
                         </Draggable>
                         <Draggable handle=".handle">
-                            <div className="flex flex-col handle mx-4 my-2">
+                            <div className="flex flex-col handle mx-4 my-2 items-center">
                                 <img src="/icons/Notes_Black.png" className="w-10 h-10 mx-auto pointer-events-none"/>
                                 <span className="text-xs">Resume.rtf</span>
                             </div>
                         </Draggable>
-                        <div className='w-full'></div>
                         <Draggable handle=".handle">
-                            <div className="flex flex-col handle mx-4 my-2">
+                            <div className="flex flex-col handle mx-4 my-2 items-center">
                                 <img src="/icons/Planet_Orange.png" className="w-10 h-10 mx-auto pointer-events-none"/>
                                 <span className="text-xs">Collaboration</span>
                             </div>
                         </Draggable>
                         <Draggable handle=".handle">
-                            <div className="flex flex-col handle mx-4 my-2">
+                            <div className="flex flex-col handle mx-4 my-2 items-center">
                                 <img src="/icons/Notes_Black.png" className="w-10 h-10 mx-auto pointer-events-none"/>
                                 <span className="text-xs">Credits.rtf</span>
                             </div>
                         </Draggable>
                         <Draggable handle=".handle">
-                            <div className="flex flex-col handle mx-4 my-2">
+                            <div className="flex flex-col handle mx-4 my-2 items-center">
                                 <img src="/icons/Notes_Black.png" className="w-10 h-10 mx-auto pointer-events-none"/>
                                 <span className="text-xs">Milestones.rtf</span>
                             </div>
