@@ -222,9 +222,11 @@ class Desktop extends React.Component {
                                             <p className="text-gray-800"><span className="text-green-500">✓</span> Let the user move the windows around</p>
                                             <p className="text-gray-800"><span className="text-green-500">✓</span> Fix window z-index when user focuses said window</p>
                                             <p className="text-gray-800">• Let the user change the music player's playlist</p>
-                                            <p className="text-gray-800">• Let the user close windows, and reopen them through the desktop icons</p>
+                                            <p className="text-gray-800"><span className="text-green-500">✓</span> Let the user close windows, and reopen them through the desktop icons</p>
                                             <p className="text-gray-800">• Let the user minimize windows to an applications dock</p>
                                             <p className="text-lg mb-2 mt-4">Changelog</p>
+                                            <p className="text-blue-700 hover:text-blue-800">• 20/02/2022 - Close and re-open windows.</p>
+                                            <p>The user can now close windows and open them by clicking the desktop icons.</p>
                                             <p className="text-blue-700 hover:text-blue-800">• 18/02/2022 - Changed the date.</p>
                                             <p>The year was changed to something more appropriate. Be careful, Y2K is coming!</p>
                                             <p className="text-blue-700 hover:text-blue-800">• 13/02/2022 - Added window focus.</p>
