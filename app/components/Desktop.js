@@ -1,5 +1,6 @@
 import React from 'react';
 import Draggable from 'react-draggable';
+import { ResizableBox } from 'react-resizable';
 import MusicPlayer from '~/components/MusicPlayer';
 import Collaborate from '~/components/Collaborate';
 import Clock from '~/components/Clock';
