@@ -1,4 +1,5 @@
 import React from 'react';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 class Resume extends React.Component {
     render() {
@@ -11,7 +12,7 @@ class Resume extends React.Component {
                 <p>Most of my projects were made using Laravel, Vue and Tailwind.</p>
                 <p>I like making music and goofy projects, like this one.</p>
                 <p>I'm into Sci-Fi movies, video games, and dream of the 90's.</p>
-                <img className="my-2" src="/img/ship.gif"></img>
+                <LazyLoadImage className="my-2" src="/img/ship.gif"/>
 
                 <p className="my-2 text-base mt-2">• Work experience</p>
                 <p><span className="text-blue-700">.Net Backend Developer</span> at <a href="https://www.exesoftware.ro/ro" target="_blank">EXE Software</a> (Apr 2017 - Sep 2017)</p>

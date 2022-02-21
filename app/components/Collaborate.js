@@ -1,4 +1,5 @@
 import React from 'react';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 class Collaborate extends React.Component {
 	constructor(props) {
@@ -16,7 +17,7 @@ class Collaborate extends React.Component {
 			<div className="flex flex-wrap items-center">
 				<p className="text-base md:text-lg">Let's build something together!</p>
 				<div className="w-1/3 md:w-2/6 justify-center items-center">
-					<img className="h-16 w-auto mx-auto" src="/img/globe.gif"/>
+					<LazyLoadImage className="h-16 w-auto mx-auto" src="/img/globe.gif" alt="globe image"/>
 				</div>
 				<div className="w-2/3 md:w-4/6">
 					<p className="my-2 text-xs md:text-sm text-justify">I'm open to freelance jobs, collaboration with companies, startups and brands.</p>

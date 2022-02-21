@@ -7,6 +7,7 @@ import Clock from '~/components/Clock';
 import Calendar from '~/components/Calendar';
 import Resume from '~/components/Resume';
 import Projects from '~/components/Projects';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 
 class Desktop extends React.Component {
@@ -48,7 +49,7 @@ class Desktop extends React.Component {
                 <div className="w-full border-b border-black px-2 flex flex-row bg-gray-mac z-50">
                     <div className="border-r border-black text-xs pr-2 flex flex-row items-center py-1 cursor-point">
                         <span>Remix OS</span>
-                        <img className="inline ml-1" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAADCAYAAABbNsX4AAAAHElEQVQImWNkYGD4z4AGQIIggCwBE0OSYGBgAABmWAMBPlQzgwAAAABJRU5ErkJggg==" height="3" width="auto"></img>
+                        <LazyLoadImage className="inline ml-1" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAADCAYAAABbNsX4AAAAHElEQVQImWNkYGD4z4AGQIIggCwBE0OSYGBgAABmWAMBPlQzgwAAAABJRU5ErkJggg==" height="3" width="auto"/>
                     </div>
                     <div className="flex-1 py-1"></div>
                     <div className="text-xs border-l border-black pl-2 py-1 sm:pr-2"><Clock /></div>
@@ -62,37 +63,37 @@ class Desktop extends React.Component {
                     <div className="mt-2 w-full grid grid-cols-3 gap-4 max-w-sm">
                         <Draggable handle=".handle" onMouseDown={this.toggleIconVisibility}>
                             <div id='icon-0' className="flex flex-col handle items-center os-icon" style={this.state.icons[0].focused ? {zIndex: 50} : {zIndex:1}}>
-                                <img src="/icons/Notes_Black.png" className="w-10 h-10 mx-auto pointer-events-none"/>
+                                <LazyLoadImage src="/icons/Notes_Black.png" className="w-10 h-10 mx-auto pointer-events-none"/>
                                 <span className={this.state.icons[0].clicks == 1 ? 'text-xs bg-blue-400 opacity-75' : 'text-xs'}>Presentation.rtf</span>
                             </div>
                         </Draggable>
                         <Draggable handle=".handle" onMouseDown={this.toggleIconVisibility}>
                             <div id='icon-1' className="flex flex-col handle items-center os-icon" style={this.state.icons[1].focused ? {zIndex: 50} : {zIndex:1}}>
-                                <img src="/icons/Play_Blue.png" className="w-10 h-10 mx-auto pointer-events-none"/>
+                                <LazyLoadImage src="/icons/Play_Blue.png" className="w-10 h-10 mx-auto pointer-events-none"/>
                                 <span className={this.state.icons[1].clicks == 1 ? 'text-xs bg-blue-400 opacity-75' : 'text-xs'}>Music Player</span>
                             </div>
                         </Draggable>
                         <Draggable handle=".handle" onMouseDown={this.toggleIconVisibility}>
                             <div id='icon-2' className="flex flex-col handle items-center os-icon" style={this.state.icons[2].focused ? {zIndex: 50} : {zIndex:1}}>
-                                <img src="/icons/Notes_Black.png" className="w-10 h-10 mx-auto pointer-events-none"/>
+                                <LazyLoadImage src="/icons/Notes_Black.png" className="w-10 h-10 mx-auto pointer-events-none"/>
                                 <span className={this.state.icons[2].clicks == 1 ? 'text-xs bg-blue-400 opacity-75' : 'text-xs'}>Resume.rtf</span>
                             </div>
                         </Draggable>
                         <Draggable handle=".handle" onMouseDown={this.toggleIconVisibility}>
                             <div id='icon-3' className="flex flex-col handle items-center os-icon" style={this.state.icons[3].focused ? {zIndex: 50} : {zIndex:1}}>
-                                <img src="/icons/Planet_Orange.png" className="w-10 h-10 mx-auto pointer-events-none"/>
+                                <LazyLoadImage src="/icons/Planet_Orange.png" className="w-10 h-10 mx-auto pointer-events-none"/>
                                 <span className={this.state.icons[3].clicks == 1 ? 'text-xs bg-blue-400 opacity-75' : 'text-xs'}>Collaboration</span>
                             </div>
                         </Draggable>
                         <Draggable handle=".handle" onMouseDown={this.toggleIconVisibility}>
                             <div id='icon-4' className="flex flex-col handle items-center os-icon" style={this.state.icons[4].focused ? {zIndex: 50} : {zIndex:1}}>
-                                <img src="/icons/Notes_Black.png" className="w-10 h-10 mx-auto pointer-events-none"/>
+                                <LazyLoadImage src="/icons/Notes_Black.png" className="w-10 h-10 mx-auto pointer-events-none"/>
                                 <span className={this.state.icons[4].clicks == 1 ? 'text-xs bg-blue-400 opacity-75' : 'text-xs'}>Credits.rtf</span>
                             </div>
                         </Draggable>
                         <Draggable handle=".handle" onMouseDown={this.toggleIconVisibility}>
                             <div id='icon-5' className="flex flex-col handle items-center os-icon" style={this.state.icons[5].focused ? {zIndex: 50} : {zIndex:1}}>
-                                <img src="/icons/Notes_Black.png" className="w-10 h-10 mx-auto pointer-events-none"/>
+                                <LazyLoadImage src="/icons/Notes_Black.png" className="w-10 h-10 mx-auto pointer-events-none"/>
                                 <span className={this.state.icons[5].clicks == 1 ? 'text-xs bg-blue-400 opacity-75' : 'text-xs'}>Milestones.rtf</span>
                             </div>
                         </Draggable>
