@@ -1,5 +1,6 @@
 import React from 'react';
 import Draggable from 'react-draggable';
+import { ResizableBox } from 'react-resizable';
 import MusicPlayer from '~/components/MusicPlayer';
 import Collaborate from '~/components/Collaborate';
 import Clock from '~/components/Clock';
@@ -13,16 +14,26 @@ class Desktop extends React.Component {
         super(props);
         this.state = {
             windows: [
-                { focused: false, closed: false},
-                { focused: false, closed: false},
-                { focused: false, closed: false},
-                { focused: false, closed: false},
-                { focused: false, closed: false},
-                { focused: false, closed: false},
-                { focused: false, closed: false},
+                { focused: false, closed: false, },
+                { focused: false, closed: false, },
+                { focused: false, closed: false, },
+                { focused: false, closed: false, },
+                { focused: false, closed: false, },
+                { focused: false, closed: false, },
+                { focused: false, closed: false, },
+            ],
+            icons: [
+                { focused: false, clicks: 0, },
+                { focused: false, clicks: 0, },
+                { focused: false, clicks: 0, },
+                { focused: false, clicks: 0, },
+                { focused: false, clicks: 0, },
+                { focused: false, clicks: 0, },
+                { focused: false, clicks: 0, },
             ],
             resumeTab: 0,
         };
+        this.iconTimeout = null;
     }
     render() {
         const resumeTab = this.state.resumeTab
@@ -47,19 +58,42 @@ class Desktop extends React.Component {
                     <span>Remix OS Alpha Release v0.1</span>
                     <span>Evaluation Copy</span>
                 </div>
-                <div className="w-screen flex flex-wrap absolute p-2">
-                    <div className="w-full">DESKTOP ICONS PLACEHOLDER</div>
-                    <div className="w-full flex flex-wrap space-x-4">
-                        <Draggable handle=".handle">
-                            <div className="w-8 flex flex-col handle">
-                                <div className="w-8 h-8 bg-black"></div>
-                                <span className="text-xs">APP NAME</span>
+                <div className="w-screen flex flex-wrap absolute p-2 z-0">
+                    <div className="mt-2 w-full grid grid-cols-3 gap-4 max-w-sm">
+                        <Draggable handle=".handle" onMouseDown={this.toggleIconVisibility}>
+                            <div id='icon-0' className="flex flex-col handle items-center os-icon" style={this.state.icons[0].focused ? {zIndex: 50} : {zIndex:1}}>
+                                <img src="/icons/Notes_Black.png" className="w-10 h-10 mx-auto pointer-events-none"/>
+                                <span className={this.state.icons[0].clicks == 1 ? 'text-xs bg-blue-400 opacity-75' : 'text-xs'}>Presentation.rtf</span>
                             </div>
                         </Draggable>
-                        <Draggable handle=".handle">
-                            <div className="w-8 flex flex-col handle">
-                                <div className="w-8 h-8 bg-black"></div>
-                                <span className="text-xs">APP NAME</span>
+                        <Draggable handle=".handle" onMouseDown={this.toggleIconVisibility}>
+                            <div id='icon-1' className="flex flex-col handle items-center os-icon" style={this.state.icons[1].focused ? {zIndex: 50} : {zIndex:1}}>
+                                <img src="/icons/Play_Blue.png" className="w-10 h-10 mx-auto pointer-events-none"/>
+                                <span className={this.state.icons[1].clicks == 1 ? 'text-xs bg-blue-400 opacity-75' : 'text-xs'}>Music Player</span>
+                            </div>
+                        </Draggable>
+                        <Draggable handle=".handle" onMouseDown={this.toggleIconVisibility}>
+                            <div id='icon-2' className="flex flex-col handle items-center os-icon" style={this.state.icons[2].focused ? {zIndex: 50} : {zIndex:1}}>
+                                <img src="/icons/Notes_Black.png" className="w-10 h-10 mx-auto pointer-events-none"/>
+                                <span className={this.state.icons[2].clicks == 1 ? 'text-xs bg-blue-400 opacity-75' : 'text-xs'}>Resume.rtf</span>
+                            </div>
+                        </Draggable>
+                        <Draggable handle=".handle" onMouseDown={this.toggleIconVisibility}>
+                            <div id='icon-3' className="flex flex-col handle items-center os-icon" style={this.state.icons[3].focused ? {zIndex: 50} : {zIndex:1}}>
+                                <img src="/icons/Planet_Orange.png" className="w-10 h-10 mx-auto pointer-events-none"/>
+                                <span className={this.state.icons[3].clicks == 1 ? 'text-xs bg-blue-400 opacity-75' : 'text-xs'}>Collaboration</span>
+                            </div>
+                        </Draggable>
+                        <Draggable handle=".handle" onMouseDown={this.toggleIconVisibility}>
+                            <div id='icon-4' className="flex flex-col handle items-center os-icon" style={this.state.icons[4].focused ? {zIndex: 50} : {zIndex:1}}>
+                                <img src="/icons/Notes_Black.png" className="w-10 h-10 mx-auto pointer-events-none"/>
+                                <span className={this.state.icons[4].clicks == 1 ? 'text-xs bg-blue-400 opacity-75' : 'text-xs'}>Credits.rtf</span>
+                            </div>
+                        </Draggable>
+                        <Draggable handle=".handle" onMouseDown={this.toggleIconVisibility}>
+                            <div id='icon-5' className="flex flex-col handle items-center os-icon" style={this.state.icons[5].focused ? {zIndex: 50} : {zIndex:1}}>
+                                <img src="/icons/Notes_Black.png" className="w-10 h-10 mx-auto pointer-events-none"/>
+                                <span className={this.state.icons[5].clicks == 1 ? 'text-xs bg-blue-400 opacity-75' : 'text-xs'}>Milestones.rtf</span>
                             </div>
                         </Draggable>
                     </div>
@@ -70,9 +104,9 @@ class Desktop extends React.Component {
                             <div className="flex flex-wrap justify-center md:justify-between items-start">
 
                                 <Draggable handle=".handle" onMouseDown={this.toggleWindowVisibility}>
-                                    <div id='window-0' className="p-1 border border-black mt-4 bg-gray-mac shadow-mac-os os-window w-full max-w-sm pointer-events-auto" style={this.state.windows[0].focused ? {zIndex: 99} : {zIndex:1}}>
+                                    <div id='window-0' className={this.state.windows[0].closed ? 'hidden' : 'p-1 border border-black mt-4 bg-gray-mac shadow-mac-os os-window w-full max-w-sm pointer-events-auto'} style={this.state.windows[0].focused ? {zIndex: 99} : {zIndex:10}}>
                                         <div className="flex flex-row items-center pb-1">
-                                            <div className="close-btn h-4 w-4 border border-black mr-2 hover:invert hover:bg-white cursor-point"></div>
+                                            <div className="close-btn h-4 w-4 border border-black mr-2 hover:invert hover:bg-white cursor-point" onMouseDown={this.toggleHideWindow}></div>
                                             <div className="flex-1 flex handle h-4 items-center">
                                                 <div className="flex-1 flex flex-col justify-between cursor-grab h-2">
                                                     <div className="border-t border-black"></div>
@@ -92,9 +126,9 @@ class Desktop extends React.Component {
                                 </Draggable>
 
                                 <Draggable handle=".handle" onMouseDown={this.toggleWindowVisibility}>
-                                    <div id='window-1' className="p-1 border border-black mt-4 bg-gray-mac shadow-mac-os os-window w-full max-w-sm pointer-events-auto" style={this.state.windows[1].focused ? {zIndex: 99} : {zIndex:1}}>
+                                    <div id='window-1' className={this.state.windows[1].closed ? 'hidden' : 'p-1 border border-black mt-4 bg-gray-mac shadow-mac-os os-window w-full max-w-sm pointer-events-auto'} style={this.state.windows[1].focused ? {zIndex: 99} : {zIndex:10}}>
                                         <div className="flex flex-row items-center pb-1">
-                                            <div className="close-btn h-4 w-4 border border-black mr-2 hover:invert hover:bg-white cursor-point"></div>
+                                            <div className="close-btn h-4 w-4 border border-black mr-2 hover:invert hover:bg-white cursor-point" onMouseDown={this.toggleHideWindow}></div>
                                             <div className="flex-1 flex handle h-4 items-center">
                                                 <div className="flex-1 flex flex-col justify-between cursor-grab h-2">
                                                     <div className="border-t border-black"></div>
@@ -109,9 +143,9 @@ class Desktop extends React.Component {
                                 </Draggable>
 
                                 <Draggable handle=".handle" onMouseDown={this.toggleWindowVisibility}>
-                                    <div id='window-2' className="p-1 border border-black mt-4 bg-gray-mac shadow-mac-os os-window w-full max-w-sm pointer-events-auto" style={this.state.windows[2].focused ? {zIndex: 99} : {zIndex:1}}>
+                                    <div id='window-2' className={this.state.windows[2].closed ? 'hidden' : 'p-1 border border-black mt-4 bg-gray-mac shadow-mac-os os-window w-full max-w-sm pointer-events-auto'} style={this.state.windows[2].focused ? {zIndex: 99} : {zIndex:10}}>
                                         <div className="flex flex-row items-center pb-1">
-                                            <div className="close-btn h-4 w-4 border border-black mr-2 hover:invert hover:bg-white cursor-point"></div>
+                                            <div className="close-btn h-4 w-4 border border-black mr-2 hover:invert hover:bg-white cursor-point" onMouseDown={this.toggleHideWindow}></div>
                                             <div className="flex-1 flex handle h-4 items-center">
                                                 <div className="flex-1 flex flex-col justify-between cursor-grab h-2">
                                                     <div className="border-t border-black"></div>
@@ -131,9 +165,9 @@ class Desktop extends React.Component {
                                 </Draggable>
 
                                 <Draggable handle=".handle" onMouseDown={this.toggleWindowVisibility}>
-                                    <div id='window-3' className="p-1 border border-black mt-4 bg-gray-mac shadow-mac-os os-window w-full max-w-sm pointer-events-auto" style={this.state.windows[3].focused ? {zIndex: 99} : {zIndex:1}}>
+                                    <div id='window-3' className={this.state.windows[3].closed ? 'hidden' : 'p-1 border border-black mt-4 bg-gray-mac shadow-mac-os os-window w-full max-w-sm pointer-events-auto'} style={this.state.windows[3].focused ? {zIndex: 99} : {zIndex:10}}>
                                         <div className="flex flex-row items-center pb-1">
-                                            <div className="close-btn h-4 w-4 border border-black mr-2 hover:invert hover:bg-white cursor-point"></div>
+                                            <div className="close-btn h-4 w-4 border border-black mr-2 hover:invert hover:bg-white cursor-point" onMouseDown={this.toggleHideWindow}></div>
                                             <div className="flex-1 flex handle h-4 items-center">
                                                 <div className="flex-1 flex flex-col justify-between cursor-grab h-2">
                                                     <div className="border-t border-black"></div>
@@ -150,9 +184,9 @@ class Desktop extends React.Component {
                                 </Draggable>
 
                                 <Draggable handle=".handle" onMouseDown={this.toggleWindowVisibility}>
-                                    <div id='window-4' className="p-1 border border-black mt-4 bg-gray-mac shadow-mac-os os-window w-full mb-16 max-w-sm pointer-events-auto" style={this.state.windows[5].focused ? {zIndex: 99} : {zIndex:1}}>
+                                    <div id='window-4' className={this.state.windows[4].closed ? 'hidden' : 'p-1 border border-black mt-4 bg-gray-mac shadow-mac-os os-window w-full max-w-sm pointer-events-auto'} style={this.state.windows[4].focused ? {zIndex: 99} : {zIndex:10}}>
                                         <div className="flex flex-row items-center pb-1">
-                                            <div className="close-btn h-4 w-4 border border-black mr-2 hover:invert hover:bg-white cursor-point"></div>
+                                            <div className="close-btn h-4 w-4 border border-black mr-2 hover:invert hover:bg-white cursor-point" onMouseDown={this.toggleHideWindow}></div>
                                             <div className="flex-1 flex handle h-4 items-center">
                                                 <div className="flex-1 flex flex-col justify-between cursor-grab h-2">
                                                     <div className="border-t border-black"></div>
@@ -171,9 +205,9 @@ class Desktop extends React.Component {
                                 </Draggable>
 
                                 <Draggable handle=".handle" onMouseDown={this.toggleWindowVisibility}>
-                                    <div id='window-5' className="p-1 border border-black mt-4 bg-gray-mac shadow-mac-os os-window w-full mb-16 max-w-sm pointer-events-auto" style={this.state.windows[6].focused ? {zIndex: 99} : {zIndex:1}}>
+                                    <div id='window-5' className={this.state.windows[5].closed ? 'hidden' : 'p-1 border border-black mt-4 bg-gray-mac shadow-mac-os os-window w-full max-w-sm pointer-events-auto'} style={this.state.windows[5].focused ? {zIndex: 99} : {zIndex:10}}>
                                         <div className="flex flex-row items-center pb-1">
-                                            <div className="close-btn h-4 w-4 border border-black mr-2 hover:invert hover:bg-white cursor-point"></div>
+                                            <div className="close-btn h-4 w-4 border border-black mr-2 hover:invert hover:bg-white cursor-point" onMouseDown={this.toggleHideWindow}></div>
                                             <div className="flex-1 flex handle h-4 items-center">
                                                 <div className="flex-1 flex flex-col justify-between cursor-grab h-2">
                                                     <div className="border-t border-black"></div>
@@ -211,6 +245,7 @@ class Desktop extends React.Component {
             resumeTab: parseInt(event.target.dataset.tab)
         });
     }
+
     toggleWindowVisibility = (event) => {
         let daddyWindow = event.target
         while(daddyWindow.classList.contains('os-window') === false) {
@@ -230,6 +265,82 @@ class Desktop extends React.Component {
             }
         });
         this.setState({ windows: visibleWindows })
+    }
+
+    toggleIconVisibility = (event) => {
+        clearTimeout(this.iconTimeout)
+        let daddyIcon = event.target
+        while(daddyIcon.classList.contains('os-icon') === false) {
+            if(!daddyIcon.parentElement) {
+                console.error('Could not find parent icon. Contact developer.')
+                return;
+            }
+            daddyIcon = daddyIcon.parentElement
+        }
+        let iconIndex = parseInt(daddyIcon.id.replace('icon-', ''))
+        let visibleIcons = this.state.icons
+        visibleIcons.forEach((icon, index) => {
+            if (index === iconIndex) {
+                let clicks = visibleIcons[index].clicks
+                visibleIcons[index] = { ...window, focused: true, clicks: clicks+1}
+                
+                if(clicks == 1) {
+                    /* An icon was double clicked
+                     * We need to reset the iconns state and show the window corresponding to the double clicked icon
+                     */
+                    let visibleIcons = this.state.icons
+                    visibleIcons.forEach((icon, index) => {
+                        let focused = visibleIcons[index].focused
+                        visibleIcons[index] = { ...icon, focused: focused, clicks: 0}
+                    })
+                    this.setState({ icons: visibleIcons })
+                    // Set window state to visible
+                    let visibleWindows = this.state.windows
+                    const windowIndex = iconIndex
+                    visibleWindows.forEach((window, index) => {
+                        if (index == windowIndex) {
+                            visibleWindows[index] = { ...window, focused: true, closed: false}
+                            this.setState({ windows: visibleWindows })
+                            return
+                        } else {
+                            visibleWindows[index] = { ...window, focused: false, closed: visibleWindows[index].closed}
+                        }
+                    });
+                }
+            } else {
+                visibleIcons[index] = {...icon, focused: false, clicks: 0}
+            }
+        });
+        this.setState({ icons: visibleIcons })
+
+        this.iconTimeout = setTimeout(() => {
+            let visibleIcons = this.state.icons
+            visibleIcons.forEach((icon, index) => {
+                let focused = visibleIcons[index].focused
+                visibleIcons[index] = { ...icon, focused: focused, clicks: 0}
+            })
+            this.setState({ icons: visibleIcons })
+        }, 2000)
+    }
+
+    toggleHideWindow = (event) => {
+        let daddyWindow = event.target
+        while(daddyWindow.classList.contains('os-window') === false) {
+            if(!daddyWindow.parentElement) {
+                console.error('Could not find parent window. Contact developer.')
+                return;
+            }
+            daddyWindow = daddyWindow.parentElement
+        }
+        let windowIndex = parseInt(daddyWindow.id.replace('window-', ''))
+        let visibleWindows = this.state.windows
+        visibleWindows.forEach((window, index) => {
+            if (index === windowIndex) {
+                visibleWindows[index] = { ...window, closed: true}
+                this.setState({ windows: visibleWindows })
+                return
+            }
+        });
     }
 
     componentDidMount() {
