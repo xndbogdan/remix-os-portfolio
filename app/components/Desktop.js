@@ -14,25 +14,26 @@ class Desktop extends React.Component {
         super(props);
         this.state = {
             windows: [
-                { focused: false, closed: false},
-                { focused: false, closed: false},
-                { focused: false, closed: false},
-                { focused: false, closed: false},
-                { focused: false, closed: false},
-                { focused: false, closed: false},
-                { focused: false, closed: false},
+                { focused: false, closed: false, },
+                { focused: false, closed: false, },
+                { focused: false, closed: false, },
+                { focused: false, closed: false, },
+                { focused: false, closed: false, },
+                { focused: false, closed: false, },
+                { focused: false, closed: false, },
             ],
             icons: [
-                { focused: false },
-                { focused: false },
-                { focused: false },
-                { focused: false },
-                { focused: false },
-                { focused: false },
-                { focused: false },
+                { focused: false, clicks: 0, },
+                { focused: false, clicks: 0, },
+                { focused: false, clicks: 0, },
+                { focused: false, clicks: 0, },
+                { focused: false, clicks: 0, },
+                { focused: false, clicks: 0, },
+                { focused: false, clicks: 0, },
             ],
             resumeTab: 0,
         };
+        this.iconTimeout = null;
     }
     render() {
         const resumeTab = this.state.resumeTab
@@ -58,39 +59,39 @@ class Desktop extends React.Component {
                     <span>Evaluation Copy</span>
                 </div>
                 <div className="w-screen flex flex-wrap absolute p-2 z-0">
-                    <div className="w-full grid grid-cols-3 gap-4 max-w-sm">
+                    <div className="mt-2 w-full grid grid-cols-3 gap-4 max-w-sm">
                         <Draggable handle=".handle" onMouseDown={this.toggleIconVisibility}>
-                            <div id='icon-0' className="flex flex-col handle mx-4 my-2 items-center os-icon" style={this.state.icons[0].focused ? {zIndex: 50} : {zIndex:1}}>
+                            <div id='icon-0' className="flex flex-col handle items-center os-icon" style={this.state.icons[0].focused ? {zIndex: 50} : {zIndex:1}}>
                                 <img src="/icons/Notes_Black.png" className="w-10 h-10 mx-auto pointer-events-none"/>
                                 <span className="text-xs">Presentation.rtf</span>
                             </div>
                         </Draggable>
                         <Draggable handle=".handle" onMouseDown={this.toggleIconVisibility}>
-                            <div id='icon-1' className="flex flex-col handle mx-4 my-2 items-center os-icon" style={this.state.icons[1].focused ? {zIndex: 50} : {zIndex:1}}>
+                            <div id='icon-1' className="flex flex-col handle items-center os-icon" style={this.state.icons[1].focused ? {zIndex: 50} : {zIndex:1}}>
                                 <img src="/icons/Play_Blue.png" className="w-10 h-10 mx-auto pointer-events-none"/>
                                 <span className="text-xs">Music Player</span>
                             </div>
                         </Draggable>
                         <Draggable handle=".handle" onMouseDown={this.toggleIconVisibility}>
-                            <div id='icon-2' className="flex flex-col handle mx-4 my-2 items-center os-icon" style={this.state.icons[2].focused ? {zIndex: 50} : {zIndex:1}}>
+                            <div id='icon-2' className="flex flex-col handle items-center os-icon" style={this.state.icons[2].focused ? {zIndex: 50} : {zIndex:1}}>
                                 <img src="/icons/Notes_Black.png" className="w-10 h-10 mx-auto pointer-events-none"/>
                                 <span className="text-xs">Resume.rtf</span>
                             </div>
                         </Draggable>
                         <Draggable handle=".handle" onMouseDown={this.toggleIconVisibility}>
-                            <div id='icon-3' className="flex flex-col handle mx-4 my-2 items-center os-icon" style={this.state.icons[3].focused ? {zIndex: 50} : {zIndex:1}}>
+                            <div id='icon-3' className="flex flex-col handle items-center os-icon" style={this.state.icons[3].focused ? {zIndex: 50} : {zIndex:1}}>
                                 <img src="/icons/Planet_Orange.png" className="w-10 h-10 mx-auto pointer-events-none"/>
                                 <span className="text-xs">Collaboration</span>
                             </div>
                         </Draggable>
                         <Draggable handle=".handle" onMouseDown={this.toggleIconVisibility}>
-                            <div id='icon-4' className="flex flex-col handle mx-4 my-2 items-center os-icon" style={this.state.icons[4].focused ? {zIndex: 50} : {zIndex:1}}>
+                            <div id='icon-4' className="flex flex-col handle items-center os-icon" style={this.state.icons[4].focused ? {zIndex: 50} : {zIndex:1}}>
                                 <img src="/icons/Notes_Black.png" className="w-10 h-10 mx-auto pointer-events-none"/>
                                 <span className="text-xs">Credits.rtf</span>
                             </div>
                         </Draggable>
                         <Draggable handle=".handle" onMouseDown={this.toggleIconVisibility}>
-                            <div id='icon-5' className="flex flex-col handle mx-4 my-2 items-center os-icon" style={this.state.icons[5].focused ? {zIndex: 50} : {zIndex:1}}>
+                            <div id='icon-5' className="flex flex-col handle items-center os-icon" style={this.state.icons[5].focused ? {zIndex: 50} : {zIndex:1}}>
                                 <img src="/icons/Notes_Black.png" className="w-10 h-10 mx-auto pointer-events-none"/>
                                 <span className="text-xs">Milestones.rtf</span>
                             </div>
@@ -267,6 +268,7 @@ class Desktop extends React.Component {
     }
 
     toggleIconVisibility = (event) => {
+        clearTimeout(this.iconTimeout)
         let daddyIcon = event.target
         while(daddyIcon.classList.contains('os-icon') === false) {
             if(!daddyIcon.parentElement) {
@@ -279,12 +281,32 @@ class Desktop extends React.Component {
         let visibleIcons = this.state.icons
         visibleIcons.forEach((icon, index) => {
             if (index === iconIndex) {
-                visibleIcons[index] = { ...icon, focused: true}
+                let clicks = visibleIcons[index].clicks
+                visibleIcons[index] = { ...window, focused: true, clicks: clicks+1}
+                
+                if(clicks == 1) {
+                    let visibleIcons = this.state.icons
+                    visibleIcons.forEach((icon, index) => {
+                        let focused = visibleIcons[index].focused
+                        visibleIcons[index] = { ...icon, focused: focused, clicks: 0}
+                    })
+                    this.setState({ icons: visibleIcons })
+                    console.info('you clicked the icon')
+                }
             } else {
-                visibleIcons[index] = {...icon, focused: false}
+                visibleIcons[index] = {...icon, focused: false, clicks: 0}
             }
         });
         this.setState({ icons: visibleIcons })
+
+        this.iconTimeout = setTimeout(() => {
+            let visibleIcons = this.state.icons
+            visibleIcons.forEach((icon, index) => {
+                let focused = visibleIcons[index].focused
+                visibleIcons[index] = { ...icon, focused: focused, clicks: 0}
+            })
+            this.setState({ icons: visibleIcons })
+        }, 2000)
     }
 
     toggleHideWindow = (event) => {
