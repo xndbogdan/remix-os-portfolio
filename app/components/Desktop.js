@@ -70,9 +70,9 @@ class Desktop extends React.Component {
                             <div className="flex flex-wrap justify-center md:justify-between items-start">
 
                                 <Draggable handle=".handle" onMouseDown={this.toggleWindowVisibility}>
-                                    <div id='window-0' className="p-1 border border-black mt-4 bg-gray-mac shadow-mac-os os-window w-full max-w-sm pointer-events-auto" style={this.state.windows[0].focused ? {zIndex: 99} : {zIndex:1}}>
+                                    <div id='window-0' className={this.state.windows[0].closed ? 'hidden' : 'p-1 border border-black mt-4 bg-gray-mac shadow-mac-os os-window w-full max-w-sm pointer-events-auto'} style={this.state.windows[0].focused ? {zIndex: 99} : {zIndex:1}}>
                                         <div className="flex flex-row items-center pb-1">
-                                            <div className="close-btn h-4 w-4 border border-black mr-2 hover:invert hover:bg-white cursor-point"></div>
+                                            <div className="close-btn h-4 w-4 border border-black mr-2 hover:invert hover:bg-white cursor-point" onMouseDown={this.toggleHideWindow}></div>
                                             <div className="flex-1 flex handle h-4 items-center">
                                                 <div className="flex-1 flex flex-col justify-between cursor-grab h-2">
                                                     <div className="border-t border-black"></div>
@@ -92,9 +92,9 @@ class Desktop extends React.Component {
                                 </Draggable>
 
                                 <Draggable handle=".handle" onMouseDown={this.toggleWindowVisibility}>
-                                    <div id='window-1' className="p-1 border border-black mt-4 bg-gray-mac shadow-mac-os os-window w-full max-w-sm pointer-events-auto" style={this.state.windows[1].focused ? {zIndex: 99} : {zIndex:1}}>
+                                    <div id='window-1' className={this.state.windows[1].closed ? 'hidden' : 'p-1 border border-black mt-4 bg-gray-mac shadow-mac-os os-window w-full max-w-sm pointer-events-auto'} style={this.state.windows[1].focused ? {zIndex: 99} : {zIndex:1}}>
                                         <div className="flex flex-row items-center pb-1">
-                                            <div className="close-btn h-4 w-4 border border-black mr-2 hover:invert hover:bg-white cursor-point"></div>
+                                            <div className="close-btn h-4 w-4 border border-black mr-2 hover:invert hover:bg-white cursor-point" onMouseDown={this.toggleHideWindow}></div>
                                             <div className="flex-1 flex handle h-4 items-center">
                                                 <div className="flex-1 flex flex-col justify-between cursor-grab h-2">
                                                     <div className="border-t border-black"></div>
@@ -109,9 +109,9 @@ class Desktop extends React.Component {
                                 </Draggable>
 
                                 <Draggable handle=".handle" onMouseDown={this.toggleWindowVisibility}>
-                                    <div id='window-2' className="p-1 border border-black mt-4 bg-gray-mac shadow-mac-os os-window w-full max-w-sm pointer-events-auto" style={this.state.windows[2].focused ? {zIndex: 99} : {zIndex:1}}>
+                                    <div id='window-2' className={this.state.windows[2].closed ? 'hidden' : 'p-1 border border-black mt-4 bg-gray-mac shadow-mac-os os-window w-full max-w-sm pointer-events-auto'} style={this.state.windows[2].focused ? {zIndex: 99} : {zIndex:1}}>
                                         <div className="flex flex-row items-center pb-1">
-                                            <div className="close-btn h-4 w-4 border border-black mr-2 hover:invert hover:bg-white cursor-point"></div>
+                                            <div className="close-btn h-4 w-4 border border-black mr-2 hover:invert hover:bg-white cursor-point" onMouseDown={this.toggleHideWindow}></div>
                                             <div className="flex-1 flex handle h-4 items-center">
                                                 <div className="flex-1 flex flex-col justify-between cursor-grab h-2">
                                                     <div className="border-t border-black"></div>
@@ -131,9 +131,9 @@ class Desktop extends React.Component {
                                 </Draggable>
 
                                 <Draggable handle=".handle" onMouseDown={this.toggleWindowVisibility}>
-                                    <div id='window-3' className="p-1 border border-black mt-4 bg-gray-mac shadow-mac-os os-window w-full max-w-sm pointer-events-auto" style={this.state.windows[3].focused ? {zIndex: 99} : {zIndex:1}}>
+                                    <div id='window-3' className={this.state.windows[3].closed ? 'hidden' : 'p-1 border border-black mt-4 bg-gray-mac shadow-mac-os os-window w-full max-w-sm pointer-events-auto'} style={this.state.windows[3].focused ? {zIndex: 99} : {zIndex:1}}>
                                         <div className="flex flex-row items-center pb-1">
-                                            <div className="close-btn h-4 w-4 border border-black mr-2 hover:invert hover:bg-white cursor-point"></div>
+                                            <div className="close-btn h-4 w-4 border border-black mr-2 hover:invert hover:bg-white cursor-point" onMouseDown={this.toggleHideWindow}></div>
                                             <div className="flex-1 flex handle h-4 items-center">
                                                 <div className="flex-1 flex flex-col justify-between cursor-grab h-2">
                                                     <div className="border-t border-black"></div>
@@ -150,9 +150,9 @@ class Desktop extends React.Component {
                                 </Draggable>
 
                                 <Draggable handle=".handle" onMouseDown={this.toggleWindowVisibility}>
-                                    <div id='window-4' className="p-1 border border-black mt-4 bg-gray-mac shadow-mac-os os-window w-full mb-16 max-w-sm pointer-events-auto" style={this.state.windows[5].focused ? {zIndex: 99} : {zIndex:1}}>
+                                    <div id='window-4' className={this.state.windows[4].closed ? 'hidden' : 'p-1 border border-black mt-4 bg-gray-mac shadow-mac-os os-window w-full max-w-sm pointer-events-auto'} style={this.state.windows[4].focused ? {zIndex: 99} : {zIndex:1}}>
                                         <div className="flex flex-row items-center pb-1">
-                                            <div className="close-btn h-4 w-4 border border-black mr-2 hover:invert hover:bg-white cursor-point"></div>
+                                            <div className="close-btn h-4 w-4 border border-black mr-2 hover:invert hover:bg-white cursor-point" onMouseDown={this.toggleHideWindow}></div>
                                             <div className="flex-1 flex handle h-4 items-center">
                                                 <div className="flex-1 flex flex-col justify-between cursor-grab h-2">
                                                     <div className="border-t border-black"></div>
@@ -171,9 +171,9 @@ class Desktop extends React.Component {
                                 </Draggable>
 
                                 <Draggable handle=".handle" onMouseDown={this.toggleWindowVisibility}>
-                                    <div id='window-5' className="p-1 border border-black mt-4 bg-gray-mac shadow-mac-os os-window w-full mb-16 max-w-sm pointer-events-auto" style={this.state.windows[6].focused ? {zIndex: 99} : {zIndex:1}}>
+                                    <div id='window-5' className={this.state.windows[5].closed ? 'hidden' : 'p-1 border border-black mt-4 bg-gray-mac shadow-mac-os os-window w-full max-w-sm pointer-events-auto'} style={this.state.windows[5].focused ? {zIndex: 99} : {zIndex:1}}>
                                         <div className="flex flex-row items-center pb-1">
-                                            <div className="close-btn h-4 w-4 border border-black mr-2 hover:invert hover:bg-white cursor-point"></div>
+                                            <div className="close-btn h-4 w-4 border border-black mr-2 hover:invert hover:bg-white cursor-point" onMouseDown={this.toggleHideWindow}></div>
                                             <div className="flex-1 flex handle h-4 items-center">
                                                 <div className="flex-1 flex flex-col justify-between cursor-grab h-2">
                                                     <div className="border-t border-black"></div>
@@ -230,6 +230,26 @@ class Desktop extends React.Component {
             }
         });
         this.setState({ windows: visibleWindows })
+    }
+
+    toggleHideWindow = (event) => {
+        let daddyWindow = event.target
+        while(daddyWindow.classList.contains('os-window') === false) {
+            if(!daddyWindow.parentElement) {
+                console.error('Could not find parent window. Contact developer.')
+                return;
+            }
+            daddyWindow = daddyWindow.parentElement
+        }
+        let windowIndex = parseInt(daddyWindow.id.replace('window-', ''))
+        let visibleWindows = this.state.windows
+        visibleWindows.forEach((window, index) => {
+            if (index === windowIndex) {
+                visibleWindows[index] = { ...window, closed: true}
+                this.setState({ windows: visibleWindows })
+                return
+            }
+        });
     }
 
     componentDidMount() {
