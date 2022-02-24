@@ -26,7 +26,7 @@ class MusicPlayer extends React.Component {
         return (
         <div className="px-2">
             <div className="bg-gray-900 h-8 border-2 border-gray-600 text-blue-300 px-2 flex items-center my-2" ref={this.displayTextContainer}>
-                <a target="_blank" href={this.state.selectedTrack.permalink_url} className="opacity-75 truncate cursor-point" ref={this.displayText}>{this.state.display}</a>
+                <a target="_blank" href={this.state.selectedTrack.permalink_url} className="opacity-75 truncate cursor-point" ref={this.displayText}>Disabled {/*this.state.display*/}</a>
             </div>
             <p className="text-sm">Station: {this.state.selectedPlaylist.name}</p>
             <div className="w-full h-2 bg-black cursor-point" ref={this.progressBarContainer} onMouseUp={this.updateSongPosition}>
@@ -56,6 +56,7 @@ class MusicPlayer extends React.Component {
                 </button>
             </div>
             <div>Track {this.state.trackIndex} of {this.state.selectedPlaylistLength}</div>
+            <p className="text-red-600 text-sm">Radio is disabled until a usable api is found</p>
             <audio ref={this.audio} onEnded={this.nextTrack} onTimeUpdate={this.updateTrackProgress} src={'https://api.poolsidefm.workers.dev/v2/get_sc_mp3_stream?track_id=' + this.state.selectedTrack.soundcloud_id}></audio>
         </div>
         );
@@ -108,12 +109,14 @@ class MusicPlayer extends React.Component {
     }
 
     togglePlay = () => {
+        return;
         this.setState({ isPlaying: !this.state.isPlaying }, () => {
             this.state.isPlaying ? this.audio.current.play() : this.audio.current.pause();
         });
     }
 
     nextTrack = () => {
+        return;
         if(this.state.trackIndex >= this.state.selectedPlaylist.tracks_in_order.length - 1) {
             return;
         }
@@ -134,6 +137,7 @@ class MusicPlayer extends React.Component {
     }
 
     previousTrack = () => {
+        return;
         if(this.state.trackIndex <= 0) {
             return;
         }
