@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import AudioSpectrum from 'react-audio-spectrum'
-
+import Marquee from "react-fast-marquee";
 class MusicPlayer extends React.Component {
     constructor(props) {
         super(props);
@@ -27,8 +27,13 @@ class MusicPlayer extends React.Component {
         return (
         <div className="px-2">
             <div className="bg-gray-900 h-8 border-t-2 border-l-2 border-r-2 border-gray-600 text-blue-300 px-2 flex items-center mt-2" ref={this.displayTextContainer}>
-                <a target="_blank" href={this.state.selectedTrack.permalink_url} className="opacity-75 truncate cursor-point" ref={this.displayText}>{this.state.display}</a>
-                
+                <a target="_blank" href={this.state.selectedTrack.permalink_url} className="opacity-75 cursor-point" ref={this.displayText}>
+                    <Marquee pauseOnHover={true} gradient={false}>
+                        <span className='pr-16'>
+                            {this.state.display}
+                        </span>
+                    </Marquee>
+                </a>
             </div>
             <div className="bg-gray-900 h-8 border-b-2 border-l-2 border-r-2 border-gray-600 text-blue-300 flex items-center justify-center mb-2" ref={this.displayTextContainer}>
             <div></div>
