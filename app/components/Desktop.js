@@ -58,8 +58,7 @@ class Desktop extends React.Component {
                     <div className="text-xs border-l border-black pl-2 py-1 hidden sm:block"><Calendar /></div>
                 </div>
                 <div className="fixed bottom-0 right-0 text-white p-2 text-sm flex flex-col items-end">
-                    <span>Remix OS Alpha Release v0.1</span>
-                    <span>Evaluation Copy</span>
+                    <span>Remix OS Beta Release v0.2</span>
                 </div>
                 <div className="w-screen flex flex-wrap absolute p-2 z-0">
                     <div className="mt-2 w-full grid grid-cols-3 gap-4 max-w-sm">
@@ -223,6 +222,7 @@ class Desktop extends React.Component {
                                         </div>
                                         <div className="bg-white p-2 overflow-y-auto border border-black text-sm max-h-80 select-full">
                                             <p className="text-lg mb-2">Project milestones</p>
+                                            <p className="text-gray-800"><span className="text-green-500">✓</span> Replace Poolsuite api calls with internal calls</p>
                                             <p className="text-gray-800"><span className="text-green-500">✓</span> Let the user move the windows around</p>
                                             <p className="text-gray-800"><span className="text-green-500">✓</span> Fix window z-index when user focuses said window</p>
                                             <p className="text-gray-800">• Let the user change the music player's playlist</p>
