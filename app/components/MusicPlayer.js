@@ -1,15 +1,16 @@
 import React, { useRef } from 'react';
+import AudioSpectrum from 'react-audio-spectrum'
 
 class MusicPlayer extends React.Component {
     constructor(props) {
         super(props);
-        const randomTrackIndex = Math.floor(Math.random() * this.props.tracklist.payload[0].tracks_in_order.length);
+        const randomTrackIndex = Math.floor(Math.random() * this.props.tracklist.length);
         this.state = {
             tracklist: this.props.tracklist,
-            selectedPlaylist: this.props.tracklist.payload[0],
-            selectedPlaylistLength: this.props.tracklist.payload[0].tracks_in_order.length,
+            selectedPlaylist: this.props.tracklist,
+            selectedPlaylistLength: this.props.tracklist.length,
             trackIndex: randomTrackIndex,
-            selectedTrack: this.props.tracklist.payload[0].tracks_in_order[randomTrackIndex],
+            selectedTrack: this.props.tracklist[randomTrackIndex],
             display: 'Player Offline',
             isPlaying: false,
             trackProgress: 0,
@@ -25,10 +26,32 @@ class MusicPlayer extends React.Component {
     render(props) {
         return (
         <div className="px-2">
-            <div className="bg-gray-900 h-8 border-2 border-gray-600 text-blue-300 px-2 flex items-center my-2" ref={this.displayTextContainer}>
-                <a target="_blank" href={this.state.selectedTrack.permalink_url} className="opacity-75 truncate cursor-point" ref={this.displayText}>Disabled {/*this.state.display*/}</a>
+            <div className="bg-gray-900 h-8 border-t-2 border-l-2 border-r-2 border-gray-600 text-blue-300 px-2 flex items-center mt-2" ref={this.displayTextContainer}>
+                <a target="_blank" href={this.state.selectedTrack.permalink_url} className="opacity-75 truncate cursor-point" ref={this.displayText}>{this.state.display}</a>
+                
             </div>
-            <p className="text-sm">Station: {this.state.selectedPlaylist.name}</p>
+            <div className="bg-gray-900 h-8 border-b-2 border-l-2 border-r-2 border-gray-600 text-blue-300 flex items-center justify-center mb-2" ref={this.displayTextContainer}>
+            <div></div>
+                <AudioSpectrum
+                    id="audio-canvas"
+                    height={25}
+                    width={340}
+                    audioId={'music-player'}
+                    capColor={'2564eb'}
+                    capHeight={2}
+                    meterWidth={2}
+                    meterCount={512}
+                    meterColor={[
+                        {stop: 0, color: '#2564eb'},
+                        {stop: 0.1, color: '#fff'},
+                        {stop: 1, color: '#fff'}
+                    ]}
+                    gap={2}
+                    />
+            </div>
+            
+            
+            <p className="text-sm">Station: Poolsuite FM</p>
             <div className="w-full h-2 bg-black cursor-point" ref={this.progressBarContainer} onMouseUp={this.updateSongPosition}>
                 <div ref={this.progressBar} className="bg-blue-300 h-2 pointer-events-none" style={{width:this.state.trackProgress}}></div>
             </div>
@@ -55,9 +78,8 @@ class MusicPlayer extends React.Component {
 					</svg>
                 </button>
             </div>
-            <div>Track {this.state.trackIndex} of {this.state.selectedPlaylistLength}</div>
-            <p className="text-red-600 text-sm">Radio is disabled until a usable api is found</p>
-            <audio ref={this.audio} onEnded={this.nextTrack} onTimeUpdate={this.updateTrackProgress} src={'https://api.poolsidefm.workers.dev/v2/get_sc_mp3_stream?track_id=' + this.state.selectedTrack.soundcloud_id}></audio>
+            <div>Track {this.state.trackIndex + 1} of {this.state.selectedPlaylistLength}</div>
+            <audio id="music-player" ref={this.audio} onEnded={this.nextTrack} onTimeUpdate={this.updateTrackProgress} src={'/playlist/' + this.state.selectedTrack.waveform_url.split('/')[3].replace('_m.png', '.128.mp3') }></audio>
         </div>
         );
     }
@@ -109,15 +131,13 @@ class MusicPlayer extends React.Component {
     }
 
     togglePlay = () => {
-        return;
         this.setState({ isPlaying: !this.state.isPlaying }, () => {
             this.state.isPlaying ? this.audio.current.play() : this.audio.current.pause();
         });
     }
 
     nextTrack = () => {
-        return;
-        if(this.state.trackIndex >= this.state.selectedPlaylist.tracks_in_order.length - 1) {
+        if(this.state.trackIndex >= this.state.selectedPlaylist.length - 1) {
             return;
         }
         let replay = false;
@@ -126,7 +146,7 @@ class MusicPlayer extends React.Component {
             replay = true
         }
         this.setState({
-            selectedTrack: this.state.selectedPlaylist.tracks_in_order[this.state.trackIndex+1],
+            selectedTrack: this.state.selectedPlaylist[this.state.trackIndex+1],
             trackIndex: this.state.trackIndex+1,
         }, () => {
             if(replay) {
@@ -137,7 +157,6 @@ class MusicPlayer extends React.Component {
     }
 
     previousTrack = () => {
-        return;
         if(this.state.trackIndex <= 0) {
             return;
         }
@@ -147,7 +166,7 @@ class MusicPlayer extends React.Component {
             replay = true
         }
         this.setState({
-            selectedTrack: this.state.selectedPlaylist.tracks_in_order[this.state.trackIndex-1],
+            selectedTrack: this.state.selectedPlaylist[this.state.trackIndex-1],
             trackIndex: this.state.trackIndex-1
         }, () => {
             if(replay) {

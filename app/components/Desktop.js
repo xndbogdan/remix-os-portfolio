@@ -36,7 +36,6 @@ class Desktop extends React.Component {
             resumeTab: 0,
         };
         this.iconTimeout = null;
-        console.log('asd')
     }
 
     render() {
