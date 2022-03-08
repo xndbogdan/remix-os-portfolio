@@ -16,6 +16,7 @@
     "@remix-run/react": "^1.1.3",
     "@remix-run/serve": "^1.1.3",
     "lru-cache": "^7.3.1",
+    "node-ray": "^1.18.0",
     "react": "^17.0.2",
     "react-audio-spectrum": "^0.1.0",
     "react-device-detect": "^2.1.2",

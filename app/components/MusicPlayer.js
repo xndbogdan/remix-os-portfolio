@@ -86,7 +86,11 @@ class MusicPlayer extends React.Component {
                 </button>
             </div>
             <div>Track {this.state.trackIndex + 1} of {this.state.selectedPlaylistLength}</div>
-            <audio id="music-player" ref={this.audio} onEnded={this.nextTrack} onTimeUpdate={this.updateTrackProgress} src={'/playlist/' + this.state.selectedTrack.waveform_url.split('/')[3].replace('_m.png', '.128.mp3') }></audio>
+            <audio 
+                id="music-player" 
+                ref={this.audio} onEnded={this.nextTrack} onTimeUpdate={this.updateTrackProgress} 
+                src={('/songs/' + this.state.selectedTrack.waveform_url.split('/')[3].replace('_m.png', ''))}>
+            </audio>
         </div>
         );
     }
