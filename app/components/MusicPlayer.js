@@ -26,35 +26,37 @@ class MusicPlayer extends React.Component {
     render(props) {
         return (
         <div className="px-2">
-            <div className="bg-gray-900 h-8 border-t-2 border-l-2 border-r-2 border-gray-600 text-blue-300 px-2 flex items-center mt-2" ref={this.displayTextContainer}>
-                <a target="_blank" href={this.state.selectedTrack.permalink_url} className="opacity-75 cursor-point" ref={this.displayText}>
-                    <Marquee pauseOnHover={true} gradient={false}>
-                        <span className='pr-16'>
-                            {this.state.display}
-                        </span>
-                    </Marquee>
-                </a>
+            <div className='bg-gray-900 border-2 border-gray-600 my-2'>
+                <div className=" h-8 text-blue-300 px-2 flex items-center" ref={this.displayTextContainer}>
+                    <a target="_blank" href={this.state.selectedTrack.permalink_url} className="opacity-75 cursor-point" ref={this.displayText}>
+                        <Marquee pauseOnHover={true} gradient={false}>
+                            <span className='pr-16'>
+                                {this.state.display}
+                            </span>
+                        </Marquee>
+                    </a>
+                </div>
+                <div className={this.state.isPlaying ? 'h-8 text-blue-300 flex items-center justify-center' : 'hidden'} ref={this.displayTextContainer}>
+                    <div>
+                        <AudioSpectrum
+                            id="audio-canvas"
+                            height={25}
+                            width={340}
+                            audioId={'music-player'}
+                            capColor={'2564eb'}
+                            capHeight={2}
+                            meterWidth={2}
+                            meterCount={512}
+                            meterColor={[
+                                {stop: 0, color: '#2564eb'},
+                                {stop: 0.1, color: '#fff'},
+                                {stop: 1, color: '#fff'}
+                            ]}
+                            gap={2}
+                            />
+                    </div>
+                </div>
             </div>
-            <div className="bg-gray-900 h-8 border-b-2 border-l-2 border-r-2 border-gray-600 text-blue-300 flex items-center justify-center mb-2" ref={this.displayTextContainer}>
-            <div></div>
-                <AudioSpectrum
-                    id="audio-canvas"
-                    height={25}
-                    width={340}
-                    audioId={'music-player'}
-                    capColor={'2564eb'}
-                    capHeight={2}
-                    meterWidth={2}
-                    meterCount={512}
-                    meterColor={[
-                        {stop: 0, color: '#2564eb'},
-                        {stop: 0.1, color: '#fff'},
-                        {stop: 1, color: '#fff'}
-                    ]}
-                    gap={2}
-                    />
-            </div>
-            
             
             <p className="text-sm">Station: Poolsuite FM</p>
             <div className="w-full h-2 bg-black cursor-point" ref={this.progressBarContainer} onMouseUp={this.updateSongPosition}>

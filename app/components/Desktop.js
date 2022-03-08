@@ -23,17 +23,20 @@ class Desktop extends React.Component {
                 { focused: false, closed: false, },
                 { focused: false, closed: false, },
                 { focused: false, closed: false, },
+                { focused: false, closed: false, },
             ],
             icons: [
-                { focused: false, clicks: 0, },
-                { focused: false, clicks: 0, },
-                { focused: false, clicks: 0, },
-                { focused: false, clicks: 0, },
-                { focused: false, clicks: 0, },
-                { focused: false, clicks: 0, },
-                { focused: false, clicks: 0, },
+                { focused: false, clicks: 0, dragging: false, },
+                { focused: false, clicks: 0, dragging: false, },
+                { focused: false, clicks: 0, dragging: false, },
+                { focused: false, clicks: 0, dragging: false },
+                { focused: false, clicks: 0, dragging: false },
+                { focused: false, clicks: 0, dragging: false },
+                { focused: false, clicks: 0, dragging: false },
+                { focused: false, clicks: 0, dragging: false },
             ],
             resumeTab: 0,
+            anyMobileDevice: false,
         };
         this.iconTimeout = null;
     }
@@ -121,9 +124,24 @@ class Desktop extends React.Component {
                                         <div className="bg-white p-2 overflow-y-auto border border-black text-sm select-full">
                                             <p>I'm Bogdan, an independent full-stack developer from Bucharest.</p>
                                             <p>Big fan of Laravel, Vue and Tailwind.</p>
-                                            <p className="mt-2">This project was made using Remix. It combines React and Node.<br/>It's still under development.</p>
+                                            <p className="mt-4">This project was made using Remix. It combines React and Node.<br/>It's still under development.</p>
                                             <p className="mt-2">You should try moving the windows around and playing some music. Maybe fax me your music playlist while you're at it.</p>
                                             <p className="mt-2">Close this window if you are on a mobile device</p>
+                                            <p className="mt-4">Links:</p>
+                                            <div className='flex flex-wrap space-x-4'>
+                                                <a target="_blank" href="https://twitter.com/xndbogdan" className="flex flex-col items-center">
+                                                    <LazyLoadImage src="/icons/Twitter.png" className="w-10 h-10 mx-auto pointer-events-none"/>
+                                                    <span className='text-xs'>Twitter</span>
+                                                </a>
+                                                <a target="_blank" href="https://github.com/xndbogdan" className="flex flex-col items-center">
+                                                    <LazyLoadImage src="/icons/github.png" className="w-10 h-10 mx-auto pointer-events-none"/>
+                                                    <span className='text-xs'>Github</span>
+                                                </a>
+                                                <a target="_blank" href="https://www.linkedin.com/in/bogdan-mihai-476262120/" className="flex flex-col items-center">
+                                                    <LazyLoadImage src="/icons/linkedin.png" className="w-10 h-10 mx-auto pointer-events-none"/>
+                                                    <span className='text-xs'>Linkedin</span>
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                 </Draggable>
@@ -291,7 +309,7 @@ class Desktop extends React.Component {
             if (index === iconIndex) {
                 let clicks = visibleIcons[index].clicks
                 visibleIcons[index] = { ...window, focused: true, clicks: clicks+1}
-                if(clicks == 1 || isMobile) {
+                if((clicks == 1 || this.state.anyMobileDevice) && !icon.dragging) {
                     /* An icon was double clicked
                      * We need to reset the iconns state and show the window corresponding to the double clicked icon
                      */
@@ -315,7 +333,7 @@ class Desktop extends React.Component {
                     });
                 }
             } else {
-                visibleIcons[index] = {...icon, focused: false, clicks: 0}
+                visibleIcons[index] = {...icon, focused: false, clicks: 0, dragging: false}
             }
         });
         this.setState({ icons: visibleIcons })
@@ -364,7 +382,7 @@ class Desktop extends React.Component {
         }
         this.intervalID = setInterval(
             () => this.tick(),
-            1000
+            250
         );
     }
     componentWillUnmount() {
@@ -372,6 +390,9 @@ class Desktop extends React.Component {
     }
 
     tick() {
+        this.setState({
+            anyMobileDevice: isMobile || window.matchMedia("(max-width: 400px)").matches
+        })
     }
 
 }
