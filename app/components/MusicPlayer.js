@@ -173,7 +173,7 @@ class MusicPlayer extends React.Component {
         }
         let replay = false;
         if(this.state.isPlaying) {
-            togglePlay()
+            this.togglePlay()
             replay = true
         }
         this.setState({
