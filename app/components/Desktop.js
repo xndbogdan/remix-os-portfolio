@@ -126,7 +126,7 @@ class Desktop extends React.Component {
                                             <p>Big fan of Laravel, Vue and Tailwind.</p>
                                             <p className="mt-4">This project was made using Remix. It combines React and Node.<br/>It's still under development.</p>
                                             <p className="mt-2">You should try moving the windows around and playing some music. Maybe fax me your music playlist while you're at it.</p>
-                                            <p className="mt-2">Close this window if you are on a mobile device</p>
+                                            <p className="mt-2">Close this window if you are on a mobile device, there are desktop icons under it that you can click to find more about me or listen to some sweet music.</p>
                                             <p className="mt-4">Links:</p>
                                             <div className='flex flex-wrap space-x-4'>
                                                 <a target="_blank" href="https://twitter.com/xndbogdan" className="flex flex-col items-center">
