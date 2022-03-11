@@ -1,42 +1,56 @@
 // file: app/routes/songs.$id.tsx
 import fs from "fs";
-import { ray } from "node-ray";
+import parseRange from "range-parser";
 
 export const loader = ({ params, request }) => {
   const { id } = params;
   const filePath = `./public/playlist/${id}.128.mp3`
   const stat = fs.statSync(filePath);
   const fileSize = stat.size;
-  const range = request.headers.get('range');
-  if (!range) {
+
+  const rangeHeader = request.headers.get("Range");
+
+  console.log(`Got range: ${rangeHeader}`);
+
+  if (!rangeHeader) {
     return new Response(
-      fs.createReadStream(filePath), {
+      // @ts-expect-error
+      fs.createReadStream(filePath),
+      {
         status: 200,
         headers: {
           "Content-Type": "audio/mpeg",
-          'Content-Length': fileSize,
+          "Content-Length": fileSize,
+          "Accept-Ranges": "bytes",
         },
       }
     );
   } else {
-    const parts = range.replace(/bytes=/, "").split("-");
-    const start = parseInt(parts[0], 10);
-    const end = parts[1] 
-        ? parseInt(parts[1], 10)
-        : fileSize - 1;
-    const chunksize = (end - start) + 1;
-    const readStream = fs.createReadStream(filePath, { start, end });
+    const ranges = parseRange(fileSize, rangeHeader);
+
+    if (ranges === -1 || ranges === -2) {
+      throw new Response("Invalid Range", { status: 416 });
+    }
+
+    if (ranges.length > 1) {
+      throw new Response("Multiple Ranges not supported", { status: 416 });
+    }
+
+    const type = ranges.type;
+    const range = ranges[0];
+
     return new Response(
-      fs.createReadStream(filePath), {
-        status: 206,
+      // @ts-expect-error
+      fs.createReadStream(filePath, range),
+      {
+        status: 200,
         headers: {
           "Content-Type": "audio/mpeg",
-          'Content-Range': `bytes ${start}-${end}/${fileSize}`,
-          'Accept-Ranges': 'bytes',
-          'Content-Length': chunksize,
+          "Content-Length": range.end - range.start + 1,
+          "Content-Range": `${type} ${range.start}-${range.end}/${fileSize}`,
+          "Accept-Ranges": "bytes",
         },
       }
     );
   }
-  
 };
