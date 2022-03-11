@@ -38,7 +38,7 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body className="select-none cursor-default overflow-x-hidden bg-tile-3">
+      <body className="select-none cursor-default overflow-hidden bg-tile-3">
         <Outlet />
         <ScrollRestoration />
         <Scripts />

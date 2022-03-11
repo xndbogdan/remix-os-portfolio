@@ -1,7 +1,6 @@
 import React from 'react';
 import Draggable from 'react-draggable';
 import { ResizableBox } from 'react-resizable';
-import {isMobile} from 'react-device-detect';
 import MusicPlayer from '~/components/MusicPlayer';
 import Collaborate from '~/components/Collaborate';
 import Clock from '~/components/Clock';
@@ -17,13 +16,13 @@ class Desktop extends React.Component {
         this.state = {
             windows: [
                 { focused: false, closed: false, },
-                { focused: false, closed: false, },
-                { focused: false, closed: false, },
-                { focused: false, closed: false, },
-                { focused: false, closed: false, },
-                { focused: false, closed: false, },
-                { focused: false, closed: false, },
-                { focused: false, closed: false, },
+                { focused: false, closed: true, },
+                { focused: false, closed: true, },
+                { focused: false, closed: true, },
+                { focused: false, closed: true, },
+                { focused: false, closed: true, },
+                { focused: false, closed: true, },
+                { focused: false, closed: true, },
             ],
             icons: [
                 { focused: false, clicks: 0, dragging: false, },
@@ -109,7 +108,7 @@ class Desktop extends React.Component {
                             <div className="flex flex-wrap justify-center md:justify-between items-start">
 
                                 <Draggable handle=".handle" onMouseDown={this.toggleWindowVisibility}>
-                                    <div id='window-0' className={this.state.windows[0].closed ? 'hidden' : 'p-1 border border-black mt-4 bg-gray-mac shadow-mac-os os-window w-full max-w-sm pointer-events-auto'} style={this.state.windows[0].focused ? {zIndex: 99} : {zIndex:10}}>
+                                    <div id='window-0' className={this.state.windows[0].closed ? 'hidden' : 'absolute p-1 border border-black mt-4 bg-gray-mac shadow-mac-os os-window w-full max-w-sm pointer-events-auto'} style={this.state.windows[0].focused ? {zIndex: 99} : {zIndex:10}}>
                                         <div className="flex flex-row items-center pb-1">
                                             <div className="close-btn h-6 w-6 md:h-4 md:w-4 border border-black mr-2 hover:invert hover:bg-white cursor-point" onMouseDown={this.toggleHideWindow}></div>
                                             <div className="flex-1 flex handle h-4 items-center">
@@ -126,7 +125,7 @@ class Desktop extends React.Component {
                                             <p>Big fan of Laravel, Vue and Tailwind.</p>
                                             <p className="mt-4">This project was made using Remix. It combines React and Node.<br/>It's still under development.</p>
                                             <p className="mt-2">You should try moving the windows around and playing some music. Maybe fax me your music playlist while you're at it.</p>
-                                            <p className="mt-2">Close this window if you are on a mobile device, there are desktop icons under it that you can click to find more about me or listen to some sweet music.</p>
+                                            <p className="mt-2">Close this window or move it lower if you are on a mobile device, there are desktop icons under it that you can click to find more about me or listen to some sweet music.</p>
                                             <p className="mt-4">Links:</p>
                                             <div className='flex flex-wrap space-x-4'>
                                                 <a target="_blank" href="https://twitter.com/xndbogdan" className="flex flex-col items-center">
@@ -145,9 +144,8 @@ class Desktop extends React.Component {
                                         </div>
                                     </div>
                                 </Draggable>
-
                                 <Draggable handle=".handle" onMouseDown={this.toggleWindowVisibility}>
-                                    <div id='window-1' className={this.state.windows[1].closed ? 'hidden' : 'p-1 border border-black mt-4 bg-gray-mac shadow-mac-os os-window w-full max-w-sm pointer-events-auto'} style={this.state.windows[1].focused ? {zIndex: 99} : {zIndex:10}}>
+                                    <div id='window-1' className={this.state.windows[1].closed ? 'hidden' : 'absolute p-1 border border-black mt-4 bg-gray-mac shadow-mac-os os-window w-full max-w-sm pointer-events-auto'} style={this.state.windows[1].focused ? {zIndex: 99} : {zIndex:10}}>
                                         <div className="flex flex-row items-center pb-1">
                                             <div className="close-btn h-6 w-6 md:h-4 md:w-4 border border-black mr-2 hover:invert hover:bg-white cursor-point" onMouseDown={this.toggleHideWindow}></div>
                                             <div className="flex-1 flex handle h-4 items-center">
@@ -162,9 +160,8 @@ class Desktop extends React.Component {
                                         <MusicPlayer tracklist={this.props.tracklist} closed={this.state.windows[1].closed}/>
                                     </div>
                                 </Draggable>
-
                                 <Draggable handle=".handle" onMouseDown={this.toggleWindowVisibility}>
-                                    <div id='window-2' className={this.state.windows[2].closed ? 'hidden' : 'p-1 border border-black mt-4 bg-gray-mac shadow-mac-os os-window w-full max-w-sm pointer-events-auto'} style={this.state.windows[2].focused ? {zIndex: 99} : {zIndex:10}}>
+                                    <div id='window-2' className={this.state.windows[2].closed ? 'hidden' : 'absolute p-1 border border-black mt-4 bg-gray-mac shadow-mac-os os-window w-full max-w-sm pointer-events-auto'} style={this.state.windows[2].focused ? {zIndex: 99} : {zIndex:10}}>
                                         <div className="flex flex-row items-center pb-1">
                                             <div className="close-btn h-6 w-6 md:h-4 md:w-4 border border-black mr-2 hover:invert hover:bg-white cursor-point" onMouseDown={this.toggleHideWindow}></div>
                                             <div className="flex-1 flex handle h-4 items-center">
@@ -184,9 +181,8 @@ class Desktop extends React.Component {
                                         
                                     </div>
                                 </Draggable>
-
                                 <Draggable handle=".handle" onMouseDown={this.toggleWindowVisibility}>
-                                    <div id='window-3' className={this.state.windows[3].closed ? 'hidden' : 'p-1 border border-black mt-4 bg-gray-mac shadow-mac-os os-window w-full max-w-sm pointer-events-auto'} style={this.state.windows[3].focused ? {zIndex: 99} : {zIndex:10}}>
+                                    <div id='window-3' className={this.state.windows[3].closed ? 'hidden' : 'absolute p-1 border border-black mt-4 bg-gray-mac shadow-mac-os os-window w-full max-w-sm pointer-events-auto'} style={this.state.windows[3].focused ? {zIndex: 99} : {zIndex:10}}>
                                         <div className="flex flex-row items-center pb-1">
                                             <div className="close-btn h-6 w-6 md:h-4 md:w-4 border border-black mr-2 hover:invert hover:bg-white cursor-point" onMouseDown={this.toggleHideWindow}></div>
                                             <div className="flex-1 flex handle h-4 items-center">
@@ -203,9 +199,8 @@ class Desktop extends React.Component {
                                         </div>
                                     </div>
                                 </Draggable>
-
                                 <Draggable handle=".handle" onMouseDown={this.toggleWindowVisibility}>
-                                    <div id='window-4' className={this.state.windows[4].closed ? 'hidden' : 'p-1 border border-black mt-4 bg-gray-mac shadow-mac-os os-window w-full max-w-sm pointer-events-auto'} style={this.state.windows[4].focused ? {zIndex: 99} : {zIndex:10}}>
+                                    <div id='window-4' className={this.state.windows[4].closed ? 'hidden' : 'absolute p-1 border border-black mt-4 bg-gray-mac shadow-mac-os os-window w-full max-w-sm pointer-events-auto'} style={this.state.windows[4].focused ? {zIndex: 99} : {zIndex:10}}>
                                         <div className="flex flex-row items-center pb-1">
                                             <div className="close-btn h-6 w-6 md:h-4 md:w-4 border border-black mr-2 hover:invert hover:bg-white cursor-point" onMouseDown={this.toggleHideWindow}></div>
                                             <div className="flex-1 flex handle h-4 items-center">
@@ -224,9 +219,8 @@ class Desktop extends React.Component {
                                         </div>
                                     </div>
                                 </Draggable>
-
                                 <Draggable handle=".handle" onMouseDown={this.toggleWindowVisibility}>
-                                    <div id='window-5' className={this.state.windows[5].closed ? 'hidden' : 'p-1 border border-black mt-4 bg-gray-mac shadow-mac-os os-window w-full max-w-sm pointer-events-auto'} style={this.state.windows[5].focused ? {zIndex: 99} : {zIndex:10}}>
+                                    <div id='window-5' className={this.state.windows[5].closed ? 'hidden' : 'absolute p-1 border border-black mt-4 bg-gray-mac shadow-mac-os os-window w-full max-w-sm pointer-events-auto'} style={this.state.windows[5].focused ? {zIndex: 99} : {zIndex:10}}>
                                         <div className="flex flex-row items-center pb-1">
                                             <div className="close-btn h-6 w-6 md:h-4 md:w-4 border border-black mr-2 hover:invert hover:bg-white cursor-point" onMouseDown={this.toggleHideWindow}></div>
                                             <div className="flex-1 flex handle h-4 items-center">
@@ -247,6 +241,10 @@ class Desktop extends React.Component {
                                             <p className="text-gray-800"><span className="text-green-500">✓</span> Let the user close windows, and reopen them through the desktop icons</p>
                                             <p className="text-gray-800">• Let the user minimize windows to an applications dock</p>
                                             <p className="text-lg mb-2 mt-4">Changelog</p>
+                                            <p className="text-blue-700 hover:text-blue-800">• 12/03/2022 - Made the windows absolute.</p>
+                                            <p>Window positioning is now absolute.<br></br> They will now open on top of each other.</p>
+                                            <p className="text-blue-700 hover:text-blue-800">• 10/03/2022 - Fixed music player.</p>
+                                            <p>Replaced poolsuite api calls with internal calls.</p>
                                             <p className="text-blue-700 hover:text-blue-800">• 21/02/2022 - Fixed music player bug.</p>
                                             <p>Fixed a bug where the music player would continue playing even if it was closed.</p>
                                             <p className="text-blue-700 hover:text-blue-800">• 20/02/2022 - Close and re-open windows.</p>
@@ -369,17 +367,6 @@ class Desktop extends React.Component {
     }
 
     componentDidMount() {
-        if (isMobile) {
-            let visibleWindows = this.state.windows
-            visibleWindows.forEach((window, index) => {
-                if(index == 0) {
-                    return;
-                }
-                visibleWindows[index] = { ...window, closed: true}
-                this.setState({ windows: visibleWindows })
-                return
-            });
-        }
         this.intervalID = setInterval(
             () => this.tick(),
             250
@@ -391,7 +378,7 @@ class Desktop extends React.Component {
 
     tick() {
         this.setState({
-            anyMobileDevice: isMobile || window.matchMedia("(max-width: 400px)").matches
+            anyMobileDevice: window.matchMedia("(max-width: 412px)").matches
         })
     }
 
