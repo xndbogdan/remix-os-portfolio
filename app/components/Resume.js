@@ -23,6 +23,7 @@ class Resume extends React.Component {
                 <p>- Reworking/upgrading older php5.6 & laravel 5 apps to laravel 8/9</p>
                 <p>- New feature implementations & bugfixes, depending on the client's needs</p>
                 <p>- Came up with solutions that worked better for the client and their customers</p>
+                <p>- Helped junior devs understand the tech stack and get better at their job</p>
 
                 <p className="mt-2"><span className="text-blue-700">Full Stack Web Developer</span> at <a href="http://artgames.ro/" target="_blank">Art Games</a> (Jul 2018 - Oct 2019)</p>
                 <p>Worked on many internal projects, including <a target="_blank" href="https://artmark.ro">Artmark.ro</a>, and <a target="_blank" href="https://artsafari.ro">Artsafari.ro</a> and <a target="_blank" href="https://www.sothebysrealty.ro/">Sotheby's Realty Romania</a> .</p>
