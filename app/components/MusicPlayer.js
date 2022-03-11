@@ -53,6 +53,11 @@ class MusicPlayer extends React.Component {
                             />
                     </div>
                 </div>
+                <div className={!this.state.isPlaying ? 'h-8 text-blue-300 flex items-center justify-start' : 'hidden'} ref={this.displayTextContainer}>
+                    <div className='opacity-75 px-2'>
+                    /// Remix OS Player - Paused ///
+                    </div>
+                </div>
             </div>
             
             <p className="text-sm">Station: Poolsuite FM</p>
