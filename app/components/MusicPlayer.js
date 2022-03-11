@@ -1,16 +1,15 @@
 import React, { useRef } from 'react';
 import AudioSpectrum from 'react-audio-spectrum'
-import Marquee from "react-fast-marquee";
 class MusicPlayer extends React.Component {
     constructor(props) {
         super(props);
-        const randomTrackIndex = Math.floor(Math.random() * this.props.tracklist.length);
+        const randomTrackIndex = 0;
         this.state = {
             tracklist: this.props.tracklist,
             selectedPlaylist: this.props.tracklist,
             selectedPlaylistLength: this.props.tracklist.length,
             trackIndex: randomTrackIndex,
-            selectedTrack: this.props.tracklist[randomTrackIndex],
+            selectedTrack: this.props.tracklist[0],
             display: 'Player Offline',
             isPlaying: false,
             trackProgress: 0,
@@ -28,12 +27,10 @@ class MusicPlayer extends React.Component {
         <div className="px-2">
             <div className='bg-gray-900 border-2 border-gray-600 my-2'>
                 <div className=" h-8 text-blue-300 px-2 flex items-center" ref={this.displayTextContainer}>
-                    <a target="_blank" href={this.state.selectedTrack.permalink_url} className="opacity-75 cursor-point" ref={this.displayText}>
-                        <Marquee pauseOnHover={true} gradient={false}>
-                            <span className='pr-16'>
-                                {this.state.display}
-                            </span>
-                        </Marquee>
+                    <a target="_blank" href={this.state.selectedTrack.permalink_url} className="opacity-75 cursor-point truncate" ref={this.displayText}>
+                        <span className='pr-16'>
+                            {this.state.display}
+                        </span>
                     </a>
                 </div>
                 <div className={this.state.isPlaying ? 'h-8 text-blue-300 flex items-center justify-center' : 'hidden'} ref={this.displayTextContainer}>

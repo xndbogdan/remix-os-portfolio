@@ -1,7 +1,7 @@
 import { useLoaderData } from "remix";
 import LRUCache from 'lru-cache';
 import Desktop from '~/components/Desktop';
-import MainResponse from '~/responses/main';
+import mainResponse from '~/responses/main';
 
 export let loader = async () => {
   // const options = {
@@ -23,7 +23,8 @@ export let loader = async () => {
   // let data = cache.get('tracklist')
   
   // return userTimeline;
-  return MainResponse;
+  const shuffledResponse = mainResponse.sort((a, b) => 0.5 - Math.random());
+  return shuffledResponse;
 };
 
 export default function Index() {
