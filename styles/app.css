@@ -106,3 +106,7 @@
       transform: translate3d(var(--move-final), 0, 0);
   }
 }
+
+.bg-black-seethrough {
+  background-color: rgba(0,0,0,.7);
+}

@@ -59,8 +59,9 @@ class Desktop extends React.Component {
                     <div className="py-1 pl-2 text-xs border-l border-black sm:pr-2"><Clock /></div>
                     <div className="hidden py-1 pl-2 text-xs border-l border-black sm:block"><Calendar /></div>
                 </div>
-                <div className="fixed bottom-0 right-0 flex flex-col items-end p-2 text-sm text-white">
-                    <span>Remix OS Beta Release v0.2</span>
+                <div className="fixed bottom-0 right-0 flex flex-col items-end p-2 bg-black-seethrough rounded-tl-lg">
+                    <span className='text-white text-sm'>Remix OS Beta Release v0.2</span>
+                    <a href='https://www.supportukraine.co/' target='_blank' className='bg-gradient-to-r from-blue-ukraine to-yellow-ukraine text-transparent bg-clip-text text-xs lg:text-sm'><blockquote className='inline italic'>It's easier to fool people than to convince them that they have been fooled</blockquote> - Mark Twain</a>
                 </div>
                 <div className="absolute z-0 flex flex-wrap w-screen p-2">
                     <div className="grid w-full max-w-sm grid-cols-3 gap-4 mt-2">
@@ -127,7 +128,7 @@ class Desktop extends React.Component {
                                             <p className="mt-2">You should try moving the windows around and playing some music. Maybe fax me your music playlist while you're at it.</p>
                                             <p className="mt-2">Close this window or move it lower if you are on a mobile device, there are desktop icons under it that you can click to find more about me or listen to some sweet music.</p>
                                             <p className="mt-4">Links:</p>
-                                            <div className='flex flex-wrap space-x-4'>
+                                            <div className='flex flex-wrap space-x-4 mb-2'>
                                                 <a target="_blank" href="https://twitter.com/xndbogdan" className="flex flex-col items-center">
                                                     <LazyLoadImage src="/icons/Twitter.png" className="w-10 h-10 mx-auto pointer-events-none"/>
                                                     <span className='text-xs'>Twitter</span>
@@ -141,6 +142,7 @@ class Desktop extends React.Component {
                                                     <span className='text-xs'>Linkedin</span>
                                                 </a>
                                             </div>
+                                            <a className='text-sm hover:text-blue-ukraine' href='https://helpukraine.center/' target="_blank">Donate to helpUkraine.center <img className='w-6 h-4 inline' src="/img/ukraine.svg"/> </a>
                                         </div>
                                     </div>
                                 </Draggable>
