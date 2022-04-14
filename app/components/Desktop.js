@@ -60,7 +60,7 @@ class Desktop extends React.Component {
                     <div className="hidden py-1 pl-2 text-xs border-l border-black sm:block"><Calendar /></div>
                 </div>
                 <div className="fixed bottom-0 right-0 flex flex-col items-end p-2 bg-black-seethrough sm:rounded-tl-lg">
-                    <span className='text-white text-sm'>Remix OS Beta Release v0.2</span>
+                    <span className='text-white text-sm'>Remix OS Beta Release v0.3</span>
                     <a href='https://www.supportukraine.co/' target='_blank' className='bg-gradient-to-r from-blue-400 to-yellow-ukraine text-transparent bg-clip-text text-xs lg:text-sm'><blockquote className='inline italic'>War is only a cowardly escape from the problems of peace</blockquote> - Thomas Mann</a>
                 </div>
                 <div className="absolute z-0 flex flex-wrap w-screen p-2">
