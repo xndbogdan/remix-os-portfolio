@@ -150,6 +150,7 @@ class Desktop extends React.Component {
                                             <p className="mt-4">This project was made using Remix. It combines React and Node.<br/>It's still under development.</p>
                                             <p className="mt-2">You should try moving the windows around and playing some music. Maybe fax me your music playlist while you're at it.</p>
                                             <p className="mt-2">Close this window or move it lower if you are on a mobile device, there are desktop icons under it that you can click to find more about me or listen to some sweet music.</p>
+                                            <p className='mt-2'>For business inqueries contact me on <a className='text-blue-700' target='_blank' href='mailto:bogdan.mosteanu@hey.com'>bogdan.mosteanu@hey.com</a></p>
                                             <p className="mt-4">Links:</p>
                                             <div className='flex flex-wrap space-x-4 mb-2'>
                                                 <a target="_blank" href="https://twitter.com/xndbogdan" className="flex flex-col items-center">
@@ -160,7 +161,7 @@ class Desktop extends React.Component {
                                                     <LazyLoadImage src="/icons/github.png" className="w-10 h-10 mx-auto pointer-events-none"/>
                                                     <span className='text-xs'>Github</span>
                                                 </a>
-                                                <a target="_blank" href="https://www.linkedin.com/in/bogdan-mihai-476262120/" className="flex flex-col items-center">
+                                                <a target="_blank" href="https://www.linkedin.com/in/bogdan-mihai-mo%C8%99teanu-476262120/" className="flex flex-col items-center">
                                                     <LazyLoadImage src="/icons/linkedin.png" className="w-10 h-10 mx-auto pointer-events-none"/>
                                                     <span className='text-xs'>Linkedin</span>
                                                 </a>
