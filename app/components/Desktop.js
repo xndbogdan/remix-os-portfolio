@@ -115,14 +115,14 @@ class Desktop extends React.Component {
                 <div className={this.state.easter ? 'absolute z-50 w-screen pointer-events-none h-screen' : 'absolute z-50 w-screen pointer-events-none h-screen hidden'}>
                     <div className='flex flex-wrap h-screen'>
                         <div className='w-1/3 flex flex-col items-top h-screen'>
-                            <img className={this.state.easterPhase === 1 ? 'w-full my-auto' : 'w-full my-auto hidden'} src='/easter/bam.webp'></img>
+                            <img className={this.state.easterPhase === 1 ? 'w-full my-auto transition-all duration-500 scale-100 ease-in-out' : 'ease-in-out transition-all duration-500 w-full my-auto scale-0'} src='/easter/bam.webp'></img>
                         </div>
                         <div className='w-1/3 flex flex-col items-top h-screen'>
-                            <img className={this.state.easterPhase === 2 ? 'w-full mb-auto' : 'w-full mb-auto hidden'} src='/easter/boom.webp'></img>
+                            <img className={this.state.easterPhase === 2 ? 'w-full mb-auto transition-all duration-500 scale-100 ease-in-out' : 'ease-in-out transition-all duration-500 w-full mb-auto scale-0'} src='/easter/boom.webp'></img>
                         </div>
                         
                         <div className='w-1/3 flex flex-col items-end h-screen'>
-                            <img className={this.state.easterPhase === 0 ? 'w-full mt-auto' : 'w-full mt-auto hidden'} src='/easter/bim.webp'></img>
+                            <img className={this.state.easterPhase === 0 ? 'w-full mt-auto transition-all duration-500 scale-100 ease-in-out' : 'ease-in-out transition-all duration-500 w-full mt-auto scale-0'} src='/easter/bim.webp'></img>
                         </div>
                     </div>
                 </div>
