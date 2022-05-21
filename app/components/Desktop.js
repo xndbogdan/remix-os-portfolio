@@ -14,6 +14,8 @@ class Desktop extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            easter: false,
+            easterPhase: 0,
             windows: [
                 { focused: false, closed: false, },
                 { focused: false, closed: true, },
@@ -37,6 +39,7 @@ class Desktop extends React.Component {
             resumeTab: 0,
             anyMobileDevice: false,
         };
+        this.easterEggPlayer = React.createRef()
         this.iconTimeout = null;
     }
 
@@ -101,6 +104,26 @@ class Desktop extends React.Component {
                                 <span className={this.state.icons[5].clicks == 1 ? 'text-xs bg-blue-400 opacity-75' : 'text-xs'}>Milestones.rtf</span>
                             </div>
                         </Draggable>
+                        <Draggable handle=".handle" onMouseDown={this.toggleIconVisibility}>
+                            <div id='icon-6' className="flex flex-col items-center handle os-icon" style={this.state.icons[6].focused ? {zIndex: 50} : {zIndex:1}}>
+                                <LazyLoadImage src="/easter/boom.webp" className="w-10 h-10 mx-auto pointer-events-none"/>
+                                <span className={this.state.icons[6].clicks == 1 ? 'text-xs bg-blue-400 opacity-75' : 'text-xs'}>Bim Bam Boom</span>
+                            </div>
+                        </Draggable>
+                    </div>
+                </div>
+                <div className={this.state.easter ? 'absolute z-50 w-screen pointer-events-none h-screen' : 'absolute z-50 w-screen pointer-events-none h-screen hidden'}>
+                    <div className='flex flex-wrap h-screen'>
+                        <div className='w-1/3 flex flex-col items-top h-screen'>
+                            <img className={this.state.easterPhase === 1 ? 'w-full my-auto' : 'w-full my-auto hidden'} src='/easter/bam.webp'></img>
+                        </div>
+                        <div className='w-1/3 flex flex-col items-top h-screen'>
+                            <img className={this.state.easterPhase === 2 ? 'w-full mb-auto' : 'w-full mb-auto hidden'} src='/easter/boom.webp'></img>
+                        </div>
+                        
+                        <div className='w-1/3 flex flex-col items-end h-screen'>
+                            <img className={this.state.easterPhase === 0 ? 'w-full mt-auto' : 'w-full mt-auto hidden'} src='/easter/bim.webp'></img>
+                        </div>
                     </div>
                 </div>
                 <div className="absolute z-0 w-screen pointer-events-none">
@@ -268,8 +291,31 @@ class Desktop extends React.Component {
                         </div>
                     </div>
                 </div>
+                <audio ref={this.easterEggPlayer} onEnded={this.endBimBamBoom} id="easter-egg-player" src='/easter/audio.ogg'></audio>
             </div>
         );
+    }
+
+    bimBamBoom = () => {
+        if(this.state.easter) {
+            return
+        }
+        this.setState({
+            easter: true,
+        })
+        this.easterEggPlayer.current.play()
+        this.incrementBims()
+        // this.setState({
+        //     easterPhase: -1,
+        // })
+        // this.incrementBim(8000)
+    }
+
+    endBimBamBoom = () => {
+        this.setState({
+            easter: false,
+            easterPhase: 0,
+        })
     }
 
     changeResumeVisibility = (event) => {
@@ -324,6 +370,10 @@ class Desktop extends React.Component {
                         let focused = visibleIcons[index].focused
                         visibleIcons[index] = { ...icon, focused: focused, clicks: 0}
                     })
+                    if(index == 6) {
+                        this.bimBamBoom()
+                        return
+                    }
                     this.setState({ icons: visibleIcons })
                     // Set window state to visible
                     let visibleWindows = this.state.windows
@@ -388,6 +438,100 @@ class Desktop extends React.Component {
         this.setState({
             anyMobileDevice: window.matchMedia("(max-width: 412px)").matches
         })
+    }
+
+    incrementBims = () => {
+        setTimeout(() => {
+            this.setState({
+                easterPhase: this.state.easterPhase + 1
+            })
+            setTimeout(() => {
+                this.setState({
+                    easterPhase: this.state.easterPhase + 1
+                })
+                setTimeout(() => {
+                    this.setState({
+                        easterPhase: this.state.easterPhase + 1
+                    })
+                    setTimeout(() => {
+                        this.setState({
+                            easterPhase: -1
+                        })
+                        setTimeout(() => {
+                            this.setState({
+                                easterPhase: this.state.easterPhase + 1
+                            })
+                            setTimeout(() => {
+                                this.setState({
+                                    easterPhase: this.state.easterPhase + 1
+                                })
+                                setTimeout(() => {
+                                    this.setState({
+                                        easterPhase: this.state.easterPhase + 1
+                                    })
+                                    setTimeout(() => {
+                                        this.setState({
+                                            easterPhase: this.state.easterPhase + 1
+                                        })
+                                        setTimeout(() => {
+                                            this.setState({
+                                                easterPhase: -1
+                                            })
+                                            setTimeout(() => {
+                                                this.setState({
+                                                    easterPhase: this.state.easterPhase + 1
+                                                })
+                                                setTimeout(() => {
+                                                    this.setState({
+                                                        easterPhase: this.state.easterPhase + 1
+                                                    })
+                                                    setTimeout(() => {
+                                                        this.setState({
+                                                            easterPhase: this.state.easterPhase + 1
+                                                        })
+                                                        setTimeout(() => {
+                                                            this.setState({
+                                                                easterPhase: this.state.easterPhase + 1
+                                                            })
+                                                            setTimeout(() => {
+                                                                this.setState({
+                                                                    easterPhase: -1
+                                                                })
+                                                                setTimeout(() => {
+                                                                    this.setState({
+                                                                        easterPhase: this.state.easterPhase + 1
+                                                                    })
+                                                                    setTimeout(() => {
+                                                                        this.setState({
+                                                                            easterPhase: this.state.easterPhase + 1
+                                                                        })
+                                                                        setTimeout(() => {
+                                                                            this.setState({
+                                                                                easterPhase: this.state.easterPhase + 1
+                                                                            })
+                                                                            setTimeout(() => {
+                                                                                this.setState({
+                                                                                    easterPhase: this.state.easterPhase + 1
+                                                                                })
+                                                                                
+                                                                            }, 500)
+                                                                        }, 500)
+                                                                    }, 500)
+                                                                }, 1800)
+                                                            }, 500)
+                                                        }, 500)
+                                                    }, 500)
+                                                }, 500)
+                                            }, 1800)
+                                        }, 500)
+                                    }, 500)
+                                }, 500)
+                            }, 500)
+                        }, 1800)
+                    }, 500)
+                }, 500)
+            }, 500)
+        }, 500)
     }
 
 }
