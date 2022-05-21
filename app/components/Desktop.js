@@ -115,14 +115,14 @@ class Desktop extends React.Component {
                 <div className={this.state.easter ? 'absolute z-50 w-screen pointer-events-none h-screen' : 'absolute z-50 w-screen pointer-events-none h-screen hidden'}>
                     <div className='flex flex-wrap h-screen'>
                         <div className='w-1/3 flex flex-col items-top h-screen'>
-                            <img className={this.state.easterPhase === 1 ? 'w-full my-auto' : 'w-full my-auto hidden'} src='/easter/bam.webp'></img>
+                            <img className={this.state.easterPhase === 1 ? 'w-full my-auto' : 'hidden'} src='/easter/bam.png'></img>
                         </div>
                         <div className='w-1/3 flex flex-col items-top h-screen'>
-                            <img className={this.state.easterPhase === 2 ? 'w-full mb-auto' : 'w-full mb-auto hidden'} src='/easter/boom.webp'></img>
+                            <img className={this.state.easterPhase === 2 ? 'w-full mb-auto mt-32' : 'hidden'} src='/easter/boom.png'></img>
                         </div>
                         
                         <div className='w-1/3 flex flex-col items-end h-screen'>
-                            <img className={this.state.easterPhase === 0 ? 'w-full mt-auto' : 'w-full mt-auto hidden'} src='/easter/bim.webp'></img>
+                            <img className={this.state.easterPhase === 0 ? 'w-full mt-auto mb-32' : 'hidden'} src='/easter/bim.png'></img>
                         </div>
                     </div>
                 </div>
@@ -292,7 +292,7 @@ class Desktop extends React.Component {
                         </div>
                     </div>
                 </div>
-                <audio ref={this.easterEggPlayer} onEnded={this.endBimBamBoom} id="easter-egg-player" src='/easter/audio.ogg'></audio>
+                <audio ref={this.easterEggPlayer} onEnded={this.endBimBamBoom} id="easter-egg-player" src='/easter/audio.mp3'></audio>
             </div>
         );
     }
