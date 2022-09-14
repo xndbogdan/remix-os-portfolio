@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import Draggable from 'react-draggable';
 import { ResizableBox } from 'react-resizable';
 import MusicPlayer from '~/components/MusicPlayer';
@@ -36,8 +36,14 @@ class Desktop extends React.Component {
                 { focused: false, clicks: 0, dragging: false },
                 { focused: false, clicks: 0, dragging: false },
             ],
+            menu: false,
+            aboutWindow: {
+                focused: false,
+                closed: true,
+            },
             resumeTab: 0,
             anyMobileDevice: false,
+            usedMemory: "0 MB",
         };
         this.easterEggPlayer = React.createRef()
         this.iconTimeout = null;
@@ -45,6 +51,7 @@ class Desktop extends React.Component {
 
     render() {
         const resumeTab = this.state.resumeTab
+        let memoryInterval = null
         let resumeContent;
         if(resumeTab === 0) {
             resumeContent = <Projects></Projects>
@@ -54,7 +61,7 @@ class Desktop extends React.Component {
         return (
             <div className="flex-1 min-h-screen font-chicago">
                 <div className="z-50 flex flex-row w-full px-2 border-b border-black bg-gray-mac">
-                    <div className="flex flex-row items-center py-1 pr-2 text-xs border-r border-black cursor-point">
+                    <div className="flex flex-row items-center py-1 pr-2 text-xs border-r border-black cursor-point" onMouseDown={() => {this.state.menu = !this.state.menu}}>
                         <span>Remix OS</span>
                         <LazyLoadImage className="inline ml-1" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAADCAYAAABbNsX4AAAAHElEQVQImWNkYGD4z4AGQIIggCwBE0OSYGBgAABmWAMBPlQzgwAAAABJRU5ErkJggg==" height="3" width="auto"/>
                     </div>
@@ -62,8 +69,38 @@ class Desktop extends React.Component {
                     <div className="py-1 pl-2 text-xs border-l border-black sm:pr-2"><Clock /></div>
                     <div className="hidden py-1 pl-2 text-xs border-l border-black sm:block"><Calendar /></div>
                 </div>
+                <div id="dropdown" className={this.state.menu ? 'z-10 w-44 bg-gray-mac shadow-mac-os absolute' : 'hidden'}>
+                    <ul className="text-xs" aria-labelledby="dropdownDefault">
+                        <li>
+                            <a 
+                                href="#" 
+                                className="block py-1 px-4 border-b border-black hover:text-white hover:bg-black" 
+                                onMouseDown={() => { 
+                                    this.state.menu = false
+                                    this.state.windows[6].closed = false
+                                    if(!memoryInterval) {
+                                        memoryInterval = setInterval(() => {
+                                            let currentUsage = 0
+                                            this.state.windows.forEach((item) => {
+                                                if (!item.closed) {
+                                                    currentUsage += 1
+                                                }
+                                            })
+                                            this.setState({
+                                                usedMemory: currentUsage * (768 / this.state.windows.length) + " MB"
+                                            })
+                                        }, 1000)
+                                    }
+                                }}
+                            >About</a>
+                        </li>
+                        <li>
+                            <span href="#" className="block py-1 px-4 border-b border-black text-gray-500">Settings</span>
+                        </li>
+                    </ul>
+                </div>
                 <div className="fixed bottom-0 right-0 flex flex-col items-end p-2 bg-black-seethrough sm:rounded-tl-lg">
-                    <span className='text-white text-sm'>Remix OS Beta Release v0.3</span>
+                    <span className='text-white text-sm'>Remix OS Beta 0.3.1</span>
                     <a href='https://www.supportukraine.co/' target='_blank' className='bg-gradient-to-r from-blue-400 to-yellow-ukraine text-transparent bg-clip-text text-xs lg:text-sm'><blockquote className='inline italic'>War is only a cowardly escape from the problems of peace</blockquote> - Thomas Mann</a>
                 </div>
                 <div className="absolute z-0 flex flex-wrap w-screen p-2">
@@ -273,6 +310,8 @@ class Desktop extends React.Component {
                                             <p className="text-gray-800"><span className="text-green-500">✓</span> Let the user close windows, and reopen them through the desktop icons</p>
                                             <p className="text-gray-800">• Let the user minimize windows to an applications dock</p>
                                             <p className="mt-4 mb-2 text-lg">Changelog</p>
+                                            <p className="text-blue-700 hover:text-blue-800">• 14/09/2022 - Juicy Stuff.</p>
+                                            <p>Added a dropdown and about window.</p>
                                             <p className="text-blue-700 hover:text-blue-800">• 12/03/2022 - Made the windows absolute.</p>
                                             <p>Window positioning is now absolute.<br></br> They will now open on top of each other.</p>
                                             <p className="text-blue-700 hover:text-blue-800">• 10/03/2022 - Fixed music player.</p>
@@ -285,6 +324,36 @@ class Desktop extends React.Component {
                                             <p>The year was changed to something more appropriate. Be careful, Y2K is coming!</p>
                                             <p className="text-blue-700 hover:text-blue-800">• 13/02/2022 - Added window focus.</p>
                                             <p>If you click on a window, it will now be placed in front of the others, as it's focused, just as it would on any sane operating system.</p>
+                                        </div>
+                                    </div>
+                                </Draggable>
+
+                                <Draggable handle=".handle" onMouseDown={this.toggleWindowVisibility}>
+                                    <div id='window-6' className={this.state.windows[6].closed ? 'hidden' : 'absolute p-1 border border-black mt-4 bg-gray-mac shadow-mac-os os-window w-full max-w-sm pointer-events-auto'} style={this.state.windows[6].focused ? {zIndex: 99} : {zIndex:10}}>
+                                        <div className="flex flex-row items-center pb-1">
+                                            <div className="w-6 h-6 mr-2 border border-black close-btn md:h-4 md:w-4 hover:invert hover:bg-white cursor-point" onMouseDown={this.toggleHideWindow}></div>
+                                            <div className="flex items-center flex-1 h-4 handle">
+                                                <div className="flex flex-col justify-between flex-1 h-2 cursor-grab">
+                                                    <div className="border-t border-black"></div>
+                                                    <div className="border-t border-black"></div>
+                                                    <div className="border-t border-black"></div>
+                                                </div>
+                                            </div>
+                                            <div className="ml-2 text-xs handle cursor-grab">Remix OS</div>
+                                        </div>
+                                        <div className="p-2 overflow-y-auto text-sm bg-white border border-black max-h-80 select-full">
+                                            <p className='text-center text-2xl'>REMIX OS</p>
+                                        </div>
+                                        <div className="flex flex-wrap text-xs py-2">
+                                            <div className="w-full md:w-1/2 md:pr-1">
+                                                <p>Version: Remix OS 0.3.1</p>
+                                                <p>Built-in Memory: 768 MB</p>
+                                                <p>Used Memory: { this.state.usedMemory }</p>
+                                            </div>
+                                            <div className="w-full md:w-1/2 md:pl-1">
+                                                <p>Remix OS Rom 0.3</p>
+                                                
+                                            </div>
                                         </div>
                                     </div>
                                 </Draggable>
