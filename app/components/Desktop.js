@@ -60,10 +60,10 @@ class Desktop extends React.Component {
         }
         return (
             <div className="flex-1 min-h-screen font-chicago">
-                <div className="z-50 flex flex-row w-full px-2 border-b border-black bg-gray-mac">
-                    <div className="flex flex-row items-center py-1 pr-2 text-xs border-r border-black cursor-point" onMouseDown={() => {this.state.menu = !this.state.menu}}>
+                <div className="z-50 flex flex-row w-full border-b border-black bg-gray-mac">
+                    <div className={ this.state.menu ?"flex flex-row items-center py-1 text-xs border-r border-black cursor-point bg-gray-400 px-2" : "flex flex-row items-center py-1 text-xs border-r border-black cursor-point px-2 hover:bg-black hover:text-white group"} onMouseDown={() => {this.state.menu = !this.state.menu}}>
                         <span>Remix OS</span>
-                        <LazyLoadImage className="inline ml-1" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAADCAYAAABbNsX4AAAAHElEQVQImWNkYGD4z4AGQIIggCwBE0OSYGBgAABmWAMBPlQzgwAAAABJRU5ErkJggg==" height="3" width="auto"/>
+                        <LazyLoadImage className="inline ml-1 group-hover:invert" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAADCAYAAABbNsX4AAAAHElEQVQImWNkYGD4z4AGQIIggCwBE0OSYGBgAABmWAMBPlQzgwAAAABJRU5ErkJggg==" height="3" width="auto"/>
                     </div>
                     <div className="flex-1 py-1"></div>
                     <div className="py-1 pl-2 text-xs border-l border-black sm:pr-2"><Clock /></div>
