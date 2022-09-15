@@ -344,7 +344,7 @@ class Desktop extends React.Component {
                                             <div className="ml-2 text-xs handle cursor-grab">Remix OS</div>
                                         </div>
                                         <div className="px-2 py-4 overflow-y-auto text-sm bg-white border border-black max-h-80 select-full flex justify-center">
-                                            <div className="stack" style={{'--stacks': 3, 'miHeight': '3.5rem'}}>
+                                            <div className="stack" style={{'--stacks': 3, 'minHeight': '3.5rem'}}>
                                                 <span className='pt-4' style={{ "--index": 0 }}>REMIX OS</span>
                                                 <span className='pt-4' style={{ "--index": 1 }}>REMIX OS</span>
                                                 <span className='pt-4' style={{ "--index": 2 }}>REMIX OS</span>
