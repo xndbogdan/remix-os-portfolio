@@ -161,3 +161,104 @@
   }
   4%, 100% {  text-shadow: none; transform: none; }
 }
+
+.mac-input {
+  -webkit-appearance: none; 
+  max-width: 7rem;
+  width: 100%; 
+  background: transparent; 
+}
+
+.mac-input:focus {
+  outline: none;
+}
+
+.mac-input::-webkit-slider-runnable-track {
+  height: 0.9rem;
+  margin: 0;
+  width: 100%;
+  cursor: pointer;
+  background: #111827;
+  background: linear-gradient(
+    to bottom right, 
+    transparent 50%,
+    #111827 50%
+  );
+}
+
+.mac-input::-moz-range-track {
+  height: 0.9rem;
+  margin: 0;
+  width: 100%;
+  cursor: pointer;
+  background: #111827;
+  background: linear-gradient(
+    to bottom right, 
+    transparent 50%,
+    #111827 50%
+  );
+}
+
+.mac-input::-ms-track {
+  height: 0.9rem;
+  margin: 0;
+  width: 100%;
+  cursor: pointer;
+  color: transparent;
+  background: #111827;
+  border: 0;
+  background: linear-gradient(
+    to bottom right, 
+    transparent 50%,
+    #111827 50%
+  );
+}
+
+.mac-input::-ms-fill-lower {
+ background: transparent;
+}
+
+.mac-input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 1.5rem;
+  width: 0.5rem;
+  background: #ffffff;
+  border: 1px solid;
+  margin-top: -5px;
+  border-radius: 0px;
+  cursor: pointer;
+}
+
+.mac-input:focus::-webkit-slider-thumb {
+  box-shadow: 0px 0px 7px 3px #0065c4;
+}
+
+.mac-input::-moz-range-thumb {
+  -webkit-appearance: none;
+  height: 1.5rem;
+  width: 0.5rem;
+  background: #ffffff;
+  border: 1px solid;
+  border-radius: 0px; 
+  cursor: pointer;
+  margin-top: 0;
+}
+
+.mac-input:focus::-moz-range-thumb {
+  box-shadow: 0px 0px 7px 3px #0065c4;
+}
+
+.mac-input::-ms-thumb {
+  -webkit-appearance: none;
+  height: 0.75rem;
+  width: 0.5rem;
+  background: #ffffff;
+  border: 1px solid;
+  margin-top: 0;
+  border-radius: 0px;
+  cursor: pointer;
+}
+
+.mac-input:focus::-ms-thumb {
+  box-shadow: 0px 0px 7px 3px #0065c4;
+}
