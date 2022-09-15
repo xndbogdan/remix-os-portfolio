@@ -1,4 +1,4 @@
-import { useLoaderData } from "@remix-run/react";
+import { useLoaderData } from "remix";
 import LRUCache from 'lru-cache';
 import Desktop from '~/components/Desktop';
 import mainResponse from '~/responses/main';
