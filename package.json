@@ -27,9 +27,7 @@
     "react-lazy-load-image-component": "^1.5.1",
     "react-player": "^2.9.0",
     "react-resizable": "^3.0.4",
-    "remix": "^1.1.3",
-    "soundcloud": "^3.3.2",
-    "three": "^0.137.5"
+    "remix": "^1.1.3"
   },
   "devDependencies": {
     "@remix-run/dev": "^1.1.3",
