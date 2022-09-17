@@ -95,6 +95,7 @@ class ResumeSection extends React.Component {
                     <p>Worked full time, prior to my first year at university, in a professional, medium sized team.</p>
                     <p>Learned to manage a fast-paced workflow, delivering features for important clients like L'Oreal and Rail Cargo Group</p>
                   </div>
+                  <div className='pb-32 sm:hidden bg-white'>&nbsp;</div>
                 </div>
             </div>
         </div>
