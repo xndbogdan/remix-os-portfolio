@@ -23,11 +23,6 @@ class MusicPlayer extends React.Component {
         this.progressBarContainer = React.createRef()
         if(typeof document !== 'undefined') {
             document.getElementById('music-player-volume').value = 1
-            // Audio player CORS hack
-            let player = document.getElementById('music-player')
-            player.src = ""
-            player.crossOrigin = "anonymous"
-            player.src = 'https://misty-butterfly-7016.fly.dev/api/play/' + this.state.selectedTrack.waveform_url.split('/')[3].replace('_m.png', '')
         }
     }
     render(props) {
@@ -103,7 +98,8 @@ class MusicPlayer extends React.Component {
             </div>
             <div>Track {this.state.trackIndex + 1} of {this.state.selectedPlaylistLength}</div>
             <audio 
-                id="music-player" 
+                id="music-player"
+                crossOrigin="anonymous"
                 ref={this.audio} onEnded={this.nextTrack} onTimeUpdate={this.updateTrackProgress} 
                 src={('https://misty-butterfly-7016.fly.dev/api/play/' + this.state.selectedTrack.waveform_url.split('/')[3].replace('_m.png', ''))}>
             </audio>
