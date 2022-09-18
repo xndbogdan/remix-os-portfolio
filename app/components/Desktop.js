@@ -17,14 +17,14 @@ class Desktop extends React.Component {
             easter: false,
             easterPhase: 0,
             windows: [
-                { focused: false, closed: false, },
-                { focused: false, closed: true, },
-                { focused: false, closed: true, },
-                { focused: false, closed: true, },
-                { focused: false, closed: true, },
-                { focused: false, closed: true, },
-                { focused: false, closed: true, },
-                { focused: false, closed: true, },
+                { focused: false, closed: false, minimized: false},
+                { focused: false, closed: true, minimized: false },
+                { focused: false, closed: true, minimized: false },
+                { focused: false, closed: true, minimized: false },
+                { focused: false, closed: true, minimized: false },
+                { focused: false, closed: true, minimized: false },
+                { focused: false, closed: true, minimized: false },
+                { focused: false, closed: true, minimized: false },
             ],
             icons: [
                 { focused: false, clicks: 0, dragging: false, },
@@ -369,6 +369,14 @@ class Desktop extends React.Component {
                     </div>
                 </div>
                 <audio ref={this.easterEggPlayer} onEnded={this.endBimBamBoom} id="easter-egg-player" src='/easter/audio.mp3'></audio>
+                <div className="w-full fixed bottom-0 border-b border-black px-2 flex flex-row bg-gray-mac z-50">
+                    <div className="flex-1 py-1 flex justify-start">
+                        <div id='icon-0' className="flex flex-col handle items-center os-icon">
+                            <LazyLoadImage src="/icons/Notes_Black.png" className="w-6 h-6 mx-auto pointer-events-none"/>
+                            <span className='text-xs'>Presentation.rtf</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         );
     }
@@ -495,6 +503,26 @@ class Desktop extends React.Component {
         visibleWindows.forEach((window, index) => {
             if (index === windowIndex) {
                 visibleWindows[index] = { ...window, closed: true}
+                this.setState({ windows: visibleWindows })
+                return
+            }
+        });
+    }
+
+    toggleMinimizeWindow = (event) => {
+        let daddyWindow = event.target
+        while(daddyWindow.classList.contains('os-window') === false) {
+            if(!daddyWindow.parentElement) {
+                console.error('Could not find parent window. Contact developer.')
+                return;
+            }
+            daddyWindow = daddyWindow.parentElement
+        }
+        let windowIndex = parseInt(daddyWindow.id.replace('window-', ''))
+        let visibleWindows = this.state.windows
+        visibleWindows.forEach((window, index) => {
+            if (index === windowIndex) {
+                visibleWindows[index] = { ...window, minimize: true}
                 this.setState({ windows: visibleWindows })
                 return
             }
