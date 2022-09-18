@@ -310,8 +310,10 @@ class Desktop extends React.Component {
                                             <p className="text-gray-800"><span className="text-green-500">✓</span> Fix window z-index when user focuses said window</p>
                                             <p className="text-gray-800">• Let the user change the music player's playlist</p>
                                             <p className="text-gray-800"><span className="text-green-500">✓</span> Let the user close windows, and reopen them through the desktop icons</p>
-                                            <p className="text-gray-800">• Let the user minimize windows to an applications dock</p>
+                                            <p className="text-gray-800"><span className="text-green-500">✓</span> Let the user minimize windows to an applications dock</p>
                                             <p className="mt-4 mb-2 text-lg">Changelog</p>
+                                            <p className="text-blue-700 hover:text-blue-800">• 18/09/2022 - Desktop dock.</p>
+                                            <p>You now have an app dock. You can thank me on Twitter.</p>
                                             <p className="text-blue-700 hover:text-blue-800">• 15/09/2022 - Music player goodness.</p>
                                             <p>You can now change the music player loudness, thanks to the new volume slider.</p>
                                             <p className="text-blue-700 hover:text-blue-800">• 14/09/2022 - Juicy Stuff.</p>
