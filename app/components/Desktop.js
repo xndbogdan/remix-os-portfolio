@@ -374,27 +374,34 @@ class Desktop extends React.Component {
                 <audio ref={this.easterEggPlayer} onEnded={this.endBimBamBoom} id="easter-egg-player" src='/easter/audio.mp3'></audio>
                 <div className='w-full fixed bottom-0 flex-row justify-center hidden lg:flex'>
                     <div className="px-2 bg-gray-mac z-50 max-w-sm xl:max-w-prose mx-auto w-full rounded-t-lg py-2 bg-opacity-50 border-black border-t border-r border-l" style={{"minHeight": "65px"}}>
-                        <div className="flex-1 py-1 flex justify-start space-x-4">
+                        <div className="flex-1 py-1 flex justify-start space-x-4 items-center">
                             <div id='dock-icon-0' onMouseDown={this.toggleWindowVisibilityViaId} data-index="0" className={this.state.windows[0].closed ? 'hidden' : "flex flex-col handle items-center os-icon p-2 hover:bg-gray-400 rounded-xl hover:bg-opacity-50 cursor-pointer" }>
                                 <LazyLoadImage src="/icons/Notes_Black.png" className="w-6 h-6 mx-auto pointer-events-none"/>
+                                <span className={this.state.windows[0].minimized ? 'rounded-full bg-black h-1 w-1 mt-9 absolute' : 'hidden'}>&nbsp;</span>
                             </div>
                             <div id='dock-icon-1' onMouseDown={this.toggleWindowVisibilityViaId} data-index="1" className={this.state.windows[1].closed ? 'hidden' : "flex flex-col handle items-center os-icon p-2 hover:bg-gray-400 rounded-xl hover:bg-opacity-50 cursor-pointer" }>
                                 <LazyLoadImage src="/icons/Play_Blue.png" className="w-6 h-6 mx-auto pointer-events-none"/>
+                                <span className={this.state.windows[1].minimized ? 'rounded-full bg-black h-1 w-1 mt-9 absolute' : 'hidden'}>&nbsp;</span>
                             </div>
                             <div id='dock-icon-2' onMouseDown={this.toggleWindowVisibilityViaId} data-index="2" className={this.state.windows[2].closed ? 'hidden' : "flex flex-col handle items-center os-icon p-2 hover:bg-gray-400 rounded-xl hover:bg-opacity-50 cursor-pointer" }>
                                 <LazyLoadImage src="/icons/Notes_Blue.png" className="w-6 h-6 mx-auto pointer-events-none"/>
+                                <span className={this.state.windows[2].minimized ? 'rounded-full bg-black h-1 w-1 mt-9 absolute' : 'hidden'}>&nbsp;</span>
                             </div>
                             <div id='dock-icon-3' onMouseDown={this.toggleWindowVisibilityViaId} data-index="3" className={this.state.windows[3].closed ? 'hidden' : "flex flex-col handle items-center os-icon p-2 hover:bg-gray-400 rounded-xl hover:bg-opacity-50 cursor-pointer" }>
                                 <LazyLoadImage src="/icons/Planet_Orange.png" className="w-6 h-6 mx-auto pointer-events-none"/>
+                                <span className={this.state.windows[3].minimized ? 'rounded-full bg-black h-1 w-1 mt-9 absolute' : 'hidden'}>&nbsp;</span>
                             </div>
                             <div id='dock-icon-4' onMouseDown={this.toggleWindowVisibilityViaId} data-index="4" className={this.state.windows[4].closed ? 'hidden' : "flex flex-col handle items-center os-icon p-2 hover:bg-gray-400 rounded-xl hover:bg-opacity-50 cursor-pointer" }>
                                 <LazyLoadImage src="/icons/Notes_Pink.png" className="w-6 h-6 mx-auto pointer-events-none"/>
+                                <span className={this.state.windows[4].minimized ? 'rounded-full bg-black h-1 w-1 mt-9 absolute' : 'hidden'}>&nbsp;</span>
                             </div>
                             <div id='dock-icon-5' onMouseDown={this.toggleWindowVisibilityViaId} data-index="5" className={this.state.windows[5].closed ? 'hidden' : "flex flex-col handle items-center os-icon p-2 hover:bg-gray-400 rounded-xl hover:bg-opacity-50 cursor-pointer" }>
                                 <LazyLoadImage src="/icons/Notes_Yellow.png" className="w-6 h-6 mx-auto pointer-events-none"/>
+                                <span className={this.state.windows[5].minimized ? 'rounded-full bg-black h-1 w-1 mt-9 absolute' : 'hidden'}>&nbsp;</span>
                             </div>
                             <div id='dock-icon-6' onMouseDown={this.toggleWindowVisibilityViaId} data-index="6" className={this.state.windows[6].closed ? 'hidden' : "flex flex-col handle items-center os-icon p-2 hover:bg-gray-400 rounded-xl hover:bg-opacity-50 cursor-pointer" }>
                                 <LazyLoadImage src="/icons/Wrench_Black.png" className="w-6 h-6 mx-auto pointer-events-none"/>
+                                <span className={this.state.windows[6].minimized ? 'rounded-full bg-black h-1 w-1 mt-9 absolute' : 'hidden'}>&nbsp;</span>
                             </div>
                         </div>
                     </div>
