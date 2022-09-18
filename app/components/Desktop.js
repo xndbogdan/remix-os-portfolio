@@ -53,6 +53,7 @@ class Desktop extends React.Component {
         const resumeTab = this.state.resumeTab
         let memoryInterval = null
         let resumeContent;
+        let currentTimeout = null;
         if(resumeTab === 0) {
             resumeContent = <Projects></Projects>
         } else {
@@ -423,8 +424,19 @@ class Desktop extends React.Component {
         }
         this.setState({
             easter: true,
+            easterPhase: 0,
         })
-        this.incrementBims()
+        let playPromise = this.easterEggPlayer.current.play()
+        // Attempt to sync the audio with the animation on browsers that support audio tag promises
+        if(playPromise !== undefined) {
+            playPromise.then(() => {
+                this.incrementBims()
+            })
+        } else {
+            this.incrementBims()
+        }
+        
+        
         // this.setState({
         //     easterPhase: -1,
         // })
@@ -432,6 +444,7 @@ class Desktop extends React.Component {
     }
 
     endBimBamBoom = () => {
+        clearTimeout(this.currentTimeout)
         this.easterEggPlayer.current.pause()
         this.easterEggPlayer.current.currentTime = 0
         this.setState({
@@ -599,134 +612,78 @@ class Desktop extends React.Component {
     }
 
     incrementBims = () => {
-        this.easterEggPlayer.current.play()
-        setTimeout(() => {
-            if(!this.state.easter) {
-                return
-            }
+        this.currentTimeout = setTimeout(() => {
             this.setState({
                 easterPhase: this.state.easterPhase + 1
             })
-            setTimeout(() => {
-                if(!this.state.easter) {
-                    return
-                }
+            this.currentTimeout = setTimeout(() => {
                 this.setState({
                     easterPhase: this.state.easterPhase + 1
                 })
-                setTimeout(() => {
-                    if(!this.state.easter) {
-                        return
-                    }
+                this.currentTimeout = setTimeout(() => {
                     this.setState({
                         easterPhase: this.state.easterPhase + 1
                     })
-                    setTimeout(() => {
-                        if(!this.state.easter) {
-                            return
-                        }
+                    this.currentTimeout = setTimeout(() => {
                         this.setState({
                             easterPhase: -1
                         })
-                        setTimeout(() => {
-                            if(!this.state.easter) {
-                                return
-                            }
+                        this.currentTimeout = setTimeout(() => {
                             this.setState({
                                 easterPhase: this.state.easterPhase + 1
                             })
-                            setTimeout(() => {
+                            this.currentTimeout = setTimeout(() => {
                                 if(!this.state.easter) {
                                     return
                                 }
-                                this.setState({
-                                    easterPhase: this.state.easterPhase + 1
-                                })
-                                setTimeout(() => {
-                                    if(!this.state.easter) {
-                                        return
-                                    }
+                                this.currentTimeout = setTimeout(() => {
                                     this.setState({
                                         easterPhase: this.state.easterPhase + 1
                                     })
-                                    setTimeout(() => {
-                                        if(!this.state.easter) {
-                                            return
-                                        }
+                                    this.currentTimeout = setTimeout(() => {
                                         this.setState({
                                             easterPhase: this.state.easterPhase + 1
                                         })
-                                        setTimeout(() => {
-                                            if(!this.state.easter) {
-                                                return
-                                            }
+                                        this.currentTimeout = setTimeout(() => {
                                             this.setState({
                                                 easterPhase: -1
                                             })
-                                            setTimeout(() => {
-                                                if(!this.state.easter) {
-                                                    return
-                                                }
+                                            this.currentTimeout = setTimeout(() => {
                                                 this.setState({
                                                     easterPhase: this.state.easterPhase + 1
                                                 })
-                                                setTimeout(() => {
-                                                    if(!this.state.easter) {
-                                                        return
-                                                    }
+                                                this.currentTimeout = setTimeout(() => {
                                                     this.setState({
                                                         easterPhase: this.state.easterPhase + 1
                                                     })
                                                     setTimeout(() => {
-                                                        if(!this.state.easter) {
-                                                            return
-                                                        }
                                                         this.setState({
                                                             easterPhase: this.state.easterPhase + 1
                                                         })
-                                                        setTimeout(() => {
-                                                            if(!this.state.easter) {
-                                                                return
-                                                            }
+                                                        this.currentTimeout = setTimeout(() => {
                                                             this.setState({
                                                                 easterPhase: this.state.easterPhase + 1
                                                             })
-                                                            setTimeout(() => {
-                                                                if(!this.state.easter) {
-                                                                    return
-                                                                }
+                                                            this.currentTimeout = setTimeout(() => {
                                                                 this.setState({
                                                                     easterPhase: -1
                                                                 })
-                                                                setTimeout(() => {
-                                                                    if(!this.state.easter) {
-                                                                        return
-                                                                    }
+                                                                this.currentTimeout = setTimeout(() => {
                                                                     this.setState({
                                                                         easterPhase: this.state.easterPhase + 1
                                                                     })
                                                                     setTimeout(() => {
-                                                                        if(!this.state.easter) {
-                                                                            return
-                                                                        }
                                                                         this.setState({
                                                                             easterPhase: this.state.easterPhase + 1
                                                                         })
-                                                                        setTimeout(() => {
-                                                                            if(!this.state.easter) {
-                                                                                return
-                                                                            }
+                                                                        this.currentTimeout =  setTimeout(() => {
                                                                             this.setState({
                                                                                 easterPhase: this.state.easterPhase + 1
                                                                             })
-                                                                            setTimeout(() => {
-                                                                                if(!this.state.easter) {
-                                                                                    return
-                                                                                }
+                                                                            this.currentTimeout = setTimeout(() => {
                                                                                 this.setState({
                                                                                     easterPhase: this.state.easterPhase + 1
                                                                                 })
-                                                                                
                                                                             }, 500)
                                                                         }, 500)
                                                                     }, 500)
