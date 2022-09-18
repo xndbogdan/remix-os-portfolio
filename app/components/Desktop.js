@@ -99,10 +99,6 @@ class Desktop extends React.Component {
                         </li>
                     </ul>
                 </div>
-                <div className="fixed top-0 right-0 flex flex-col items-end p-2 bg-black-seethrough sm:rounded-bl-lg mt-6 pointer-events-nonez">
-                    <span className='text-white text-sm'>Remix OS Beta 0.4</span>
-                    <a href='https://www.supportukraine.co/' target='_blank' className='bg-gradient-to-r from-blue-400 to-yellow-ukraine text-transparent bg-clip-text text-xs lg:text-sm'><blockquote className='inline italic'>War is only a cowardly escape from the problems of peace</blockquote> - Thomas Mann</a>
-                </div>
                 <div className="absolute z-0 flex flex-wrap w-screen p-2">
                     <div className="grid w-full max-w-sm grid-cols-3 gap-4 mt-2">
                         <Draggable handle=".handle" onMouseDown={this.toggleIconVisibility}>
@@ -204,7 +200,7 @@ class Desktop extends React.Component {
                                                     <span className='text-xs'>Linkedin</span>
                                                 </a>
                                             </div>
-                                            <a className='text-sm hover:text-blue-ukraine' href='https://helpukraine.center/' target="_blank">Donate to helpUkraine.center <img className='w-6 h-4 inline' src="/img/ukraine.svg"/> </a>
+                                            <a className='text-sm hover:text-blue-ukraine' href='https://helpukraine.center/' target="_blank">Donate to HELP<span className='text-red-600'>UKRAINE</span>.CENTER <img className='w-6 h-4 inline' src="/img/ukraine.svg"/> </a>
                                         </div>
                                     </div>
                                 </Draggable>
@@ -377,7 +373,7 @@ class Desktop extends React.Component {
                 </div>
                 <audio ref={this.easterEggPlayer} onEnded={this.endBimBamBoom} id="easter-egg-player" src='/easter/audio.mp3'></audio>
                 <div className='w-full fixed bottom-0 flex-row justify-center hidden lg:flex'>
-                    <div className="px-2 bg-gray-mac z-50 max-w-prose mx-auto w-full rounded-t-lg py-2 bg-opacity-50 border-black border-t border-r border-l" style={{"minHeight": "65px"}}>
+                    <div className="px-2 bg-gray-mac z-50 max-w-sm xl:max-w-prose mx-auto w-full rounded-t-lg py-2 bg-opacity-50 border-black border-t border-r border-l" style={{"minHeight": "65px"}}>
                         <div className="flex-1 py-1 flex justify-start space-x-4">
                             <div id='dock-icon-0' onMouseDown={this.toggleWindowVisibilityViaId} data-index="0" className={this.state.windows[0].closed ? 'hidden' : "flex flex-col handle items-center os-icon p-2 hover:bg-gray-400 rounded-xl hover:bg-opacity-50 cursor-pointer" }>
                                 <LazyLoadImage src="/icons/Notes_Black.png" className="w-6 h-6 mx-auto pointer-events-none"/>
