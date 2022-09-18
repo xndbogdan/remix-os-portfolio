@@ -21,6 +21,9 @@ class MusicPlayer extends React.Component {
         this.displayTextContainer = React.createRef()
         this.progressBar = React.createRef()
         this.progressBarContainer = React.createRef()
+        if(typeof document !== 'undefined') {
+            document.getElementById('music-player-volume').value = 1
+        }
     }
     render(props) {
         return (
@@ -65,33 +68,40 @@ class MusicPlayer extends React.Component {
                 <div ref={this.progressBar} className="bg-blue-300 h-2 pointer-events-none" style={{width:this.state.trackProgress}}></div>
             </div>
             <div style={this.state.currentTrackDuration ? {display:'block'} : {display:'none'}}>{this.convertDuration(this.state.currentTrackTime)} / {this.convertDuration(this.state.currentTrackDuration)}</div>
-            <div className="flex flex-row space-x-4 text-sm mt-2 pb-2">
-                <button onClick={this.previousTrack}>
-                    <svg className="icon h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 12 9"> 
-                        <path fill="var(--color-icon, #000)" d="M12 0v9h-1V8h-1V7H9V6H8V5H7v4H6V8H5V7H4V6H3V5H2v4H0V0h2v4h1V3h1V2h1V1h1V0h1v4h1V3h1V2h1V1h1V0h1z"/>
-                    </svg>
-                </button>
-                <button onClick={this.togglePlay}>{!this.state.isPlaying ? 
-                    <svg className="icon h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 9 9">
-						<path fill="var(--color-icon, #000)" d="M3 9V0h1v1h1v1h1v1h1v1h1v1H7v1H6v1H5v1H4v1H3z"/>
-					</svg> 
-                    : 
-                    <svg className="icon h-4" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg" >
-						<path d="M2 0H4V9H2V0Z" fill="var(--color-icon, #000)" />
-						<path d="M5 0H7V9H5V0Z" fill="var(--color-icon, #000)" />
-					</svg>}
-                </button>
-                <button onClick={this.nextTrack}>
-                    <svg className="icon h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 12 9" >
-							<path fill="var(--color-icon, #000)" d="M0 9V0h1v1h1v1h1v1h1v1h1V0h1v1h1v1h1v1h1v1h1V0h2v9h-2V5H9v1H8v1H7v1H6v1H5V5H4v1H3v1H2v1H1v1H0z"/>
-					</svg>
-                </button>
+            <div className='flex flex-row justify-between items-center'>
+                <div className="flex flex-row space-x-4 text-sm mt-2 pb-2">
+                    <button onClick={this.previousTrack}>
+                        <svg className="icon h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 12 9"> 
+                            <path fill="var(--color-icon, #000)" d="M12 0v9h-1V8h-1V7H9V6H8V5H7v4H6V8H5V7H4V6H3V5H2v4H0V0h2v4h1V3h1V2h1V1h1V0h1v4h1V3h1V2h1V1h1V0h1z"/>
+                        </svg>
+                    </button>
+                    <button onClick={this.togglePlay}>{!this.state.isPlaying ? 
+                        <svg className="icon h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 9 9">
+                            <path fill="var(--color-icon, #000)" d="M3 9V0h1v1h1v1h1v1h1v1h1v1H7v1H6v1H5v1H4v1H3z"/>
+                        </svg> 
+                        : 
+                        <svg className="icon h-4" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg" >
+                            <path d="M2 0H4V9H2V0Z" fill="var(--color-icon, #000)" />
+                            <path d="M5 0H7V9H5V0Z" fill="var(--color-icon, #000)" />
+                        </svg>}
+                    </button>
+                    <button onClick={this.nextTrack}>
+                        <svg className="icon h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 12 9" >
+                                <path fill="var(--color-icon, #000)" d="M0 9V0h1v1h1v1h1v1h1v1h1V0h1v1h1v1h1v1h1v1h1V0h2v9h-2V5H9v1H8v1H7v1H6v1H5V5H4v1H3v1H2v1H1v1H0z"/>
+                        </svg>
+                    </button>
+                </div>
+                <div className="wrapper">
+                    <input id="music-player-volume" className='mac-input' type="range" min="0" max="1" step="0.05" onChange={(e)=> { document.getElementById('music-player').volume = e.target.value }} />
+                    <label className="hidden" htmlFor="volume">Volume</label>
+                </div>
             </div>
             <div>Track {this.state.trackIndex + 1} of {this.state.selectedPlaylistLength}</div>
             <audio 
-                id="music-player" 
+                id="music-player"
+                crossOrigin="anonymous"
                 ref={this.audio} onEnded={this.nextTrack} onTimeUpdate={this.updateTrackProgress} 
-                src={('/songs/' + this.state.selectedTrack.waveform_url.split('/')[3].replace('_m.png', ''))}>
+                src={('https://misty-butterfly-7016.fly.dev/api/play/' + this.state.selectedTrack.waveform_url.split('/')[3].replace('_m.png', ''))}>
             </audio>
         </div>
         );

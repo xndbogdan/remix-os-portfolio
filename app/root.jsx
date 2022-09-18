@@ -14,7 +14,7 @@ export function links() {
 }
 
 export function meta() {
-  return { title: "New Remix App" };
+  return { title: "Remix OS" };
 }
 
 export default function App() {
@@ -34,7 +34,6 @@ export default function App() {
         <meta name="twitter:image" content="https://remixos.dev/remix.png"/>
         <meta name="twitter:image:alt" content="Remix framework logo"/>
         <meta name="twitter:card" content="summary_large_image"/>
-        
         <Meta />
         <Links />
       </head>
