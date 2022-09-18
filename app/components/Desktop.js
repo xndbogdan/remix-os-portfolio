@@ -405,6 +405,10 @@ class Desktop extends React.Component {
                                 <LazyLoadImage src="/icons/Wrench_Black.png" className="w-6 h-6 mx-auto pointer-events-none"/>
                                 <span className={this.state.windows[6].minimized ? 'rounded-full bg-black h-1 w-1 mt-9 absolute' : 'hidden'}>&nbsp;</span>
                             </div>
+                            <div id='dock-icon-7' onMouseDown={this.endBimBamBoom} className={!this.state.easter ? 'hidden' : "flex flex-col handle items-center os-icon p-2 hover:bg-gray-400 rounded-xl hover:bg-opacity-50 cursor-pointer" }>
+                                <LazyLoadImage src="/easter/boom.webp" className="w-6 h-6 mx-auto pointer-events-none"/>
+                            </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -414,12 +418,12 @@ class Desktop extends React.Component {
 
     bimBamBoom = () => {
         if(this.state.easter) {
+            this.endBimBamBoom()
             return
         }
         this.setState({
             easter: true,
         })
-        this.easterEggPlayer.current.play()
         this.incrementBims()
         // this.setState({
         //     easterPhase: -1,
@@ -428,6 +432,8 @@ class Desktop extends React.Component {
     }
 
     endBimBamBoom = () => {
+        this.easterEggPlayer.current.pause()
+        this.easterEggPlayer.current.currentTime = 0
         this.setState({
             easter: false,
             easterPhase: 0,
@@ -593,75 +599,130 @@ class Desktop extends React.Component {
     }
 
     incrementBims = () => {
+        this.easterEggPlayer.current.play()
         setTimeout(() => {
+            if(!this.state.easter) {
+                return
+            }
             this.setState({
                 easterPhase: this.state.easterPhase + 1
             })
             setTimeout(() => {
+                if(!this.state.easter) {
+                    return
+                }
                 this.setState({
                     easterPhase: this.state.easterPhase + 1
                 })
                 setTimeout(() => {
+                    if(!this.state.easter) {
+                        return
+                    }
                     this.setState({
                         easterPhase: this.state.easterPhase + 1
                     })
                     setTimeout(() => {
+                        if(!this.state.easter) {
+                            return
+                        }
                         this.setState({
                             easterPhase: -1
                         })
                         setTimeout(() => {
+                            if(!this.state.easter) {
+                                return
+                            }
                             this.setState({
                                 easterPhase: this.state.easterPhase + 1
                             })
                             setTimeout(() => {
+                                if(!this.state.easter) {
+                                    return
+                                }
                                 this.setState({
                                     easterPhase: this.state.easterPhase + 1
                                 })
                                 setTimeout(() => {
+                                    if(!this.state.easter) {
+                                        return
+                                    }
                                     this.setState({
                                         easterPhase: this.state.easterPhase + 1
                                     })
                                     setTimeout(() => {
+                                        if(!this.state.easter) {
+                                            return
+                                        }
                                         this.setState({
                                             easterPhase: this.state.easterPhase + 1
                                         })
                                         setTimeout(() => {
+                                            if(!this.state.easter) {
+                                                return
+                                            }
                                             this.setState({
                                                 easterPhase: -1
                                             })
                                             setTimeout(() => {
+                                                if(!this.state.easter) {
+                                                    return
+                                                }
                                                 this.setState({
                                                     easterPhase: this.state.easterPhase + 1
                                                 })
                                                 setTimeout(() => {
+                                                    if(!this.state.easter) {
+                                                        return
+                                                    }
                                                     this.setState({
                                                         easterPhase: this.state.easterPhase + 1
                                                     })
                                                     setTimeout(() => {
+                                                        if(!this.state.easter) {
+                                                            return
+                                                        }
                                                         this.setState({
                                                             easterPhase: this.state.easterPhase + 1
                                                         })
                                                         setTimeout(() => {
+                                                            if(!this.state.easter) {
+                                                                return
+                                                            }
                                                             this.setState({
                                                                 easterPhase: this.state.easterPhase + 1
                                                             })
                                                             setTimeout(() => {
+                                                                if(!this.state.easter) {
+                                                                    return
+                                                                }
                                                                 this.setState({
                                                                     easterPhase: -1
                                                                 })
                                                                 setTimeout(() => {
+                                                                    if(!this.state.easter) {
+                                                                        return
+                                                                    }
                                                                     this.setState({
                                                                         easterPhase: this.state.easterPhase + 1
                                                                     })
                                                                     setTimeout(() => {
+                                                                        if(!this.state.easter) {
+                                                                            return
+                                                                        }
                                                                         this.setState({
                                                                             easterPhase: this.state.easterPhase + 1
                                                                         })
                                                                         setTimeout(() => {
+                                                                            if(!this.state.easter) {
+                                                                                return
+                                                                            }
                                                                             this.setState({
                                                                                 easterPhase: this.state.easterPhase + 1
                                                                             })
                                                                             setTimeout(() => {
+                                                                                if(!this.state.easter) {
+                                                                                    return
+                                                                                }
                                                                                 this.setState({
                                                                                     easterPhase: this.state.easterPhase + 1
                                                                                 })
