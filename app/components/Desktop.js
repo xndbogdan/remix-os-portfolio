@@ -308,7 +308,7 @@ class Desktop extends React.Component {
                                             <p className="text-gray-800"><span className="text-green-500">✓</span> Replace Poolsuite api calls with internal calls</p>
                                             <p className="text-gray-800"><span className="text-green-500">✓</span> Let the user move the windows around</p>
                                             <p className="text-gray-800"><span className="text-green-500">✓</span> Fix window z-index when user focuses said window</p>
-                                            <p className="text-gray-800"><span className='text-red-500'>✘</span> Let the user change the music player's playlist - Cancelled as there are enough songs</p>
+                                            <p className="text-gray-800"><span className='text-red-500 font-bold'>-</span> Let the user change the music player's playlist - Cancelled as there are enough songs</p>
                                             <p className="text-gray-800"><span className="text-green-500">✓</span> Let the user close windows, and reopen them through the desktop icons</p>
                                             <p className="text-gray-800"><span className="text-green-500">✓</span> Let the user minimize windows to an applications dock</p>
                                             <p className="mt-4 mb-2 text-lg">Changelog</p>
