@@ -99,8 +99,8 @@ class Desktop extends React.Component {
                         </li>
                     </ul>
                 </div>
-                <div className="fixed bottom-0 right-0 flex flex-col items-end p-2 bg-black-seethrough sm:rounded-tl-lg">
-                    <span className='text-white text-sm'>Remix OS Beta 0.3.1</span>
+                <div className="fixed top-0 right-0 flex flex-col items-end p-2 bg-black-seethrough sm:rounded-bl-lg mt-6 pointer-events-nonez">
+                    <span className='text-white text-sm'>Remix OS Beta 0.4</span>
                     <a href='https://www.supportukraine.co/' target='_blank' className='bg-gradient-to-r from-blue-400 to-yellow-ukraine text-transparent bg-clip-text text-xs lg:text-sm'><blockquote className='inline italic'>War is only a cowardly escape from the problems of peace</blockquote> - Thomas Mann</a>
                 </div>
                 <div className="absolute z-0 flex flex-wrap w-screen p-2">
@@ -119,7 +119,7 @@ class Desktop extends React.Component {
                         </Draggable>
                         <Draggable handle=".handle" onMouseDown={this.toggleIconVisibility}>
                             <div id='icon-2' className="flex flex-col items-center handle os-icon" style={this.state.icons[2].focused ? {zIndex: 50} : {zIndex:1}}>
-                                <LazyLoadImage src="/icons/Notes_Black.png" className="w-10 h-10 mx-auto pointer-events-none"/>
+                                <LazyLoadImage src="/icons/Notes_Blue.png" className="w-10 h-10 mx-auto pointer-events-none"/>
                                 <span className={this.state.icons[2].clicks == 1 ? 'text-xs bg-blue-400 opacity-75' : 'text-xs'}>Resume.rtf</span>
                             </div>
                         </Draggable>
@@ -131,13 +131,13 @@ class Desktop extends React.Component {
                         </Draggable>
                         <Draggable handle=".handle" onMouseDown={this.toggleIconVisibility}>
                             <div id='icon-4' className="flex flex-col items-center handle os-icon" style={this.state.icons[4].focused ? {zIndex: 50} : {zIndex:1}}>
-                                <LazyLoadImage src="/icons/Notes_Black.png" className="w-10 h-10 mx-auto pointer-events-none"/>
+                                <LazyLoadImage src="/icons/Notes_Pink.png" className="w-10 h-10 mx-auto pointer-events-none"/>
                                 <span className={this.state.icons[4].clicks == 1 ? 'text-xs bg-blue-400 opacity-75' : 'text-xs'}>Credits.rtf</span>
                             </div>
                         </Draggable>
                         <Draggable handle=".handle" onMouseDown={this.toggleIconVisibility}>
                             <div id='icon-5' className="flex flex-col items-center handle os-icon" style={this.state.icons[5].focused ? {zIndex: 50} : {zIndex:1}}>
-                                <LazyLoadImage src="/icons/Notes_Black.png" className="w-10 h-10 mx-auto pointer-events-none"/>
+                                <LazyLoadImage src="/icons/Notes_Yellow.png" className="w-10 h-10 mx-auto pointer-events-none"/>
                                 <span className={this.state.icons[5].clicks == 1 ? 'text-xs bg-blue-400 opacity-75' : 'text-xs'}>Milestones.rtf</span>
                             </div>
                         </Draggable>
@@ -353,12 +353,12 @@ class Desktop extends React.Component {
                                         </div>
                                         <div className="flex flex-wrap text-xs py-2">
                                             <div className="w-full md:w-1/2 md:pr-1">
-                                                <p>Version: Remix OS 0.3.1</p>
+                                                <p>Version: Remix OS 0.4.0</p>
                                                 <p>Built-in Memory: 768 MB</p>
                                                 <p>Used Memory: { this.state.usedMemory }</p>
                                             </div>
                                             <div className="w-full md:w-1/2 md:pl-1">
-                                                <p>Remix OS Rom 0.3</p>
+                                                <p>Remix Rom 1.1.3</p>
                                                 
                                             </div>
                                         </div>
@@ -369,11 +369,30 @@ class Desktop extends React.Component {
                     </div>
                 </div>
                 <audio ref={this.easterEggPlayer} onEnded={this.endBimBamBoom} id="easter-egg-player" src='/easter/audio.mp3'></audio>
-                <div className="w-full fixed bottom-0 border-b border-black px-2 flex flex-row bg-gray-mac z-50">
-                    <div className="flex-1 py-1 flex justify-start">
-                        <div id='icon-0' className="flex flex-col handle items-center os-icon">
-                            <LazyLoadImage src="/icons/Notes_Black.png" className="w-6 h-6 mx-auto pointer-events-none"/>
-                            <span className='text-xs'>Presentation.rtf</span>
+                <div className='w-full fixed bottom-0 flex-row justify-center hidden xl:flex'>
+                    <div className="px-2 bg-gray-mac z-50 max-w-prose mx-auto w-full rounded-t-lg py-2 bg-opacity-50 border-black border-t border-r border-l" style={{"minHeight": "65px"}}>
+                        <div className="flex-1 py-1 flex justify-start space-x-4">
+                            <div id='dock-icon-0' className={this.state.windows[0].closed ? 'hidden' : "flex flex-col handle items-center os-icon p-2 hover:bg-gray-400 rounded-xl hover:bg-opacity-50 cursor-pointer" }>
+                                <LazyLoadImage src="/icons/Notes_Black.png" className="w-6 h-6 mx-auto pointer-events-none"/>
+                            </div>
+                            <div id='dock-icon-1' className={this.state.windows[1].closed ? 'hidden' : "flex flex-col handle items-center os-icon p-2 hover:bg-gray-400 rounded-xl hover:bg-opacity-50 cursor-pointer" }>
+                                <LazyLoadImage src="/icons/Play_Blue.png" className="w-6 h-6 mx-auto pointer-events-none"/>
+                            </div>
+                            <div id='dock-icon-2' className={this.state.windows[2].closed ? 'hidden' : "flex flex-col handle items-center os-icon p-2 hover:bg-gray-400 rounded-xl hover:bg-opacity-50 cursor-pointer" }>
+                                <LazyLoadImage src="/icons/Notes_Blue.png" className="w-6 h-6 mx-auto pointer-events-none"/>
+                            </div>
+                            <div id='dock-icon-3' className={this.state.windows[3].closed ? 'hidden' : "flex flex-col handle items-center os-icon p-2 hover:bg-gray-400 rounded-xl hover:bg-opacity-50 cursor-pointer" }>
+                                <LazyLoadImage src="/icons/Planet_Orange.png" className="w-6 h-6 mx-auto pointer-events-none"/>
+                            </div>
+                            <div id='dock-icon-4' className={this.state.windows[4].closed ? 'hidden' : "flex flex-col handle items-center os-icon p-2 hover:bg-gray-400 rounded-xl hover:bg-opacity-50 cursor-pointer" }>
+                                <LazyLoadImage src="/icons/Notes_Pink.png" className="w-6 h-6 mx-auto pointer-events-none"/>
+                            </div>
+                            <div id='dock-icon-5' className={this.state.windows[5].closed ? 'hidden' : "flex flex-col handle items-center os-icon p-2 hover:bg-gray-400 rounded-xl hover:bg-opacity-50 cursor-pointer" }>
+                                <LazyLoadImage src="/icons/Notes_Yellow.png" className="w-6 h-6 mx-auto pointer-events-none"/>
+                            </div>
+                            <div id='dock-icon-6' className={this.state.windows[6].closed ? 'hidden' : "flex flex-col handle items-center os-icon p-2 hover:bg-gray-400 rounded-xl hover:bg-opacity-50 cursor-pointer" }>
+                                <LazyLoadImage src="/icons/Wrench_Black.png" className="w-6 h-6 mx-auto pointer-events-none"/>
+                            </div>
                         </div>
                     </div>
                 </div>
