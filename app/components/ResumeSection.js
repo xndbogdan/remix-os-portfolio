@@ -21,9 +21,9 @@ class ResumeSection extends React.Component {
                   <div className="p-2 overflow-y-auto text-sm bg-white select-full">
                     <p>I'm Bogdan, an independent Full-Stack Developer from Bucharest.</p>
                     <p className='mt-1'>Most of my projects were made using Laravel, Vue and Tailwind.</p>
-                    <p>I've also worked with Python (Cli apps & Flask apps) and Node (Express). I'm okay with all kinds of tech stacks really.</p>
+                    <p>I've also worked with Python (Cli apps & Flask apps) and Node (Express). I'm okay any tech stack, as long as it makes sense and it's supported.</p>
                     <p className='mt-1'>I want to build clean codebases that are easy to extend and work with.</p>
-                    <p>I'm also a big fan of open-source software and I try to contribute to the community as much as I can.</p>
+                    <p>I'm also a big fan of open-source software and I try to contribute to the community when I have the time.</p>
 
                     <p className='mt-2'>In my free time, I like making music and goofy projects.</p>
                     <p>I'm into Sci-Fi movies, video games, and dream of the 90's.</p>
