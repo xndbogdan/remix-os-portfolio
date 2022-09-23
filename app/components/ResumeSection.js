@@ -19,10 +19,13 @@ class ResumeSection extends React.Component {
                 </div>
                 <div className='overflow-y-auto' style={{maxHeight:"95vh"}}>
                   <div className="p-2 overflow-y-auto text-sm bg-white select-full">
-                    <h1 className="mb-2 text-lg font-bold">About me</h1>
-                    <p >I'm Bogdan, an independent full-stack developer from Bucharest.</p>
-                    <p>Most of my projects were made using Laravel, Vue and Tailwind.</p>
-                    <p>I like making music and goofy projects, like this one.</p>
+                    <p>I'm Bogdan, an independent Full-Stack Developer from Bucharest.</p>
+                    <p className='mt-1'>Most of my projects were made using Laravel, Vue and Tailwind.</p>
+                    <p>I've also worked with Python (Cli apps & Flask apps) and Node (Express). I'm okay with all kinds of tech stacks really.</p>
+                    <p className='mt-1'>I want to build clean codebases that are easy to extend and work with.</p>
+                    <p>I'm also a big fan of open-source software and I try to contribute to the community as much as I can.</p>
+
+                    <p className='mt-2'>In my free time, I like making music and goofy projects.</p>
                     <p>I'm into Sci-Fi movies, video games, and dream of the 90's.</p>
                     <LazyLoadImage className="my-2" src="/img/ship.gif"/>
       
@@ -33,7 +36,10 @@ class ResumeSection extends React.Component {
                         <LazyLoadImage className="my-1" src="https://camo.githubusercontent.com/24a62dc163252f3a80f5299c2a597f396673facac5f5aae9b775da728ff51b14/68747470733a2f2f696d672e736869656c64732e696f2f7061636b61676973742f64742f786e64626f6764616e2f73746174616d69632d626172642d746578742d636f6c6f722e737667" alt="Total Downloads" />
                     </a>
                     <p>This is an open source, free to use statamic bard plugin that lets you change text color! <br/>It allows you to use the default tailwind palette, but you can also add your own. <br/>At the moment it's still under development, so please report any bugs that you encounter.<br/>New feature suggestions are welcomed too.</p>
-      
+
+                    <p className="mt-2"><a className="text-blue-700 hover:text-blue-700" target="_blank" href="https://voice.ai/">• Voice AI</a> - App & Website</p>
+                    <p className="mt-2">Part of the main development team for the website & desktop app. This is an AI-powered voice changer that makes you sound like various celebrities.</p>
+
                     <p className="mt-2"><a className="text-blue-700 hover:text-blue-700" target="_blank" href="https://www.artmark.ro/">• A10 by Artmark</a> - Website</p>
                     <div className="my-1">
                         <a className="p-1 text-xs text-white bg-gray-700 rounded-md">~70k visits per month</a>

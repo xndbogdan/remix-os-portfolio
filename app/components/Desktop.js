@@ -55,9 +55,10 @@ class Desktop extends React.Component {
         let resumeContent;
         let currentTimeout = null;
         if(resumeTab === 0) {
-            resumeContent = <Projects></Projects>
-        } else {
             resumeContent = <Resume></Resume>
+            
+        } else {
+            resumeContent = <Projects></Projects>
         }
         return (
             <div className="flex-1 min-h-screen font-chicago">
@@ -237,8 +238,8 @@ class Desktop extends React.Component {
                                             <div className="ml-2 text-xs handle cursor-grab">Remix OS</div>
                                         </div>
                                         <div className="flex flex-wrap justify-start border border-gray-500 bg-gray-mac">
-                                            <a onMouseDown={this.changeResumeVisibility} data-tab="0" className={this.state.resumeTab == 0 ? 'py-1 px-2 text-xs border-gray-500 border-r cursor-point bg-gray-400' : 'py-1 px-2 text-xs border-gray-600 border-r cursor-point hover:bg-gray-200'}>Projects.rtf</a>
-                                            <a onMouseDown={this.changeResumeVisibility} data-tab="1" className={this.state.resumeTab == 1 ? 'py-1 px-2 text-xs border-gray-500 border-r cursor-point bg-gray-400' : 'py-1 px-2 text-xs border-gray-600 border-r cursor-point hover:bg-gray-200'}>Resume.rtf</a>
+                                            <a onMouseDown={this.changeResumeVisibility} data-tab="0" className={this.state.resumeTab == 0 ? 'py-1 px-2 text-xs border-gray-500 border-r cursor-point bg-gray-400' : 'py-1 px-2 text-xs border-gray-600 border-r cursor-point hover:bg-gray-200'}>Resume.rtf</a>
+                                            {/* <a onMouseDown={()=>{}} data-tab="1" className='py-1 px-2 text-xs border-gray-400 border-r cursor-point bg-gray-300'>Redacted.rtf</a> */}
                                             <div className='flex justify-end flex-1'>
                                                 <a href='/resume' target='_blank' className="flex flex-row px-2 py-1 text-xs border-l border-gray-600 cursor-grab cursor-point hover:bg-gray-200">
                                                     <img className='w-auto h-4 mr-2' src='/img/link.svg'></img>
