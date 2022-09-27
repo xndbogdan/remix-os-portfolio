@@ -4,6 +4,7 @@ class MusicPlayer extends React.Component {
     constructor(props) {
         super(props);
         const randomTrackIndex = 0;
+        this.musicApiEndpoint = 'https://misty-butterfly-7016.fly.dev/api/play/';
         this.state = {
             tracklist: this.props.tracklist,
             selectedPlaylist: this.props.tracklist,
@@ -92,17 +93,12 @@ class MusicPlayer extends React.Component {
                     </button>
                 </div>
                 <div className="wrapper">
-                    <input id="music-player-volume" className='mac-input' type="range" min="0" max="1" step="0.05" onChange={(e)=> { document.getElementById('music-player').volume = e.target.value }} />
+                    <input id="music-player-volume" className='mac-input' type="range" min="0" max="1" step="0.025" onChange={(e)=> { document.getElementById('music-player').volume = e.target.value }} />
                     <label className="hidden" htmlFor="volume">Volume</label>
                 </div>
             </div>
             <div>Track {this.state.trackIndex + 1} of {this.state.selectedPlaylistLength}</div>
-            <audio 
-                id="music-player"
-                crossOrigin="anonymous"
-                ref={this.audio} onEnded={this.nextTrack} onTimeUpdate={this.updateTrackProgress} 
-                src={('https://misty-butterfly-7016.fly.dev/api/play/' + this.state.selectedTrack.waveform_url.split('/')[3].replace('_m.png', ''))}>
-            </audio>
+            <audio id="music-player" crossOrigin="anonymous" ref={this.audio} onEnded={this.nextTrack} onTimeUpdate={this.updateTrackProgress}/>
         </div>
         );
     }
@@ -154,6 +150,9 @@ class MusicPlayer extends React.Component {
     }
 
     togglePlay = () => {
+        if(this.audio.current.src != this.musicApiEndpoint + this.state.selectedTrack.waveform_url.split('/')[3].replace('_m.png', '.mp3')) {
+            this.audio.current.src = this.musicApiEndpoint + this.state.selectedTrack.waveform_url.split('/')[3].replace('_m.png', '.mp3')
+        }
         this.setState({ isPlaying: !this.state.isPlaying }, () => {
             this.state.isPlaying ? this.audio.current.play() : this.audio.current.pause();
         });
