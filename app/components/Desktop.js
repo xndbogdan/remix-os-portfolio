@@ -68,7 +68,7 @@ class Desktop extends React.Component {
                         <LazyLoadImage className="inline ml-1 group-hover:invert" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAADCAYAAABbNsX4AAAAHElEQVQImWNkYGD4z4AGQIIggCwBE0OSYGBgAABmWAMBPlQzgwAAAABJRU5ErkJggg==" height="3" width="auto"/>
                     </div>
                     <div className="flex-1 py-1"></div>
-                    <div className="py-1 pl-2 text-xs border-l border-black sm:pr-2"><Clock /></div>
+                    <div className="py-1 pl-2 text-xs border-l border-black pr-2"><Clock /></div>
                     <div className="hidden py-1 pl-2 text-xs border-l border-black sm:block pr-2"><Calendar /></div>
                 </div>
                 <div id="dropdown" className={this.state.menu ? 'z-10 w-44 bg-gray-mac shadow-mac-os absolute' : 'hidden'}>
