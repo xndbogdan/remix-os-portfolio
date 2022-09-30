@@ -150,14 +150,14 @@ class Desktop extends React.Component {
                 <div className={this.state.easter ? 'absolute z-50 w-screen pointer-events-none h-screen' : 'absolute z-50 w-screen pointer-events-none h-screen hidden'}>
                     <div className='flex flex-wrap h-screen'>
                         <div className='w-1/3 flex flex-col items-top h-screen'>
-                            <img className={this.state.easterPhase === 1 ? 'w-full my-auto transition-all duration-500 scale-100 ease-in-out' : 'w-full my-auto transition-all duration-500 scale-0 ease-in-out'} src='/easter/bam.png'></img>
+                            <img alt="easter-egg" className={this.state.easterPhase === 1 ? 'w-full my-auto transition-all duration-500 scale-100 ease-in-out' : 'w-full my-auto transition-all duration-500 scale-0 ease-in-out'} src='/easter/bam.png'></img>
                         </div>
                         <div className='w-1/3 flex flex-col items-top h-screen'>
-                            <img className={this.state.easterPhase === 2 ? 'w-full mb-auto mt-32 transition-all duration-500 scale-100 ease-in-out' : 'w-full mb-auto mt-32 transition-all duration-500 scale-0 ease-in-out'} src='/easter/boom.png'></img>
+                            <img alt="easter-egg" className={this.state.easterPhase === 2 ? 'w-full mb-auto mt-32 transition-all duration-500 scale-100 ease-in-out' : 'w-full mb-auto mt-32 transition-all duration-500 scale-0 ease-in-out'} src='/easter/boom.png'></img>
                         </div>
                         
                         <div className='w-1/3 flex flex-col items-end h-screen'>
-                            <img className={this.state.easterPhase === 0 ? 'w-full mt-auto mb-32 transition-all duration-500 scale-100 ease-in-out' : 'w-full mt-auto mb-32 transition-all duration-500 scale-0 ease-in-out'} src='/easter/bim.png'></img>
+                            <img alt="easter-egg" className={this.state.easterPhase === 0 ? 'w-full mt-auto mb-32 transition-all duration-500 scale-100 ease-in-out' : 'w-full mt-auto mb-32 transition-all duration-500 scale-0 ease-in-out'} src='/easter/bim.png'></img>
                         </div>
                     </div>
                 </div>
@@ -202,7 +202,7 @@ class Desktop extends React.Component {
                                                     <span className='text-xs'>Linkedin</span>
                                                 </a>
                                             </div>
-                                            <a className='text-sm hover:text-blue-ukraine' href='https://helpukraine.center/' target="_blank">Donate to HELP<span className='text-red-600'>UKRAINE</span>.CENTER <img className='w-6 h-4 inline' src="/img/ukraine.svg"/> </a>
+                                            <a className='text-sm hover:text-blue-ukraine' href='https://helpukraine.center/' target="_blank">Donate to HELP<span className='text-red-600'>UKRAINE</span>.CENTER <img alt='Ukraine flag' className='w-6 h-4 inline' src="/img/ukraine.svg"/> </a>
                                         </div>
                                     </div>
                                 </Draggable>
@@ -242,7 +242,7 @@ class Desktop extends React.Component {
                                             {/* <a onMouseDown={()=>{}} data-tab="1" className='py-1 px-2 text-xs border-gray-400 border-r cursor-point bg-gray-300'>Redacted.rtf</a> */}
                                             <div className='flex justify-end flex-1'>
                                                 <a href='/resume' target='_blank' className="flex flex-row px-2 py-1 text-xs border-l border-gray-600 cursor-grab cursor-point hover:bg-gray-200">
-                                                    <img className='w-auto h-4 mr-2' src='/img/link.svg'></img>
+                                                    <img alt="link" className='w-auto h-4 mr-2' src='/img/link.svg'></img>
                                                     <span>Open in new tab</span>
                                                 </a>
                                             </div>
