@@ -419,6 +419,7 @@ class Desktop extends React.Component {
     }
 
     bimBamBoom = () => {
+        this.easterEggPlayer.current.volume = 0.15
         if(this.state.easter) {
             this.endBimBamBoom()
             return
@@ -612,6 +613,7 @@ class Desktop extends React.Component {
         })
     }
 
+    // Hacky job to get the images animated - There are many better ways to do this
     incrementBims = () => {
         this.currentTimeout = setTimeout(() => {
             this.setState({
