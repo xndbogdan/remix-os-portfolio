@@ -55,7 +55,7 @@ class Desktop extends React.Component {
         let resumeContent;
         let currentTimeout = null;
         if(resumeTab === 0) {
-            resumeContent = <Resume></Resume>
+            resumeContent = <div className="bg-white p-2 overflow-y-auto max-h-80 border border-black text-sm select-full"><Resume></Resume></div>
             
         } else {
             resumeContent = <Projects></Projects>

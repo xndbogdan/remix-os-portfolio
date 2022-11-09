@@ -24,15 +24,15 @@
 }
 
 .cursor-grab {
-  cursor:url('/img/cursors/hand2.png'), auto;
+  cursor:url('/img/cursors/hand2.png'), auto !important;
 }
 
 .cursor-point {
-  cursor:url('/img/cursors/hand.png'), auto;
+  cursor:url('/img/cursors/hand.png'), auto !important;
 }
 
 .cursor-default {
-  cursor:url('/img/cursors/arrow.png'), auto;
+  cursor:url('/img/cursors/arrow.png'), auto !important;
 }
 
 .select-none {
