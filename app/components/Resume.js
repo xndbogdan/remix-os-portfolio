@@ -5,12 +5,20 @@ import { jsPDF } from "jspdf";
 import html2canvas from 'html2canvas';
 
 class Resume extends React.Component {
-    render() {
-        return (
-            <div>
+    downloadButton = () => {
+        if (this.props.download) {
+            return (
                 <a className='flex flex-row items-center mt-2 cursor-point' onMouseDown={this.saveToFile}>
                     <img src='/img/floppy.svg' alt='Save to file' className='w-6 h-6'/> <span className='text-blue-600 hover:text-blue-700 cursor-pointer ml-2 font-bold'>Save to file</span>
                 </a> 
+            )
+        }
+       
+    }
+    render() {
+        return (
+            <div>
+                {this.downloadButton()}
                 <div id='resume-content'>
                     <h1 className='text-2xl mb-2 mt-4'>Contact Information</h1>
                     <p><span className='font-bold'>Personal Website: </span><a className='text-blue-600' target="_blank" href="https://remixos.dev">remixos.dev</a></p>
