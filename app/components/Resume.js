@@ -105,18 +105,18 @@ class Resume extends React.Component {
         );
     }
     saveToFile = () => {
-        const doc = new jsPDF('p', 'pt', 'a3');
+        const doc = new jsPDF('p', 'mm', [300, 600]);
         const resumeContent = document.getElementById('resume-content')
         const shipImage = document.getElementById('ship')
-        resumeContent.style.width = '1000px'
-        resumeContent.style.height = '5000px'
+        resumeContent.style.width = '800px'
+        resumeContent.style.height = '8000px'
         shipImage.style.display = 'none'
 
         html2canvas(resumeContent, {
             removeContainer: false,
             useCORS: false,
             allowTaint: false,
-            height: 3000,
+            height: 8000,
         }).then(canvas => {
                 console.log('rendered')
                 var imgData = canvas.toDataURL('image/png');
