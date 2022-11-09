@@ -5,20 +5,32 @@ import { jsPDF } from "jspdf";
 import html2canvas from 'html2canvas';
 
 class Resume extends React.Component {
-    downloadButton = () => {
-        if (this.props.download) {
-            return (
+    
+    constructor(props) {
+        super(props);
+        this.state = {isDownloading: false};
+    }
+
+    render() {
+        const isDownloading = this.state.isDownloading
+        let downloadButton = null
+        if (this.props.download && !isDownloading) {
+            downloadButton = (
                 <a className='flex flex-row items-center mt-2 cursor-point' onMouseDown={this.saveToFile}>
                     <img src='/img/floppy.svg' alt='Save to file' className='w-6 h-6'/> <span className='text-blue-600 hover:text-blue-700 cursor-pointer ml-2 font-bold'>Save to file</span>
                 </a> 
             )
         }
-       
-    }
-    render() {
+        if(isDownloading) {
+            downloadButton = (
+                <div className='flex flex-row items-center mt-2'>
+                    <img src='/img/floppy.svg' alt='Save to file' className='w-6 h-6'/> <span className='text-blue-600 ml-2 font-bold'>Downloading...</span>
+                </div> 
+            )
+        }
         return (
             <div>
-                {this.downloadButton()}
+                {downloadButton}
                 <div id='resume-content'>
                     <h1 className='text-2xl mb-2 mt-4'>Contact Information</h1>
                     <p><span className='font-bold'>Personal Website: </span><a className='text-blue-600' target="_blank" href="https://remixos.dev">remixos.dev</a></p>
@@ -105,11 +117,20 @@ class Resume extends React.Component {
         );
     }
     saveToFile = () => {
+        this.setState({isDownloading: true});
+        let platform = 0 // 0 = pc, 1 = mac
+        if(navigator.platform.toLowerCase().indexOf("mac") != -1) platform = 1
+        console.log(platform)
+        
         const doc = new jsPDF('p', 'mm', [300, 600]);
         const resumeContent = document.getElementById('resume-content')
         const shipImage = document.getElementById('ship')
-        resumeContent.style.width = '800px'
+        resumeContent.style.width = '700px'
         resumeContent.style.height = '8000px'
+        // decrease base font size of div to fit on one page if on pc
+        if(platform != 1) {
+            resumeContent.style.fontSize = '.6rem'
+        }
         shipImage.style.display = 'none'
 
         html2canvas(resumeContent, {
@@ -118,15 +139,20 @@ class Resume extends React.Component {
             allowTaint: false,
             height: 8000,
         }).then(canvas => {
-                console.log('rendered')
+                
+    
                 var imgData = canvas.toDataURL('image/png');
                 doc.addImage(imgData, 'PNG', 15, 0);
                 doc.save('resume.pdf');
                 setTimeout(() => {
+                    this.setState({isDownloading: false});
                     resumeContent.style.width = null
                     resumeContent.style.height = null
                     shipImage.style.display = null
-                }, 50)
+                    if(platform != 1) {
+                        resumeContent.style.fontSize = null
+                    }
+                }, 10)
                 
         })
     }
