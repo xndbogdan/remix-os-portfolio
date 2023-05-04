@@ -38,7 +38,7 @@ class Resume extends React.Component {
                     <p><span className='font-bold'>E-Mail: </span><a className='text-blue-600' target="_blank" href="mailto:bogdan.mosteanu@hey.com">bogdan.mosteanu@hey.com</a></p>
 
                     <h1 className='text-2xl mb-2 mt-4'>Presentation</h1>
-                    <p>I'm Bogdan, an independent Full-Stack Developer from Bucharest.</p>
+                    <p>I'm Bogdan, a Full-Stack Developer & hobbyist composer from Bucharest.</p>
                     <p className='mt-1'>Most of my projects were made using Laravel, Vue and Tailwind.</p>
                     <p>I've also worked with Python (Cli apps & Flask apps) and Node (Express). I'm okay any tech stack, as long as it makes sense and it's supported.</p>
                     <p className='mt-1'>I want to build clean codebases that are easy to extend and work with.</p>
@@ -54,14 +54,84 @@ class Resume extends React.Component {
                     <p className="mt-2"><span className="text-blue-700">► Independent Contractor / Freelancer</span> (Nov 2019 - Present day)</p>
                     <p>Switched to contracting to enjoy the freedom of remote work and a larger variety of projects.</p>
                     <p className="mt-1">Tech stack typically used: Laravel, Vue, Tailwindcss, Inertia.js, Elastic Search, Alpine, Websockets, Amazon SES, SNS, S3, Cloudfront.</p>
+
+                    <p className='mt-2 text-xl'>Collaboration history:</p>
+                    <div class="flex flex-col px-4 pb-4">
+                        <div className='mt-4'>
+                            <a className='text-blue-700 hover:text-blue-600' href='https://www.reelcrafter.com/' target='_blank'>→ ReelCrafter</a>
+                            <p className='whitespace-pre-wrap mt-2'>
+                                ReelCrafter is a platform that allows users to create tailored reels to showcase their music, offering a unique and engaging way to showcase their work.<br/>
+                                Working as a Full Stack Developer at ReelCrafter, I have had the opportunity to work closely with the CEO to develop new features and fix bugs, making this collaboration by far the best I have had so far.<br/> 
+                                My main responsibilities include implementing features, fixing bugs, and coming up with ways to solve issues experienced by ReelCrafter's users.<br/>
+                                One of the most exciting aspects of this role has been my involvement in re-making part of the project with Vue3 & GraphQL and the opportunity to work with a bunch of technologies for the first time.<br/> 
+                                This has allowed me to expand my skillset and contribute to the ongoing success of the platform.
+                            </p>
+                        </div>
+                        <div className='mt-4'>
+                            <a className='text-blue-700 hover:text-blue-600' href='https://voice.ai/' target='_blank'>→ Voice.ai</a>
+                            <p className='whitespace-pre-wrap mt-2'>
+                                Contributed to the Voice.AI application by developing various features on the Frontend/Backend related to user interaction & user features.<br/>
+                                Got some hands-on experience with vuetify & desktop app development.<br/> 
+                            </p>
+                        </div>
+                        <div className='mt-4'>
+                            <a className='text-blue-700 hover:text-blue-600' href='https://www.quest-global.com/' target='_blank'>→ Quest Global</a>
+                            <p className='whitespace-pre-wrap mt-2'>
+                                At Quest Global, I had the opportunity to work on a social media platform project (details of which are confidential due to NDA) as part of a team, utilizing React.js, Neo4j, and Laravel.
+                                Although React.js and Neo4j were new to me, I was able to quickly adapt and contribute to the project's success.<br/>
+                                The project allowed me some flexibility in suggesting new technologies and approaches, which helped me develop my skills and enhance the platform's functionality. 
+                                Working collaboratively with the team and the client, we were able to deliver a high-quality product that met their specific needs and specifications.<br/> 
+                                Through this experience, I was able to improve my communication, project management, and team collaboration skills, as well as gain a deeper understanding of software development principles and best practices.<br/>
+                                Gained valuable experience in the corporate environment.
+                            </p>
+                        </div>
+                        <div className='mt-4'>
+                            <a className='text-blue-700 hover:text-blue-600' href='https://www.webfusion.ro/' target='_blank'>→ WEBFUSION</a>
+                            <p className='whitespace-pre-wrap mt-2'>
+                                <p>Some of the I did included:</p>
+                                <p>- Full Stack Development of new projects</p>
+                                <p>- Integerations with various providers/apis including payment providers.</p>
+                                <p>- Upgrading older php5.6 & laravel 5 apps to laravel 8/9</p>
+                                <p>- New feature implementations & bugfixes, depending on the client's needs</p>
+                                <p>- Came up with solutions that worked better for the client and their customers</p>
+                                <p>- Helped junior devs understand the tech stack and get better at their job</p>
+                                <p>- Worked on a few projects solo, from start to finish</p>
+                            </p>
+                        </div>
+                        <div className='mt-4'>
+                            <a className='text-blue-700 hover:text-blue-600' href='https://boostit.com/' target='_blank'>→ BoostIT HUB</a>
+                            <p className='whitespace-pre-wrap mt-2'>
+                                During my time at BoostIT Hub as a software developer, I had the opportunity to work on the CryptoCoin Pro project, a crypto exchange platform. Throughout the contract period I utilized my expertise in Laravel and Vue.js to deliver high-quality software solutions.<br/>
+                                As instructed by my project manager, I was responsible for identifying and fixing bugs, as well as implementing new features to enhance the functionality of the platform. Working collaboratively with my team members.<br/>
+                                My experience at BoostIT Hub allowed me to further develop my skills in Laravel and Vue.js, as well as gain a deeper understanding of software development principles and best practices.
+                            </p>
+                        </div>
+                        <div className='mt-4'>
+                            <a className='text-blue-700 hover:text-blue-600' href='http://dawn.ro/' target='_blank'>→ Dawn Consulting Group</a>
+                            <p className='whitespace-pre-wrap mt-2'>
+                                Dawn Consulting is a technology consulting firm that specializes in providing custom software development solutions to businesses across various industries. As a software developer at Dawn Consulting, my primary responsibility was to develop and implement software solutions for the company's clients using a variety of programming languages and frameworks.<br/>
+                                Specifically, in my role at Dawn Consulting, I have worked on various projects for the company's clients, utilizing my expertise in Express.js, Python, Node.js, Laravel, and JavaScript. I have worked closely with the company's CEO to understand client requirements and develop new features for their applications.<br/>
+                            </p>
+                        </div>
+                        <div className='mt-4'>
+                            <a className='text-blue-700 hover:text-blue-600' href='https://artgames.ro/' target='_blank'>→ ART GAMES</a>
+                            <p className='whitespace-pre-wrap mt-2'>
+                                Some of the work I did included:
+                                <p>- Develop Wordpress presentation websites for the company's clients.</p>
+                                <p>- Integrations with various providers/apis including payment providers.</p>
+                                <p>- Reworking/upgrading older laravel 5 apps to laravel 8/9</p>
+                                <p>- New feature implementations & bugfixes, depending on the client's needs</p>
+                                <p>- Elasticsearch implementation where database queries were not the best solution</p>
+                                <p>- Speed optimisations on endpoints where response time was critical</p>
+                                <p>- Came up with solutions that worked better for the client and their customers</p>
+                                <p>- Helped junior devs understand the tech stack and get better at their job</p>
+                                <p>- Worked solo on projects from start to finish</p>
+                                <p>- Part of the main development team for major projects like Artmark, Sotheby's Romania</p>
+                                <p>- Part of the main development team for a project with a banking partner (cannot give details due to nda)</p>
+                            </p>
+                        </div>
+                    </div>
                     
-                    <p>Some of the I did included:</p>
-                    <p>- Full Stack Development of new projects</p>
-                    <p>- Integerations with various providers/apis including payment providers.</p>
-                    <p>- Upgrading older php5.6 & laravel 5 apps to laravel 8/9</p>
-                    <p>- New feature implementations & bugfixes, depending on the client's needs</p>
-                    <p>- Came up with solutions that worked better for the client and their customers</p>
-                    <p>- Helped junior devs understand the tech stack and get better at their job</p>
 
                     <p className="mt-2"><span className="text-blue-700">► Full Stack Web Developer</span> at <a href="http://artgames.ro/" target="_blank">Art Games</a> (Jul 2018 - Oct 2019)</p>
                     <p>Worked on many internal projects, including <a target="_blank" href="https://artmark.ro">Artmark.ro</a>, and <a target="_blank" href="https://artsafari.ro">Artsafari.ro</a> and <a target="_blank" href="https://www.sothebysrealty.ro/">Sotheby's Realty Romania</a> .</p>
