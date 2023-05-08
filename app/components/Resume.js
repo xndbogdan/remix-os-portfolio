@@ -56,7 +56,7 @@ class Resume extends React.Component {
                     <p className="mt-1">Tech stack typically used: Laravel, Vue, Tailwindcss, Inertia.js, Elastic Search, Alpine, Websockets, Amazon SES, SNS, S3, Cloudfront.</p>
 
                     <p className='mt-2 text-xl'>Collaboration history:</p>
-                    <div class="flex flex-col px-4 pb-4">
+                    <div className="flex flex-col px-4 pb-4">
                         <div className='mt-4'>
                             <a className='text-blue-700 hover:text-blue-600' href='https://www.reelcrafter.com/' target='_blank'>→ ReelCrafter</a>
                             <p className='whitespace-pre-wrap mt-2'>

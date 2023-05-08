@@ -6,7 +6,7 @@ export default function Index() {
   return (
     <div className="h-screen w-screen flex flex-col">
       <div className="bg-gray-900">
-        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between">
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between">
           <h1 className="text-2xl md:text-4xl text-white font-bold px-4 py-4">Reel Embed Demo</h1>
           <div className="flex items-center">
             <a className="text-white hover:text-gray-300 px-4 py-4" href="/">Home</a>

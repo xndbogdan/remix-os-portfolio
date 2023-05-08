@@ -11,6 +11,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 
 class Desktop extends React.Component {
+    sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms))
     constructor(props) {
         super(props);
         this.state = {
@@ -613,98 +614,74 @@ class Desktop extends React.Component {
         })
     }
 
-    // Hacky job to get the images animated - There are many better ways to do this
-    incrementBims = () => {
-        this.currentTimeout = setTimeout(() => {
-            this.setState({
-                easterPhase: this.state.easterPhase + 1
-            })
-            this.currentTimeout = setTimeout(() => {
-                this.setState({
-                    easterPhase: this.state.easterPhase + 1
-                })
-                this.currentTimeout = setTimeout(() => {
-                    this.setState({
-                        easterPhase: this.state.easterPhase + 1
-                    })
-                    this.currentTimeout = setTimeout(() => {
-                        this.setState({
-                            easterPhase: -1
-                        })
-                        this.currentTimeout = setTimeout(() => {
-                            this.setState({
-                                easterPhase: this.state.easterPhase + 1
-                            })
-                            this.currentTimeout = setTimeout(() => {
-                                if(!this.state.easter) {
-                                    return
-                                }
-                                this.currentTimeout = setTimeout(() => {
-                                    this.setState({
-                                        easterPhase: this.state.easterPhase + 1
-                                    })
-                                    this.currentTimeout = setTimeout(() => {
-                                        this.setState({
-                                            easterPhase: this.state.easterPhase + 1
-                                        })
-                                        this.currentTimeout = setTimeout(() => {
-                                            this.setState({
-                                                easterPhase: -1
-                                            })
-                                            this.currentTimeout = setTimeout(() => {
-                                                this.setState({
-                                                    easterPhase: this.state.easterPhase + 1
-                                                })
-                                                this.currentTimeout = setTimeout(() => {
-                                                    this.setState({
-                                                        easterPhase: this.state.easterPhase + 1
-                                                    })
-                                                    setTimeout(() => {
-                                                        this.setState({
-                                                            easterPhase: this.state.easterPhase + 1
-                                                        })
-                                                        this.currentTimeout = setTimeout(() => {
-                                                            this.setState({
-                                                                easterPhase: this.state.easterPhase + 1
-                                                            })
-                                                            this.currentTimeout = setTimeout(() => {
-                                                                this.setState({
-                                                                    easterPhase: -1
-                                                                })
-                                                                this.currentTimeout = setTimeout(() => {
-                                                                    this.setState({
-                                                                        easterPhase: this.state.easterPhase + 1
-                                                                    })
-                                                                    setTimeout(() => {
-                                                                        this.setState({
-                                                                            easterPhase: this.state.easterPhase + 1
-                                                                        })
-                                                                        this.currentTimeout =  setTimeout(() => {
-                                                                            this.setState({
-                                                                                easterPhase: this.state.easterPhase + 1
-                                                                            })
-                                                                            this.currentTimeout = setTimeout(() => {
-                                                                                this.setState({
-                                                                                    easterPhase: this.state.easterPhase + 1
-                                                                                })
-                                                                            }, 500)
-                                                                        }, 500)
-                                                                    }, 500)
-                                                                }, 1800)
-                                                            }, 500)
-                                                        }, 500)
-                                                    }, 500)
-                                                }, 500)
-                                            }, 1800)
-                                        }, 500)
-                                    }, 500)
-                                }, 500)
-                            }, 500)
-                        }, 1800)
-                    }, 500)
-                }, 500)
-            }, 500)
-        }, 500)
+    incrementBims = async () => {
+        await this.sleep(500)
+        this.setState({
+            easterPhase: this.state.easterPhase + 1
+        })
+        await this.sleep(500)
+        this.setState({
+            easterPhase: this.state.easterPhase + 1
+        })
+        await this.sleep(500)
+        this.setState({
+            easterPhase: this.state.easterPhase + 1
+        })
+        await this.sleep(500)
+        this.setState({
+            easterPhase: -1
+        })
+        await this.sleep(1800)
+        this.setState({
+            easterPhase: this.state.easterPhase + 1
+        })
+        await this.sleep(500)
+        if(!this.state.easter) {
+            return
+        }
+        this.setState({
+            easterPhase: this.state.easterPhase + 1
+        })
+        await this.sleep(500)
+        this.setState({
+            easterPhase: this.state.easterPhase + 1
+        })
+        await this.sleep(500)
+        this.setState({
+            easterPhase: -1
+        })
+        await this.sleep(1900)
+        this.setState({
+            easterPhase: this.state.easterPhase + 1
+        })
+        await this.sleep(500)
+        this.setState({
+            easterPhase: this.state.easterPhase + 1
+        })
+        await this.sleep(500)
+        this.setState({
+            easterPhase: this.state.easterPhase + 1
+        })
+        await this.sleep(500)
+        this.setState({
+            easterPhase: -1
+        })
+        await this.sleep(2300)
+        this.setState({
+            easterPhase: this.state.easterPhase + 1
+        })
+        await this.sleep(500)
+        this.setState({
+            easterPhase: this.state.easterPhase + 1
+        })
+        await this.sleep(500)
+        this.setState({
+            easterPhase: this.state.easterPhase + 1
+        })
+        await this.sleep(500)
+        this.setState({
+            easterPhase: -1
+        })
     }
 
 }
