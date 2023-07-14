@@ -614,74 +614,111 @@ class Desktop extends React.Component {
         })
     }
 
+    // Sorry for the mess, but it's for the easter egg
+    steps = [
+        {
+            waitTime: 500,
+            action: 'increment',
+            value: 1,
+        },
+        {
+            waitTime: 500,
+            action: 'increment',
+            value: 1,
+        },
+        {
+            waitTime: 500,
+            action: 'increment',
+            value: 1,
+        },
+        {
+            waitTime: 500,
+            action: 'set',
+            value: -1,
+        },
+        {
+            waitTime: 1800,
+            action: 'increment',
+            value: 1,
+        },
+        {
+            waitTime: 500,
+            action: 'increment',
+            value: 1,
+        },
+        {
+            waitTime: 500,
+            action: 'increment',
+            value: 1,
+        },
+        {
+            waitTime: 500,
+            action: 'set',
+            value: -1,
+        },
+        {
+            waitTime: 1900,
+            action: 'increment',
+            value: 1,
+        },
+        {
+            waitTime: 500,
+            action: 'increment',
+            value: 1,
+        },
+        {
+            waitTime: 500,
+            action: 'increment',
+            value: 1,
+        },
+        {
+            waitTime: 500,
+            action: 'set',
+            value: -1,
+        },
+        {
+            waitTime: 2300,
+            action: 'increment',
+            value: 1,
+        },
+        {
+            waitTime: 500,
+            action: 'increment',
+            value: 1,
+        },
+        {
+            waitTime: 500,
+            action: 'increment',
+            value: 1,
+        },
+        {
+            waitTime: 500,
+            action: 'set',
+            value: -1,
+        },
+    ]
+
     incrementBims = async () => {
-        await this.sleep(500)
-        this.setState({
-            easterPhase: this.state.easterPhase + 1
-        })
-        await this.sleep(500)
-        this.setState({
-            easterPhase: this.state.easterPhase + 1
-        })
-        await this.sleep(500)
-        this.setState({
-            easterPhase: this.state.easterPhase + 1
-        })
-        await this.sleep(500)
-        this.setState({
-            easterPhase: -1
-        })
-        await this.sleep(1800)
-        this.setState({
-            easterPhase: this.state.easterPhase + 1
-        })
-        await this.sleep(500)
-        if(!this.state.easter) {
-            return
+        let counter = 0;
+        while (counter < this.steps.length && this.state.easter) {
+            await this.sleep(this.steps[counter].waitTime)
+            switch (this.steps[counter].action) {
+                case 'increment':
+                    this.setState({
+                        easterPhase: this.state.easterPhase + this.steps[counter].value
+                    })
+                    break;
+                case 'set':
+                    this.setState({
+                        easterPhase: this.steps[counter].value
+                    })
+                    break;
+                default:
+                    console.error('Invalid action in easter egg steps. Contact developer.')
+                    break;
+            }
+            counter++;
         }
-        this.setState({
-            easterPhase: this.state.easterPhase + 1
-        })
-        await this.sleep(500)
-        this.setState({
-            easterPhase: this.state.easterPhase + 1
-        })
-        await this.sleep(500)
-        this.setState({
-            easterPhase: -1
-        })
-        await this.sleep(1900)
-        this.setState({
-            easterPhase: this.state.easterPhase + 1
-        })
-        await this.sleep(500)
-        this.setState({
-            easterPhase: this.state.easterPhase + 1
-        })
-        await this.sleep(500)
-        this.setState({
-            easterPhase: this.state.easterPhase + 1
-        })
-        await this.sleep(500)
-        this.setState({
-            easterPhase: -1
-        })
-        await this.sleep(2300)
-        this.setState({
-            easterPhase: this.state.easterPhase + 1
-        })
-        await this.sleep(500)
-        this.setState({
-            easterPhase: this.state.easterPhase + 1
-        })
-        await this.sleep(500)
-        this.setState({
-            easterPhase: this.state.easterPhase + 1
-        })
-        await this.sleep(500)
-        this.setState({
-            easterPhase: -1
-        })
     }
 
 }
