@@ -168,6 +168,7 @@
 
 .mac-input {
   -webkit-appearance: none; 
+  appearance: none;
   max-width: 9rem;
   width: 100%; 
   background: transparent; 
@@ -239,6 +240,7 @@
 
 .mac-input::-moz-range-thumb {
   -webkit-appearance: none;
+  appearance: none;
   height: 1.5rem;
   width: 0.5rem;
   background: #ffffff;
@@ -254,6 +256,7 @@
 
 .mac-input::-ms-thumb {
   -webkit-appearance: none;
+  appearance: none;
   height: 0.75rem;
   width: 0.5rem;
   background: #ffffff;
