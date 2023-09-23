@@ -1,211 +1,208 @@
-import React, { useRef } from 'react';
-import AudioSpectrum from 'react-audio-spectrum'
-class MusicPlayer extends React.Component {
-    constructor(props) {
-        super(props);
-        const randomTrackIndex = 0;
-        this.musicApiEndpoint = 'https://misty-butterfly-7016.fly.dev/api/play/';
-        this.state = {
-            tracklist: this.props.tracklist,
-            selectedPlaylist: this.props.tracklist,
-            selectedPlaylistLength: this.props.tracklist.length,
-            trackIndex: randomTrackIndex,
-            selectedTrack: this.props.tracklist[0],
-            display: 'Player Offline',
-            isPlaying: false,
-            trackProgress: 0,
-            currentTrackTime: 0,
-            currentTrackDuration: 0,
-        };
-        this.audio = React.createRef()
-        this.displayText = React.createRef()
-        this.displayTextContainer = React.createRef()
-        this.progressBar = React.createRef()
-        this.progressBarContainer = React.createRef()
-        if(typeof document !== 'undefined') {
-            document.getElementById('music-player-volume').value = 1
-        }
+import { useRef, useState, useEffect } from 'react';
+import AudioSpectrum from 'react-audio-spectrum';
+// import { sleep } from '~/utils/sleep';
+
+const MusicPlayer = (props) => {
+  const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+  const randomTrackIndex = 0;
+  const musicApiEndpoint = 'https://misty-butterfly-7016.fly.dev/api/play/';
+
+  const [selectedPlaylist, setSelectedPlaylist] = useState(props.tracklist);
+  const [selectedPlaylistLength, setSelectedPlaylistLength] = useState(props.tracklist.length);
+  const [trackIndex, setTrackIndex] = useState(randomTrackIndex);
+  const [selectedTrack, setSelectedTrack] = useState(props.tracklist[0]);
+  const [display, setDisplay] = useState('Player Offline');
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [trackProgress, setTrackProgress] = useState(0);
+  const [currentTrackTime, setCurrentTrackTime] = useState(0);
+  const [currentTrackDuration, setCurrentTrackDuration] = useState(0);
+
+  const audio = useRef();
+  const displayText = useRef();
+  const displayTextContainer = useRef();
+  const progressBar = useRef();
+  const progressBarContainer = useRef();
+
+  useEffect(() => {
+    if (typeof document !== 'undefined') {
+      document.getElementById('music-player-volume').value = 1;
     }
-    render(props) {
-        return (
-        <div className="px-2">
-            <div className='bg-gray-900 border-2 border-gray-600 my-2'>
-                <div className=" h-8 text-blue-300 px-2 flex items-center" ref={this.displayTextContainer}>
-                    <a target="_blank" href={this.state.selectedTrack.permalink_url} className="opacity-75 cursor-point truncate" ref={this.displayText}>
-                        <span className='pr-16'>
-                            {this.state.display}
-                        </span>
-                    </a>
-                </div>
-                <div className={this.state.isPlaying ? 'h-8 text-blue-300 flex items-center justify-center' : 'hidden'} ref={this.displayTextContainer}>
-                    <div>
-                        <AudioSpectrum
-                            id="audio-canvas"
-                            height={25}
-                            width={340}
-                            audioId={'music-player'}
-                            capColor={'2564eb'}
-                            capHeight={2}
-                            meterWidth={2}
-                            meterCount={512}
-                            meterColor={[
-                                {stop: 0, color: '#2564eb'},
-                                {stop: 0.1, color: '#fff'},
-                                {stop: 1, color: '#fff'}
-                            ]}
-                            gap={2}
-                            />
-                    </div>
-                </div>
-                <div className={!this.state.isPlaying ? 'h-8 text-blue-300 flex items-center justify-start' : 'hidden'} ref={this.displayTextContainer}>
-                    <div className='opacity-75 px-2'>
-                    /// Remix OS Player - Paused ///
-                    </div>
-                </div>
-            </div>
-            
-            <p className="text-sm">Station: Poolsuite FM</p>
-            <div className="w-full h-2 bg-black cursor-point" ref={this.progressBarContainer} onMouseUp={this.updateSongPosition}>
-                <div ref={this.progressBar} className="bg-blue-300 h-2 pointer-events-none" style={{width:this.state.trackProgress}}></div>
-            </div>
-            <div style={this.state.currentTrackDuration ? {display:'block'} : {display:'none'}}>{this.convertDuration(this.state.currentTrackTime)} / {this.convertDuration(this.state.currentTrackDuration)}</div>
-            <div className='flex flex-row justify-between items-center'>
-                <div className="flex flex-row space-x-4 text-sm mt-2 pb-2">
-                    <button onClick={this.previousTrack}>
-                        <svg className="icon h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 12 9"> 
-                            <path fill="var(--color-icon, #000)" d="M12 0v9h-1V8h-1V7H9V6H8V5H7v4H6V8H5V7H4V6H3V5H2v4H0V0h2v4h1V3h1V2h1V1h1V0h1v4h1V3h1V2h1V1h1V0h1z"/>
-                        </svg>
-                    </button>
-                    <button onClick={this.togglePlay}>{!this.state.isPlaying ? 
-                        <svg className="icon h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 9 9">
-                            <path fill="var(--color-icon, #000)" d="M3 9V0h1v1h1v1h1v1h1v1h1v1H7v1H6v1H5v1H4v1H3z"/>
-                        </svg> 
-                        : 
-                        <svg className="icon h-4" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg" >
-                            <path d="M2 0H4V9H2V0Z" fill="var(--color-icon, #000)" />
-                            <path d="M5 0H7V9H5V0Z" fill="var(--color-icon, #000)" />
-                        </svg>}
-                    </button>
-                    <button onClick={this.nextTrack}>
-                        <svg className="icon h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 12 9" >
-                                <path fill="var(--color-icon, #000)" d="M0 9V0h1v1h1v1h1v1h1v1h1V0h1v1h1v1h1v1h1v1h1V0h2v9h-2V5H9v1H8v1H7v1H6v1H5V5H4v1H3v1H2v1H1v1H0z"/>
-                        </svg>
-                    </button>
-                </div>
-                <div className="wrapper">
-                    <input id="music-player-volume" className='mac-input' type="range" min="0" max="1" step="0.025" onChange={(e)=> { document.getElementById('music-player').volume = e.target.value }} />
-                    <label className="hidden" htmlFor="volume">Volume</label>
-                </div>
-            </div>
-            <div>Track {this.state.trackIndex + 1} of {this.state.selectedPlaylistLength}</div>
-            <audio id="music-player" crossOrigin="anonymous" ref={this.audio} onEnded={this.nextTrack} onTimeUpdate={this.updateTrackProgress}/>
+    
+    // Add event listeners and cleanup
+    const audioElement = audio.current;
+
+    const intervalID = setInterval(updateScreen, 1000);
+
+    audioElement.addEventListener('ended', () => setIsPlaying(false));
+
+    return () => {
+      clearInterval(intervalID);
+      audioElement.removeEventListener('ended', () => setIsPlaying(false));
+    };
+  }, [props.closed, isPlaying]);
+
+  useEffect(async () => {
+    if (isPlaying) {
+      silentlyPause();
+    }
+    await sleep(100);
+    if (isPlaying) {
+      silentlyPlay();
+    }
+  }, [trackIndex]);
+  
+  const updateTrackProgress = (event) => {
+    if (props.closed) {
+      if (isPlaying) {
+        togglePlay();
+      }
+    }
+    const currentTime = event.target.currentTime;
+    const duration = event.target.duration;
+    setTrackProgress((currentTime + 0.25) / duration * 100 + '%');
+    setCurrentTrackDuration(duration);
+    setCurrentTrackTime(currentTime);
+  };
+
+  const updateSongPosition = (event) => {
+    let boundingRect = event.target.getBoundingClientRect();
+    let percentage = ((event.clientX - boundingRect.left) / boundingRect.width);
+    audio.current.currentTime = percentage * audio.current.duration;
+  };
+
+  const convertDuration = (time) => {
+    let mins = Math.floor(time / 60);
+    if (mins < 10) {
+      mins = '0' + String(mins);
+    }
+    let secs = Math.floor(time % 60);
+    if (secs < 10) {
+      secs = '0' + String(secs);
+    }
+    return mins + ':' + secs;
+  };
+
+  const togglePlay = () => {
+    if (audio.current.src !== musicApiEndpoint + selectedTrack.waveform_url.split('/')[3].replace('_m.png', '.mp3')) {
+      audio.current.src = musicApiEndpoint + selectedTrack.waveform_url.split('/')[3].replace('_m.png', '.mp3');
+    }
+    setIsPlaying(!isPlaying);
+    if (isPlaying) {
+      audio.current.pause();
+    } else {
+      audio.current.play();
+    }
+  };
+
+  const silentlyPause = () => {
+    if (audio.current.src !== musicApiEndpoint + selectedTrack.waveform_url.split('/')[3].replace('_m.png', '.mp3')) {
+      audio.current.src = musicApiEndpoint + selectedTrack.waveform_url.split('/')[3].replace('_m.png', '.mp3');
+    }
+    audio.current.pause();
+  };
+
+  const silentlyPlay = () => {
+    if (audio.current.src !== musicApiEndpoint + selectedTrack.waveform_url.split('/')[3].replace('_m.png', '.mp3')) {
+      audio.current.src = musicApiEndpoint + selectedTrack.waveform_url.split('/')[3].replace('_m.png', '.mp3');
+    }
+    audio.current.play();
+  };
+
+  const nextTrack = async () => {
+    if (trackIndex >= selectedPlaylist.length - 1) {
+      return;
+    }
+    setSelectedTrack(selectedPlaylist[trackIndex + 1]);
+    setTrackIndex(trackIndex + 1);
+  };
+
+  const previousTrack = () => {
+    if (trackIndex <= 0) {
+      return;
+    }
+    setSelectedTrack(selectedPlaylist[trackIndex - 1]);
+    setTrackIndex(trackIndex - 1);
+  };
+
+  const updateScreen = () => {
+    setDisplay(selectedTrack.artist + ' - ' + selectedTrack.title);
+  };
+
+  return (
+    <div className="px-2">
+      <div className='bg-gray-900 border-2 border-gray-600 my-2'>
+        <div className=" h-8 text-blue-300 px-2 flex items-center" ref={displayTextContainer}>
+          <a target="_blank" href={selectedTrack.permalink_url} className="opacity-75 cursor-point truncate" ref={displayText}>
+            <span className='pr-16'>
+              {display}
+            </span>
+          </a>
         </div>
-        );
-    }
+        <div className={isPlaying ? 'h-8 text-blue-300 flex items-center justify-center' : 'hidden'} ref={displayTextContainer}>
+          <div>
+            <AudioSpectrum
+              id="audio-canvas"
+              height={25}
+              width={340}
+              audioId={'music-player'}
+              capColor={'2564eb'}
+              capHeight={2}
+              meterWidth={2}
+              meterCount={512}
+              meterColor={[
+                { stop: 0, color: '#2564eb' },
+                { stop: 0.1, color: '#fff' },
+                { stop: 1, color: '#fff' }
+              ]}
+              gap={2}
+            />
+          </div>
+        </div>
+        <div className={!isPlaying ? 'h-8 text-blue-300 flex items-center justify-start' : 'hidden'} ref={displayTextContainer}>
+          <div className='opacity-75 px-2'>
+            /// Remix OS Player - Paused ///
+          </div>
+        </div>
+      </div>
 
-    updateSongPosition = (event) => {
-        let boundingRect = event.target.getBoundingClientRect()
-        let percentage = ((event.clientX - boundingRect.left) / boundingRect.width)
-        this.audio.current.currentTime = percentage * this.audio.current.duration
-    }
+      <p className="text-sm">Station: Poolsuite FM</p>
+      <div className="w-full h-2 bg-black cursor-point" ref={progressBarContainer} onMouseUp={updateSongPosition}>
+        <div ref={progressBar} className="bg-blue-300 h-2 pointer-events-none" style={{ width: trackProgress }}></div>
+      </div>
+      <div style={currentTrackDuration ? { display: 'block' } : { display: 'none' }}>{convertDuration(currentTrackTime)} / {convertDuration(currentTrackDuration)}</div>
+      <div className='flex flex-row justify-between items-center'>
+        <div className="flex flex-row space-x-4 text-sm mt-2 pb-2">
+          <button onClick={previousTrack}>
+            <svg className="icon h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 12 9">
+              <path fill="var(--color-icon, #000)" d="M12 0v9h-1V8h-1V7H9V6H8V5H7v4H6V8H5V7H4V6H3V5H2v4H0V0h2v4h1V3h1V2h1V1h1V0h1v4h1V3h1V2h1V1h1V0h1z" />
+            </svg>
+          </button>
+          <button onClick={togglePlay}>
+            {!isPlaying ?
+              <svg className="icon h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 9 9">
+                <path fill="var(--color-icon, #000)" d="M3 9V0h1v1h1v1h1v1h1v1h1v1H7v1H6v1H5v1H4v1H3z" />
+              </svg>
+              :
+              <svg className="icon h-4" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg" >
+                <path d="M2 0H4V9H2V0Z" fill="var(--color-icon, #000)" />
+                <path d="M5 0H7V9H5V0Z" fill="var(--color-icon, #000)" />
+              </svg>}
+          </button>
+          <button onClick={nextTrack}>
+            <svg className="icon h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 12 9" >
+              <path fill="var(--color-icon, #000)" d="M0 9V0h1v1h1v1h1v1h1v1h1V0h1v1h1v1h1v1h1V0h2v9h-2V5H9v1H8v1H7v1H6v1H5V5H4v1H3v1H2v1H1v1H0z" />
+            </svg>
+          </button>
+        </div>
+        <div className="wrapper">
+          <input id="music-player-volume" className='mac-input' type="range" min="0" max="1" step="0.025" onChange={(e) => { document.getElementById('music-player').volume = e.target.value }} />
+          <label className="hidden" htmlFor="volume">Volume</label>
+        </div>
+      </div>
+      <div>Track {trackIndex + 1} of {selectedPlaylistLength}</div>
+      <audio id="music-player" crossOrigin="anonymous" ref={audio} onEnded={nextTrack} onTimeUpdate={updateTrackProgress} />
+    </div>
+  );
+};
 
-    convertDuration = (time) => {
-        let mins = Math.floor(time / 60);
-        if (mins < 10) {
-            mins = '0' + String(mins);
-        }
-        let secs = Math.floor(time % 60);
-        if (secs < 10) {
-            secs = '0' + String(secs);
-        }
-
-        return mins + ':' + secs;
-    }
-
-    updateTrackProgress = (event) => {
-        if(this.props.closed) {
-            if(this.state.isPlaying) {
-                this.togglePlay()
-            }
-        }
-        const currentTime = event.target.currentTime
-        const duration = event.target.duration
-        this.setState({
-            trackProgress: (currentTime + 0.25) / duration * 100 + '%',
-            currentTrackDuration: duration,
-            currentTrackTime: currentTime,
-        })
-    }
-
-    componentDidMount() {
-        // audio.addEventListener('ended', () => this.setState({ play: false }));
-        this.intervalID = setInterval(
-        () => this.tick(),
-        1000
-        );
-    }
-    componentWillUnmount() {
-        // audio.removeEventListener('ended', () => this.setState({ play: false }));  
-        clearInterval(this.intervalID);
-    }
-
-    togglePlay = () => {
-        if(this.audio.current.src != this.musicApiEndpoint + this.state.selectedTrack.waveform_url.split('/')[3].replace('_m.png', '.mp3')) {
-            this.audio.current.src = this.musicApiEndpoint + this.state.selectedTrack.waveform_url.split('/')[3].replace('_m.png', '.mp3')
-        }
-        this.setState({ isPlaying: !this.state.isPlaying }, () => {
-            this.state.isPlaying ? this.audio.current.play() : this.audio.current.pause();
-        });
-    }
-
-    nextTrack = () => {
-        if(this.state.trackIndex >= this.state.selectedPlaylist.length - 1) {
-            return;
-        }
-        let replay = false;
-        if(this.state.isPlaying) {
-            this.togglePlay()
-            replay = true
-        }
-        this.setState({
-            selectedTrack: this.state.selectedPlaylist[this.state.trackIndex+1],
-            trackIndex: this.state.trackIndex+1,
-        }, () => {
-            if(replay) {
-                this.togglePlay()
-            }
-        })
-        
-    }
-
-    previousTrack = () => {
-        if(this.state.trackIndex <= 0) {
-            return;
-        }
-        let replay = false;
-        if(this.state.isPlaying) {
-            this.togglePlay()
-            replay = true
-        }
-        this.setState({
-            selectedTrack: this.state.selectedPlaylist[this.state.trackIndex-1],
-            trackIndex: this.state.trackIndex-1
-        }, () => {
-            if(replay) {
-                this.togglePlay()
-            }
-        })
-    }
-
-    tick() {
-        this.setState({
-            display: this.state.selectedTrack.artist + ' - ' + this.state.selectedTrack.title
-        })
-        /**/
-        // this.setState({
-        //     date: new Date().toLocaleDateString("en-US", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
-        // });
-    }
-
-}
 export default MusicPlayer;
