@@ -33,6 +33,7 @@ export const Desktop = (props: {tracklist: Tracklist}) => {
     { focused: false, clicks: 0, dragging: false },
     { focused: false, clicks: 0, dragging: false },
   ]);
+
   const [menu, setMenu] = useState(false);
   const [resumeTab, setResumeTab] = useState(0);
   const [anyMobileDevice, setAnyMobileDevice] = useState(false);
@@ -66,7 +67,114 @@ export const Desktop = (props: {tracklist: Tracklist}) => {
       return;
     }
     setEaster(true);
+    setEasterPhase(0);
+    if(!easterEggPlayer.current) {
+      return;
+    }
+    let playPromise = easterEggPlayer.current.play();
+    if (playPromise !== undefined) {
+      playPromise.then(() => {
+        incrementBims();
+      });
+    } else {
+      incrementBims();
+    }
   }
+  
+  useEffect(() => {
+    const steps = [
+      {
+          waitTime: 500,
+          action: 'increment',
+          value: 1,
+      }, {
+          waitTime: 500,
+          action: 'increment',
+          value: 1,
+      }, {
+          waitTime: 500,
+          action: 'increment',
+          value: 1,
+      },{
+          waitTime: 500,
+          action: 'set',
+          value: -1,
+      }, {
+          waitTime: 1800,
+          action: 'increment',
+          value: 1,
+      }, {
+          waitTime: 500,
+          action: 'increment',
+          value: 1,
+      }, {
+          waitTime: 500,
+          action: 'increment',
+          value: 1,
+      }, {
+          waitTime: 500,
+          action: 'set',
+          value: -1,
+      }, {
+          waitTime: 1900,
+          action: 'increment',
+          value: 1,
+      }, {
+          waitTime: 500,
+          action: 'increment',
+          value: 1,
+      }, {
+          waitTime: 500,
+          action: 'increment',
+          value: 1,
+      }, {
+          waitTime: 500,
+          action: 'set',
+          value: -1,
+      }, {
+          waitTime: 2300,
+          action: 'increment',
+          value: 1,
+      }, {
+          waitTime: 500,
+          action: 'increment',
+          value: 1,
+      }, {
+          waitTime: 500,
+          action: 'increment',
+          value: 1,
+      }, {
+          waitTime: 500,
+          action: 'set',
+          value: -1,
+      },
+    ];
+  
+    const incrementBims = async () => {
+      let counter = 0;
+      let currentEasterPhase = easterPhase;
+      while (counter < steps.length && easter) {
+        await sleep(steps[counter].waitTime);
+        switch (steps[counter].action) {
+          case 'increment':
+            currentEasterPhase += steps[counter].value;
+            setEasterPhase(currentEasterPhase);
+            break;
+          case 'set':
+            currentEasterPhase = steps[counter].value;
+            setEasterPhase(currentEasterPhase);
+            break;
+          default:
+            console.error('Invalid action in easter egg steps. Contact developer.');
+            break;
+        }
+        counter++;
+      }
+    }
+    if(easter && easterPhase === 0) {
+      incrementBims();
+    }
+  }, [easter, easterPhase])
 
   const endBimBamBoom = () => {
     if(!easterEggPlayer.current) {
@@ -228,109 +336,7 @@ export const Desktop = (props: {tracklist: Tracklist}) => {
 
   // Switch useEffect for easter true/false
   useEffect(() => {
-    const steps = [
-      {
-          waitTime: 500,
-          action: 'increment',
-          value: 1,
-      }, {
-          waitTime: 500,
-          action: 'increment',
-          value: 1,
-      }, {
-          waitTime: 500,
-          action: 'increment',
-          value: 1,
-      },{
-          waitTime: 500,
-          action: 'set',
-          value: -1,
-      }, {
-          waitTime: 1800,
-          action: 'increment',
-          value: 1,
-      }, {
-          waitTime: 500,
-          action: 'increment',
-          value: 1,
-      }, {
-          waitTime: 500,
-          action: 'increment',
-          value: 1,
-      }, {
-          waitTime: 500,
-          action: 'set',
-          value: -1,
-      }, {
-          waitTime: 1900,
-          action: 'increment',
-          value: 1,
-      }, {
-          waitTime: 500,
-          action: 'increment',
-          value: 1,
-      }, {
-          waitTime: 500,
-          action: 'increment',
-          value: 1,
-      }, {
-          waitTime: 500,
-          action: 'set',
-          value: -1,
-      }, {
-          waitTime: 2300,
-          action: 'increment',
-          value: 1,
-      }, {
-          waitTime: 500,
-          action: 'increment',
-          value: 1,
-      }, {
-          waitTime: 500,
-          action: 'increment',
-          value: 1,
-      }, {
-          waitTime: 500,
-          action: 'set',
-          value: -1,
-      },
-    ];
-  
-    const incrementBims = async () => {
-      let counter = 0;
-      let currentEasterPhase = easterPhase;
-      while (counter < steps.length && easter) {
-        await sleep(steps[counter].waitTime);
-        switch (steps[counter].action) {
-          case 'increment':
-            currentEasterPhase += steps[counter].value;
-            setEasterPhase(currentEasterPhase);
-            break;
-          case 'set':
-            currentEasterPhase = steps[counter].value;
-            setEasterPhase(currentEasterPhase);
-            break;
-          default:
-            console.error('Invalid action in easter egg steps. Contact developer.');
-            break;
-        }
-        counter++;
-      }
-    }
-    if (easter) {
-      setEasterPhase(0);
-      if(!easterEggPlayer.current) {
-        return;
-      }
-      let playPromise = easterEggPlayer.current.play();
-      if (playPromise !== undefined) {
-        playPromise.then(() => {
-          incrementBims();
-        });
-      } else {
-        incrementBims();
-      }
-    } else {
+    if (!easter) {
       endBimBamBoom();
     }
   }, [easter, easterPhase]);
