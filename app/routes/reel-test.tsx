@@ -14,7 +14,14 @@ export default function Index() {
           </div>
         </div>
       </div>
-      <iframe className="flex-grow w-screen" width="560" height="315" src="https://play.reelcrafter.com/u_NizoqFTTyPJOYUVJdPig" frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <iframe 
+        className='flex-grow w-screen' 
+        width='560' 
+        height='315'
+        title='Reel Embed Demo'
+        src='https://play.reelcrafter.com/u_NizoqFTTyPJOYUVJdPig'
+        allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; fullscreen;'
+        />
     </div>
   );
 }

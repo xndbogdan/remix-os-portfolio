@@ -1,4 +1,5 @@
-export default [
+import type { Tracklist } from "~/types"
+export const response: Tracklist = [
   {
     "soundcloud_id": 284101883,
     "title": "Tru Tones - Dancing (Roger Thornhill Edit)",
