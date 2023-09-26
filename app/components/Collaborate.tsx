@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
+import pkg from 'react-lazy-load-image-component';
+const { LazyLoadImage } = pkg;
 
-function Collaborate() {
+export const Collaborate = () => {
   const getTimeInBucharest = () => {
     return Intl.DateTimeFormat('ro-RO', {
       hour: 'numeric',
@@ -18,7 +19,7 @@ function Collaborate() {
     return () => {
       clearInterval(intervalID);
     };
-  }, []);
+  });
 
   const tick = () => {
     setTime(getTimeInBucharest());
@@ -40,4 +41,3 @@ function Collaborate() {
     </div>
   );
 }
-export default Collaborate;

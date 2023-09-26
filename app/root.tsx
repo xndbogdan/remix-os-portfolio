@@ -1,29 +1,24 @@
+import stylesheet from "~/tailwind.css";
+import type { LinksFunction } from "@remix-run/node";
 import {
   Links,
   LiveReload,
   Meta,
   Outlet,
   Scripts,
-  ScrollRestoration
-} from "remix";
+  ScrollRestoration,
+} from "@remix-run/react";
 
-import styles from "./styles/app.css"
-
-export function links() {
-  return [{ rel: "stylesheet", href: styles }]
-}
-
-export function meta() {
-  return { title: "Remix OS" };
-}
+export const links: LinksFunction = () => [
+  { rel: "stylesheet", href: stylesheet },
+];
 
 export default function App() {
   return (
     <html lang="en">
       <head>
-        <title>Remix OS</title>
         <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta property="og:title" content="Remix OS - My Portfolio" />
         <meta property="og:type" content="profile" />
         <meta property="og:url" content="https://remixos.dev/" />
@@ -41,7 +36,7 @@ export default function App() {
         <Outlet />
         <ScrollRestoration />
         <Scripts />
-        {process.env.NODE_ENV === "development" && <LiveReload />}
+        <LiveReload />
       </body>
     </html>
   );

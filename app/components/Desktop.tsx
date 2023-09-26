@@ -1,14 +1,16 @@
 import { useState, useRef, useEffect } from 'react';
 import Draggable from 'react-draggable';
-import MusicPlayer from '~/components/MusicPlayer';
-import Collaborate from '~/components/Collaborate';
-import Clock from '~/components/Clock';
-import Calendar from '~/components/Calendar';
-import Resume from '~/components/Resume';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { MusicPlayer } from '~/components/MusicPlayer';
+import { Collaborate } from '~/components/Collaborate';
+import { Clock } from '~/components/Clock';
+import { Calendar } from '~/components/Calendar';
+import { Resume } from '~/components/Resume';
+import pkg from 'react-lazy-load-image-component';
+import type { Tracklist } from '~/types';
+const { LazyLoadImage } = pkg;
 
-function Desktop(props) {
-  const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+export const Desktop = (props: {tracklist: Tracklist}) => {
+  const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
   const [easter, setEaster] = useState(false);
   const [easterPhase, setEasterPhase] = useState(0);
   const [windows, setWindows] = useState([
@@ -32,43 +34,18 @@ function Desktop(props) {
     { focused: false, clicks: 0, dragging: false },
   ]);
   const [menu, setMenu] = useState(false);
-  const [aboutWindow, setAboutWindow] = useState({
-    focused: false,
-    closed: true,
-  });
   const [resumeTab, setResumeTab] = useState(0);
   const [anyMobileDevice, setAnyMobileDevice] = useState(false);
   const [usedMemory, setUsedMemory] = useState("0 MB");
+  const easterEggPlayer = useRef<HTMLAudioElement>(null);
+  const iconTimeout = useRef<NodeJS.Timeout>();
+  let memoryInterval: NodeJS.Timeout;
 
-  const easterEggPlayer = useRef(null);
-  const iconTimeout = useRef(null);
-
-  useEffect(() => {
-    const intervalID = setInterval(() => tick(), 250);
-    return () => {
-      clearInterval(intervalID);
-    };
-  }, []);
-
-  // Switch useEffect for easter true/false
-  useEffect(() => {
-    if (easter) {
-      setEasterPhase(0);
-      let playPromise = easterEggPlayer.current.play();
-      if (playPromise !== undefined) {
-        playPromise.then(() => {
-          incrementBims();
-        });
-      } else {
-        incrementBims();
-      }
-    } else {
-      endBimBamBoom();
+  const findParentWindow = (event: React.ChangeEvent<HTMLInputElement>) => {
+    let daddyWindow: HTMLElement = event.target;
+    if (!daddyWindow) {
+        return;
     }
-  }, [easter]);
-
-  const findParentWindow = (event) => {
-    let daddyWindow = event.target;
     while (!daddyWindow.classList.contains('os-window')) {
       if (!daddyWindow.parentElement) {
         console.error('Could not find parent window. Contact developer.');
@@ -80,6 +57,9 @@ function Desktop(props) {
   }
 
   const bimBamBoom = () => {
+    if (!easterEggPlayer.current) {
+      return;
+    }
     easterEggPlayer.current.volume = 0.15;
     if (easter) {
       endBimBamBoom();
@@ -89,6 +69,9 @@ function Desktop(props) {
   }
 
   const endBimBamBoom = () => {
+    if(!easterEggPlayer.current) {
+        return;
+    }
     clearTimeout(iconTimeout.current);
     easterEggPlayer.current.pause();
     easterEggPlayer.current.currentTime = 0;
@@ -96,20 +79,28 @@ function Desktop(props) {
     setEasterPhase(0);
   }
 
-  const changeResumeVisibility = (event) => {
+  const changeResumeVisibility = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if(!event.target) {
+        return;
+    }
+    if(!event.target.dataset.tab) {
+        return;
+    }
     setResumeTab(parseInt(event.target.dataset.tab));
   }
 
-  const toggleWindowVisibility = (event) => {
+  const toggleWindowVisibility = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.stopPropagation();
-    if(runAdjacencyCheck(event.target)) {
+    if(runAdjacencyCheck(event)) {
       return;
     }
-
+    if(!event.target) {
+        return;
+    }
     if (event.target.classList.contains('min-btn')) {
       return;
     }
-    let daddyWindow = event.target;
+    let daddyWindow: HTMLElement = event.target;
     
     while (!daddyWindow.classList.contains('os-window')) {
       if (!daddyWindow.parentElement) {
@@ -125,7 +116,10 @@ function Desktop(props) {
     }));
   }
 
-  const toggleWindowVisibilityViaId = (event) => {
+  const toggleWindowVisibilityViaId = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if(!event.target.dataset.index) {
+        return;
+    }
     let windowIndex = parseInt(event.target.dataset.index);
     
     setWindows(windows.map((window, index) => {
@@ -133,9 +127,9 @@ function Desktop(props) {
     }));
   }
 
-  const toggleIconVisibility = (event) => {
+  const toggleIconVisibility = (event: React.ChangeEvent<HTMLInputElement>) => {
     clearTimeout(iconTimeout.current);
-    let daddyIcon = event.target;
+    let daddyIcon: HTMLElement = event.target;
     while (!daddyIcon.classList.contains('os-icon')) {
       if (!daddyIcon.parentElement) {
         console.error('Could not find parent icon. Contact developer.');
@@ -187,27 +181,35 @@ function Desktop(props) {
     }));
   }
   
-  const runAdjacencyCheck = (target) => {
-    if(target.classList.contains('close-btn')) {
+  const runAdjacencyCheck = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if(event.target.classList.contains('close-btn')) {
       toggleHideWindow(event);
       return true;
     }
-    if(target.classList.contains('min-btn')) {
+    if(event.target.classList.contains('min-btn')) {
       toggleMinimizeWindow(event);
       return true;
     }
     return false;
   }
 
-  const toggleHideWindow = (event) => {
-    let windowIndex = parseInt(findParentWindow(event).id.replace('window-', ''));
+  const toggleHideWindow = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const parentWindow = findParentWindow(event);
+    if (!parentWindow) {
+        return;
+    }
+    let windowIndex = parseInt(parentWindow.id.replace('window-', ''));
     setWindows(windows.map((window, index) => {
       return index === windowIndex ? { ...window, closed: true } : window;
     }));
   }
 
-  const toggleMinimizeWindow = (event) => {
-    let windowIndex = parseInt(findParentWindow(event).id.replace('window-', ''));
+  const toggleMinimizeWindow = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const parentWindow = findParentWindow(event);
+    if (!parentWindow) {
+        return;
+    }
+    let windowIndex = parseInt(parentWindow.id.replace('window-', ''));
     setWindows(windows.map((window, index) => {
       return index === windowIndex ? { ...window, minimized: true } : window;
     }));
@@ -217,95 +219,121 @@ function Desktop(props) {
     setAnyMobileDevice(window.matchMedia("(max-width: 412px)").matches);
   }
 
-  const steps = [
-    {
-        waitTime: 500,
-        action: 'increment',
-        value: 1,
-    }, {
-        waitTime: 500,
-        action: 'increment',
-        value: 1,
-    }, {
-        waitTime: 500,
-        action: 'increment',
-        value: 1,
-    },{
-        waitTime: 500,
-        action: 'set',
-        value: -1,
-    }, {
-        waitTime: 1800,
-        action: 'increment',
-        value: 1,
-    }, {
-        waitTime: 500,
-        action: 'increment',
-        value: 1,
-    }, {
-        waitTime: 500,
-        action: 'increment',
-        value: 1,
-    }, {
-        waitTime: 500,
-        action: 'set',
-        value: -1,
-    }, {
-        waitTime: 1900,
-        action: 'increment',
-        value: 1,
-    }, {
-        waitTime: 500,
-        action: 'increment',
-        value: 1,
-    }, {
-        waitTime: 500,
-        action: 'increment',
-        value: 1,
-    }, {
-        waitTime: 500,
-        action: 'set',
-        value: -1,
-    }, {
-        waitTime: 2300,
-        action: 'increment',
-        value: 1,
-    }, {
-        waitTime: 500,
-        action: 'increment',
-        value: 1,
-    }, {
-        waitTime: 500,
-        action: 'increment',
-        value: 1,
-    }, {
-        waitTime: 500,
-        action: 'set',
-        value: -1,
-    },
-  ];
+  useEffect(() => {
+    const intervalID = setInterval(() => tick(), 250);
+    return () => {
+      clearInterval(intervalID);
+    };
+  }, []);
 
-  const incrementBims = async () => {
-    let counter = 0;
-    let currentEasterPhase = easterPhase;
-    while (counter < steps.length && easter) {
-      await sleep(steps[counter].waitTime);
-      switch (steps[counter].action) {
-        case 'increment':
-          currentEasterPhase += steps[counter].value;
-          setEasterPhase(currentEasterPhase);
-          break;
-        case 'set':
-          currentEasterPhase = steps[counter].value;
-          setEasterPhase(currentEasterPhase);
-          break;
-        default:
-          console.error('Invalid action in easter egg steps. Contact developer.');
-          break;
+  // Switch useEffect for easter true/false
+  useEffect(() => {
+    const steps = [
+      {
+          waitTime: 500,
+          action: 'increment',
+          value: 1,
+      }, {
+          waitTime: 500,
+          action: 'increment',
+          value: 1,
+      }, {
+          waitTime: 500,
+          action: 'increment',
+          value: 1,
+      },{
+          waitTime: 500,
+          action: 'set',
+          value: -1,
+      }, {
+          waitTime: 1800,
+          action: 'increment',
+          value: 1,
+      }, {
+          waitTime: 500,
+          action: 'increment',
+          value: 1,
+      }, {
+          waitTime: 500,
+          action: 'increment',
+          value: 1,
+      }, {
+          waitTime: 500,
+          action: 'set',
+          value: -1,
+      }, {
+          waitTime: 1900,
+          action: 'increment',
+          value: 1,
+      }, {
+          waitTime: 500,
+          action: 'increment',
+          value: 1,
+      }, {
+          waitTime: 500,
+          action: 'increment',
+          value: 1,
+      }, {
+          waitTime: 500,
+          action: 'set',
+          value: -1,
+      }, {
+          waitTime: 2300,
+          action: 'increment',
+          value: 1,
+      }, {
+          waitTime: 500,
+          action: 'increment',
+          value: 1,
+      }, {
+          waitTime: 500,
+          action: 'increment',
+          value: 1,
+      }, {
+          waitTime: 500,
+          action: 'set',
+          value: -1,
+      },
+    ];
+  
+    const incrementBims = async () => {
+      let counter = 0;
+      let currentEasterPhase = easterPhase;
+      while (counter < steps.length && easter) {
+        await sleep(steps[counter].waitTime);
+        switch (steps[counter].action) {
+          case 'increment':
+            currentEasterPhase += steps[counter].value;
+            setEasterPhase(currentEasterPhase);
+            break;
+          case 'set':
+            currentEasterPhase = steps[counter].value;
+            setEasterPhase(currentEasterPhase);
+            break;
+          default:
+            console.error('Invalid action in easter egg steps. Contact developer.');
+            break;
+        }
+        counter++;
       }
-      counter++;
     }
-  }
+    if (easter) {
+      setEasterPhase(0);
+      if(!easterEggPlayer.current) {
+        return;
+      }
+      let playPromise = easterEggPlayer.current.play();
+      if (playPromise !== undefined) {
+        playPromise.then(() => {
+          incrementBims();
+        });
+      } else {
+        incrementBims();
+      }
+    } else {
+      endBimBamBoom();
+    }
+  }, [easter, easterPhase]);
 
   return (
     <div className="flex-1 min-h-screen font-chicago">
@@ -314,7 +342,7 @@ function Desktop(props) {
             className={ menu ? "flex flex-row items-center py-1 text-xs border-r border-black cursor-point bg-gray-400 px-2" : "flex flex-row items-center py-1 text-xs border-r border-black cursor-point px-2 hover:bg-black hover:text-white group"} 
             onMouseDown={ () => { setMenu(!menu) } }
           >
-              <span>Remix OS { easterPhase }</span>
+              <span>Remix OS</span>
               <LazyLoadImage className="inline ml-1 group-hover:invert" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAADCAYAAABbNsX4AAAAHElEQVQImWNkYGD4z4AGQIIggCwBE0OSYGBgAABmWAMBPlQzgwAAAABJRU5ErkJggg==" height="3" width="auto"/>
           </div>
           <div className="flex-1 py-1"></div>
@@ -324,13 +352,15 @@ function Desktop(props) {
       <div id="dropdown" className={ menu ? 'z-10 w-44 bg-gray-mac shadow-mac-os absolute' : 'hidden' }>
           <ul className="text-xs" aria-labelledby="dropdownDefault">
               <li>
-                  <a 
-                      href="#" 
-                      className="block py-1 px-4 border-b border-black hover:text-white hover:bg-black" 
+                  <span 
+                      className="block py-1 px-4 border-b border-black hover:text-white hover:bg-black cursor-pointer" 
                       onMouseDown={() => { 
                           setMenu(false)
                           
-                          setWindows([...windows, { ...windows[6], closed: false }])
+                          setWindows(windows.map((window, index) => {
+                            return index === 6 ? { ...window, focused: true, closed: false } : window;
+                          }));
+                          
                           if(!memoryInterval) {
                               memoryInterval = setInterval(() => {
                                   let currentUsage = 0
@@ -343,10 +373,10 @@ function Desktop(props) {
                               }, 1000)
                           }
                       }}
-                  >About</a>
+                  >About</span>
               </li>
               <li>
-                  <span href="#" className="block py-1 px-4 border-b border-black text-gray-500">Settings</span>
+                  <span className="block py-1 px-4 border-b border-black text-gray-500">Settings</span>
               </li>
           </ul>
       </div>
@@ -435,23 +465,23 @@ function Desktop(props) {
                                   <p className="mt-4">This project was made using Remix. It combines React and Node.<br/>It's still under development.</p>
                                   <p className="mt-2">You should try moving the windows around and playing some music. Maybe fax me your music playlist while you're at it.</p>
                                   <p className="mt-2">Close this window or move it lower if you are on a mobile device, there are desktop icons under it that you can click to find more about me or listen to some sweet music.</p>
-                                  <p className='mt-2'>For business inqueries contact me on <a className='text-blue-700' target='_blank' href='mailto:bogdan.mosteanu@hey.com'>bogdan.mosteanu@hey.com</a></p>
+                                  <p className='mt-2'>For business inqueries contact me on <a className='text-blue-700' target='_blank' href='mailto:bogdan.mosteanu@hey.com' rel="noreferrer">bogdan.mosteanu@hey.com</a></p>
                                   <p className="mt-4">Links:</p>
                                   <div className='flex flex-wrap space-x-4 mb-2'>
-                                      <a target="_blank" href="https://twitter.com/xndbogdan" className="flex flex-col items-center">
+                                      <a target="_blank" href="https://twitter.com/xndbogdan" className="flex flex-col items-center" rel="noreferrer">
                                           <LazyLoadImage src="/icons/Twitter.png" className="w-10 h-10 mx-auto pointer-events-none"/>
                                           <span className='text-xs'>Twitter</span>
                                       </a>
-                                      <a target="_blank" href="https://github.com/xndbogdan" className="flex flex-col items-center">
+                                      <a target="_blank" href="https://github.com/xndbogdan" className="flex flex-col items-center" rel="noreferrer">
                                           <LazyLoadImage src="/icons/github.png" className="w-10 h-10 mx-auto pointer-events-none"/>
                                           <span className='text-xs'>Github</span>
                                       </a>
-                                      <a target="_blank" href="https://www.linkedin.com/in/bogdan-mihai-mo%C8%99teanu-476262120/" className="flex flex-col items-center">
+                                      <a target="_blank" href="https://www.linkedin.com/in/bogdan-mihai-mo%C8%99teanu-476262120/" className="flex flex-col items-center" rel="noreferrer">
                                           <LazyLoadImage src="/icons/linkedin.png" className="w-10 h-10 mx-auto pointer-events-none"/>
                                           <span className='text-xs'>Linkedin</span>
                                       </a>
                                   </div>
-                                  <a className='text-sm hover:text-blue-ukraine' href='https://helpukraine.center/' target="_blank">Donate to HELP<span className='text-red-600'>UKRAINE</span>.CENTER <img alt='Ukraine flag' className='w-6 h-4 inline' src="/img/ukraine.svg"/> </a>
+                                  <a className='text-sm hover:text-blue-ukraine' href='https://helpukraine.center/' target="_blank" rel="noreferrer">Donate to HELP<span className='text-red-600'>UKRAINE</span>.CENTER <img alt='Ukraine flag' className='w-6 h-4 inline' src="/img/ukraine.svg"/> </a>
                               </div>
                           </div>
                       </Draggable>
@@ -535,8 +565,8 @@ function Desktop(props) {
                               </div>
                               <div className="p-2 overflow-y-auto text-sm bg-white border border-black max-h-80 select-full">
                                   <p className="mb-2 text-lg">Credits</p>
-                                  <p><a target="_blank" href="https://remix.run" className="text-blue-700 hover:text-blue-800">• Remix framework</a>, for making this project possible.</p>
-                                  <p><a target="_blank" href="https://poolsuite.net/" className="text-blue-700 hover:text-blue-800">• Poolsuite</a>, for inspiring this project's design and providing awesome music playlists.</p>
+                                  <p><a target="_blank" href="https://remix.run" className="text-blue-700 hover:text-blue-800" rel="noreferrer">• Remix framework</a>, for making this project possible.</p>
+                                  <p><a target="_blank" href="https://poolsuite.net/" className="text-blue-700 hover:text-blue-800" rel="noreferrer">• Poolsuite</a>, for inspiring this project's design and providing awesome music playlists.</p>
                               </div>
                           </div>
                       </Draggable>
@@ -600,21 +630,24 @@ function Desktop(props) {
                                   <div className="ml-2 text-xs handle cursor-grab">Remix OS</div>
                               </div>
                               <div className="px-2 py-4 overflow-y-auto text-sm bg-white border border-black max-h-80 select-full flex justify-center">
-                                  <div className="stack" style={{'--stacks': 3, 'minHeight': '3.5rem'}}>
-                                      <span className='pt-4' style={{ "--index": 0 }}>REMIX OS</span>
-                                      <span className='pt-4' style={{ "--index": 1 }}>REMIX OS</span>
-                                      <span className='pt-4' style={{ "--index": 2 }}>REMIX OS</span>
+                                  <div
+                                    className="stack"
+                                    style={{'--stacks': 3, 'minHeight': '3.5rem'} as React.CSSProperties}
+                                  >
+                                      <span className='pt-4' style={{ "--index": 0 } as React.CSSProperties}>REMIX OS</span>
+                                      <span className='pt-4' style={{ "--index": 1 } as React.CSSProperties}>REMIX OS</span>
+                                      <span className='pt-4' style={{ "--index": 2 } as React.CSSProperties}>REMIX OS</span>
                                   </div>
                                   
                               </div>
                               <div className="flex flex-wrap text-xs py-2">
                                   <div className="w-full md:w-1/2 md:pr-1">
-                                      <p>Version: Remix OS 0.4.0</p>
+                                      <p>Version: Remix OS 2.0</p>
                                       <p>Built-in Memory: 768 MB</p>
                                       <p>Used Memory: { usedMemory }</p>
                                   </div>
                                   <div className="w-full md:w-1/2 md:pl-1">
-                                      <p>Remix Rom 1.1.3</p>
+                                      <p>Remix Rom 2.0.1</p>
                                       
                                   </div>
                               </div>
@@ -666,5 +699,3 @@ function Desktop(props) {
     </div>
   );
 }
-
-export default Desktop;

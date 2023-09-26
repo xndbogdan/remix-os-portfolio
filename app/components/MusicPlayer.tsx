@@ -1,57 +1,32 @@
 import { useRef, useState, useEffect } from 'react';
-import AudioSpectrum from 'react-audio-spectrum';
+// import AudioSpectrum from 'react-audio-spectrum2';
+import AudioSpectrum from './Shared/AudioSpectrum';
+import type { Tracklist } from '~/types';
 // import { sleep } from '~/utils/sleep';
 
-const MusicPlayer = (props) => {
-  const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+export const MusicPlayer = (props: { tracklist: Tracklist, closed: boolean }) => {
+  const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
   const randomTrackIndex = 0;
   const musicApiEndpoint = 'https://misty-butterfly-7016.fly.dev/api/play/';
 
-  const [selectedPlaylist, setSelectedPlaylist] = useState(props.tracklist);
-  const [selectedPlaylistLength, setSelectedPlaylistLength] = useState(props.tracklist.length);
+  const [selectedPlaylist] = useState(props.tracklist);
+  const [selectedPlaylistLength] = useState(props.tracklist.length);
   const [trackIndex, setTrackIndex] = useState(randomTrackIndex);
   const [selectedTrack, setSelectedTrack] = useState(props.tracklist[0]);
   const [display, setDisplay] = useState('Player Offline');
   const [isPlaying, setIsPlaying] = useState(false);
-  const [trackProgress, setTrackProgress] = useState(0);
+  const [trackProgress, setTrackProgress] = useState("0%");
   const [currentTrackTime, setCurrentTrackTime] = useState(0);
   const [currentTrackDuration, setCurrentTrackDuration] = useState(0);
 
-  const audio = useRef();
-  const displayText = useRef();
-  const displayTextContainer = useRef();
-  const progressBar = useRef();
-  const progressBarContainer = useRef();
-
-  useEffect(() => {
-    if (typeof document !== 'undefined') {
-      document.getElementById('music-player-volume').value = 1;
-    }
-    
-    // Add event listeners and cleanup
-    const audioElement = audio.current;
-
-    const intervalID = setInterval(updateScreen, 1000);
-
-    audioElement.addEventListener('ended', () => setIsPlaying(false));
-
-    return () => {
-      clearInterval(intervalID);
-      audioElement.removeEventListener('ended', () => setIsPlaying(false));
-    };
-  }, [props.closed, isPlaying]);
-
-  useEffect(async () => {
-    if (isPlaying) {
-      silentlyPause();
-    }
-    await sleep(100);
-    if (isPlaying) {
-      silentlyPlay();
-    }
-  }, [trackIndex]);
+  const audio = useRef<HTMLAudioElement>();
+  const displayText = useRef<HTMLInputElement>(null);
+  const displayTextContainer = useRef<HTMLElement>(null);
+  const progressBar = useRef<HTMLElement>(null);
+  const progressBarContainer = useRef<HTMLElement>(null);
+  const previousWaveformUrl = useRef<string>(selectedTrack.waveform_url);
   
-  const updateTrackProgress = (event) => {
+  const updateTrackProgress = (event: React.ChangeEvent<HTMLAudioElement>) => {
     if (props.closed) {
       if (isPlaying) {
         togglePlay();
@@ -64,48 +39,49 @@ const MusicPlayer = (props) => {
     setCurrentTrackTime(currentTime);
   };
 
-  const updateSongPosition = (event) => {
+  const updateSongPosition = (event: React.MouseEvent<HTMLElement>) => {
+    if(!event.target) {
+      return;
+    }
     let boundingRect = event.target.getBoundingClientRect();
     let percentage = ((event.clientX - boundingRect.left) / boundingRect.width);
+    if(!audio.current) {
+      return;
+    }
     audio.current.currentTime = percentage * audio.current.duration;
   };
 
-  const convertDuration = (time) => {
+  const convertDuration = (time: number) => {
     let mins = Math.floor(time / 60);
-    if (mins < 10) {
-      mins = '0' + String(mins);
-    }
     let secs = Math.floor(time % 60);
-    if (secs < 10) {
-      secs = '0' + String(secs);
-    }
-    return mins + ':' + secs;
+    // if (mins < 10) {
+    //   mins = '0' + String(mins);
+    // }
+    // if (secs < 10) {
+    //   secs = '0' + String(secs);
+    // }
+    let returnResult = mins < 10 ? '0' + String(mins) : String(mins);
+    returnResult += ':';
+    returnResult += secs < 10 ? '0' + String(secs) : String(secs);
+    return returnResult;
   };
 
   const togglePlay = () => {
+    if (!audio.current) {
+      return;
+    }
     if (audio.current.src !== musicApiEndpoint + selectedTrack.waveform_url.split('/')[3].replace('_m.png', '.mp3')) {
       audio.current.src = musicApiEndpoint + selectedTrack.waveform_url.split('/')[3].replace('_m.png', '.mp3');
     }
     setIsPlaying(!isPlaying);
+    if (previousWaveformUrl.current !== selectedTrack.waveform_url && !isPlaying) {
+      return;
+    }
     if (isPlaying) {
       audio.current.pause();
     } else {
       audio.current.play();
     }
-  };
-
-  const silentlyPause = () => {
-    if (audio.current.src !== musicApiEndpoint + selectedTrack.waveform_url.split('/')[3].replace('_m.png', '.mp3')) {
-      audio.current.src = musicApiEndpoint + selectedTrack.waveform_url.split('/')[3].replace('_m.png', '.mp3');
-    }
-    audio.current.pause();
-  };
-
-  const silentlyPlay = () => {
-    if (audio.current.src !== musicApiEndpoint + selectedTrack.waveform_url.split('/')[3].replace('_m.png', '.mp3')) {
-      audio.current.src = musicApiEndpoint + selectedTrack.waveform_url.split('/')[3].replace('_m.png', '.mp3');
-    }
-    audio.current.play();
   };
 
   const nextTrack = async () => {
@@ -124,15 +100,72 @@ const MusicPlayer = (props) => {
     setTrackIndex(trackIndex - 1);
   };
 
-  const updateScreen = () => {
-    setDisplay(selectedTrack.artist + ' - ' + selectedTrack.title);
-  };
+  useEffect(() => {
+    if (typeof document !== 'undefined') {
+      const volume = document.getElementById('music-player-volume') as HTMLInputElement | null;
+      if(volume) {
+        volume.value = "1";
+      }
+    }
+
+    const updateScreen = () => {
+      setDisplay(selectedTrack.artist + ' - ' + selectedTrack.title);
+    };
+    
+    // Add event listeners and cleanup
+    const audioElement = audio.current;
+
+    const intervalID = setInterval(updateScreen, 1000);
+    if(!audioElement) {
+      return;
+    }
+
+    audioElement.addEventListener('ended', () => setIsPlaying(false));
+    return () => {
+      clearInterval(intervalID);
+      audioElement.removeEventListener('ended', () => setIsPlaying(false));
+    };
+  }, [props.closed, isPlaying, selectedTrack.artist, selectedTrack.title]);
+
+  useEffect(() => {
+    const silentlyPause = () => {
+      if (!audio.current) {
+        return;
+      }
+      if (audio.current.src !== musicApiEndpoint + selectedTrack.waveform_url.split('/')[3].replace('_m.png', '.mp3')) {
+        audio.current.src = musicApiEndpoint + selectedTrack.waveform_url.split('/')[3].replace('_m.png', '.mp3');
+      }
+      audio.current.pause();
+    };
+  
+    const silentlyPlay = () => {
+      if (!audio.current) {
+        return;
+      }
+      if (audio.current.src !== musicApiEndpoint + selectedTrack.waveform_url.split('/')[3].replace('_m.png', '.mp3')) {
+        audio.current.src = musicApiEndpoint + selectedTrack.waveform_url.split('/')[3].replace('_m.png', '.mp3');
+      }
+      audio.current.play();
+    };
+    if (selectedTrack.waveform_url !== previousWaveformUrl.current) {
+      if (isPlaying) {
+        silentlyPause();
+      }
+      sleep(100);
+      if (isPlaying) {
+        silentlyPlay();
+      }
+    } else {
+      previousWaveformUrl.current = selectedTrack.waveform_url;
+    }
+    
+  }, [trackIndex, isPlaying, selectedTrack.waveform_url]);
 
   return (
     <div className="px-2">
       <div className='bg-gray-900 border-2 border-gray-600 my-2'>
         <div className=" h-8 text-blue-300 px-2 flex items-center" ref={displayTextContainer}>
-          <a target="_blank" href={selectedTrack.permalink_url} className="opacity-75 cursor-point truncate" ref={displayText}>
+          <a target="_blank" href={selectedTrack.permalink_url} className="opacity-75 cursor-point truncate" ref={displayText} rel="noreferrer">
             <span className='pr-16'>
               {display}
             </span>
@@ -160,7 +193,7 @@ const MusicPlayer = (props) => {
         </div>
         <div className={!isPlaying ? 'h-8 text-blue-300 flex items-center justify-start' : 'hidden'} ref={displayTextContainer}>
           <div className='opacity-75 px-2'>
-            /// Remix OS Player - Paused ///
+            &#47;&#47;&#47; Remix OS Player - Paused &#47;&#47;&#47;
           </div>
         </div>
       </div>
@@ -204,5 +237,3 @@ const MusicPlayer = (props) => {
     </div>
   );
 };
-
-export default MusicPlayer;

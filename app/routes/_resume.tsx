@@ -1,4 +1,4 @@
-import ResumeSection from '~/components/ResumeSection';
+import { ResumeSection } from '~/components/ResumeSection';
 
 export let loader = async () => {
   return {};

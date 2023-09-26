@@ -1,6 +1,6 @@
-import Resume from './Resume';
+import { Resume } from './Resume';
 
-const ResumeSection = () => {
+export const ResumeSection = () => {
     const closeResume = () => {
         window.close();
     };
@@ -29,5 +29,3 @@ const ResumeSection = () => {
         </div>
     );
 }
-
-export default ResumeSection;

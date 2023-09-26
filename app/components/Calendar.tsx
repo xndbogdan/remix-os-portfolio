@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-function Calendar() {
+export const Calendar = () => {
   const [date, setDate] = useState(() => {
     let currentDate = new Date();
     currentDate.setFullYear(currentDate.getFullYear() - 30);
@@ -23,4 +23,3 @@ function Calendar() {
 
   return <span>{date}</span>;
 }
-export default Calendar;
