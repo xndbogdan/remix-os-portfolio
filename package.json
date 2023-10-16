@@ -11,6 +11,7 @@
     "deploy": "npm run build && flyctl deploy"
   },
   "dependencies": {
+    "18": "^0.0.0",
     "@remix-run/css-bundle": "^2.0.1",
     "@remix-run/node": "^2.0.1",
     "@remix-run/react": "^2.0.1",
