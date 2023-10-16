@@ -116,7 +116,7 @@ export const MusicPlayer = (props: { tracklist: Tracklist, closed: boolean }) =>
     // Add event listeners and cleanup
     const audioElement = audio.current;
 
-    const intervalID = setInterval(updateScreen, 1000);
+    const intervalID = setInterval(updateScreen, 50);
     if(!audioElement) {
       return;
     }
