@@ -18,12 +18,13 @@ export const MusicPlayer = (props: { tracklist: Tracklist, closed: boolean }) =>
   const [trackProgress, setTrackProgress] = useState("0%");
   const [currentTrackTime, setCurrentTrackTime] = useState(0);
   const [currentTrackDuration, setCurrentTrackDuration] = useState(0);
+  const [currentVolume, setCurrentVolume] = useState(1);
 
-  const audio = useRef<HTMLAudioElement>();
-  const displayText = useRef<HTMLInputElement>(null);
-  const displayTextContainer = useRef<HTMLElement>(null);
-  const progressBar = useRef<HTMLElement>(null);
-  const progressBarContainer = useRef<HTMLElement>(null);
+  const audio = useRef<HTMLAudioElement>(null);
+  const displayText = useRef<HTMLAnchorElement>(null);
+  const displayTextContainer = useRef<HTMLDivElement>(null);
+  const progressBar = useRef<HTMLDivElement>(null);
+  const progressBarContainer = useRef<HTMLDivElement>(null);
   const previousWaveformUrl = useRef<string>(selectedTrack.waveform_url);
   
   const updateTrackProgress = (event: React.ChangeEvent<HTMLAudioElement>) => {
@@ -40,9 +41,9 @@ export const MusicPlayer = (props: { tracklist: Tracklist, closed: boolean }) =>
   };
 
   const updateSongPosition = (event: React.MouseEvent<HTMLElement>) => {
-    if(!event.target) {
+    if (!(event.target instanceof Element)) {
       return;
-    }
+  }
     let boundingRect = event.target.getBoundingClientRect();
     let percentage = ((event.clientX - boundingRect.left) / boundingRect.width);
     if(!audio.current) {
@@ -115,7 +116,7 @@ export const MusicPlayer = (props: { tracklist: Tracklist, closed: boolean }) =>
     // Add event listeners and cleanup
     const audioElement = audio.current;
 
-    const intervalID = setInterval(updateScreen, 1000);
+    const intervalID = setInterval(updateScreen, 50);
     if(!audioElement) {
       return;
     }
@@ -228,7 +229,14 @@ export const MusicPlayer = (props: { tracklist: Tracklist, closed: boolean }) =>
           </button>
         </div>
         <div className="wrapper">
-          <input id="music-player-volume" className='mac-input' type="range" min="0" max="1" step="0.025" onChange={(e) => { document.getElementById('music-player').volume = e.target.value }} />
+          <input id="music-player-volume" value={currentVolume} className='mac-input' type="range" min="0" max="1" step="0.025" onChange={(e) => {
+            const currentVolume = parseFloat(e.target.value)
+            const musicPlayer = document.getElementById('music-player') as HTMLAudioElement | null;
+            if(musicPlayer) {
+              musicPlayer.volume = currentVolume
+            }
+            setCurrentVolume(currentVolume)
+          }} />
           <label className="hidden" htmlFor="volume">Volume</label>
         </div>
       </div>
