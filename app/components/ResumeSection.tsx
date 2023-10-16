@@ -21,7 +21,7 @@ export const ResumeSection = () => {
                 </div>
                 <div className='overflow-y-auto' style={{ maxHeight: "95vh" }}>
                     <div className="py-2 px-4 overflow-y-auto text-sm bg-white select-full">
-                        <Resume></Resume>
+                        <Resume/>
                     </div>
                     <div className='pb-32 sm:hidden bg-white'>&nbsp;</div>
                 </div>
