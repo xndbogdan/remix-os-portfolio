@@ -62,7 +62,7 @@ export const Resume = () => {
           </div>
           <div className='mt-4'>
             <a className='text-blue-700 hover:text-blue-600' href='https://www.webfusion.ro/' target='_blank' rel="noreferrer">→ WEBFUSION</a>
-            <p className='whitespace-pre-wrap mt-2'>
+            <div className='whitespace-pre-wrap mt-2'>
               <p>Some of the I did included:</p>
               <p>- Full Stack Development of new projects</p>
               <p>- Integerations with various providers/apis including payment providers.</p>
@@ -71,7 +71,7 @@ export const Resume = () => {
               <p>- Came up with solutions that worked better for the client and their customers</p>
               <p>- Helped junior devs understand the tech stack and get better at their job</p>
               <p>- Worked on a few projects solo, from start to finish</p>
-            </p>
+            </div>
             <p className='mt-4'><span className='font-bold'>Tech Stack:</span> MySQL · Inertia.js · Elasticsearch · Laravel · Vue.js · PHP · Tailwind CSS</p>
           </div>
           <div className='mt-4'>
@@ -93,7 +93,7 @@ export const Resume = () => {
           </div>
           <div className='mt-4'>
             <a className='text-blue-700 hover:text-blue-600' href='https://artgames.ro/' target='_blank' rel="noreferrer">→ ART GAMES</a>
-            <p className='whitespace-pre-wrap mt-2'>
+            <div className='whitespace-pre-wrap mt-2'>
               Some of the work I did included:
               <p>- Develop Wordpress presentation websites for the company's clients.</p>
               <p>- Integrations with various providers/apis including payment providers.</p>
@@ -106,7 +106,7 @@ export const Resume = () => {
               <p>- Worked solo on projects from start to finish</p>
               <p>- Part of the main development team for major projects like Artmark, Sotheby's Romania</p>
               <p>- Part of the main development team for a project with a banking partner (cannot give details due to nda)</p>
-            </p>
+            </div>
             <p className='mt-4'><span className='font-bold'>Tech Stack:</span> Webrtc · MySQL · Inertia.js · Elasticsearch · WebSocket · Laravel · Vue.js · PHP · WordPress · Tailwind CSS</p>
           </div>
         </div>
