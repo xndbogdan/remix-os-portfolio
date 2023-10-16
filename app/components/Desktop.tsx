@@ -93,6 +93,9 @@ export const Desktop = (props: {tracklist: Tracklist}) => {
   }
 
   const toggleIconVisibility = (iconIndex: number) => {
+    if (iconTimeout.current) {
+      clearTimeout(iconTimeout.current);
+    }
     let visibleIcons = [...icons];
     visibleIcons.forEach((icon, index) => {
       if (index === iconIndex) {
@@ -120,12 +123,12 @@ export const Desktop = (props: {tracklist: Tracklist}) => {
     setIcons(visibleIcons);
 
     iconTimeout.current = setTimeout(() => {
-      resetIconsFocusedState();
+      resetIconsFocusedState(iconIndex);
     }, 2000);
     
   }
 
-  const resetIconsFocusedState = () => {
+  const resetIconsFocusedState = (iconIndex: number) => {
     setIcons(icons.map((icon, index) => {
       const focused = icons[index].focused;
       return { ...icon, focused: focused, clicks: 0 };
