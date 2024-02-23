@@ -29,8 +29,17 @@ export const Resume = () => {
 
         <p className='mt-2 text-xl'>Collaboration history:</p>
         <div className="flex flex-col px-4 pb-4">
+        <div className='mt-4'>
+            <a className='text-blue-700 hover:text-blue-600' href='https://www.fabricdata.com/' target='_blank' rel="noreferrer">→ Fabric</a> - Ongoing
+            <p className="whitespace-pre-wrap mt-2">
+              ● Fixed bugs in the app, making it more reliable for users.<br/>
+              ● Suggested changes to the way we write and organize code, helping the team work better.<br/>
+              ● Delivered critical fixes for key clients like MGM, Fox, Viacom, etc enhancing their experience and trust in our product.
+            </p>
+            <p className='mt-4'><span className='font-bold'>Tech Stack:</span> Express.js · Laravel · React · Material UI</p>
+          </div>
           <div className='mt-4'>
-            <a className='text-blue-700 hover:text-blue-600' href='https://www.reelcrafter.com/' target='_blank' rel="noreferrer">→ ReelCrafter</a>
+            <a className='text-blue-700 hover:text-blue-600' href='https://www.reelcrafter.com/' target='_blank' rel="noreferrer">→ ReelCrafter</a> - Ongoing
             <p className='whitespace-pre-wrap mt-2'>
               ReelCrafter is a platform that allows users to create tailored reels to showcase their music, offering a unique and engaging way to showcase their work.<br/>
               Working as a Full Stack Developer at ReelCrafter, I have had the opportunity to work closely with the CEO to develop new features and fix bugs, making this collaboration by far the best I have had so far.<br/> 
@@ -111,7 +120,7 @@ export const Resume = () => {
           </div>
         </div>
 
-        <h1 className="text-2xl mb-2 mt-4">Work experience</h1>
+        <h1 className="text-2xl mb-2 mt-4">Employment experience</h1>
         <p className="mt-2"><span className="text-blue-700">► Full Stack Web Developer</span> at <a href="http://artgames.ro/" target="_blank" rel="noreferrer">Art Games</a> (Jul 2018 - Oct 2019)</p>
         <p>Worked on many internal projects, including <a target="_blank" href="https://artmark.ro" rel="noreferrer">Artmark.ro</a>, and <a target="_blank" href="https://artsafari.ro" rel="noreferrer">Artsafari.ro</a> and <a target="_blank" href="https://www.sothebysrealty.ro/" rel="noreferrer">Sotheby's Realty Romania</a> .</p>
         <p>Started working on Artmark since it's beginning, to the end. Worked solo on many internal projects.</p>
