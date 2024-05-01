@@ -39,7 +39,7 @@ export const Resume = () => {
             <p className='mt-4'><span className='font-bold'>Tech Stack:</span> Express.js · Laravel · React · Material UI</p>
           </div>
           <div className='mt-4'>
-            <a className='text-blue-700 hover:text-blue-600' href='https://www.reelcrafter.com/' target='_blank' rel="noreferrer">→ ReelCrafter</a> - Ongoing
+            <a className='text-blue-700 hover:text-blue-600' href='https://www.reelcrafter.com/' target='_blank' rel="noreferrer">→ ReelCrafter</a>
             <p className='whitespace-pre-wrap mt-2'>
               ReelCrafter is a platform that allows users to create tailored reels to showcase their music, offering a unique and engaging way to showcase their work.<br/>
               Working as a Full Stack Developer at ReelCrafter, I have had the opportunity to work closely with the CEO to develop new features and fix bugs, making this collaboration by far the best I have had so far.<br/> 
