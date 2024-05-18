@@ -123,7 +123,7 @@ export const Resume = () => {
         <h1 className="text-2xl mb-2 mt-4">Employment experience</h1>
         <p className="mt-2"><span className="text-blue-700">► Full Stack Web Developer</span> at <a href="http://artgames.ro/" target="_blank" rel="noreferrer">Art Games</a> (Jul 2018 - Oct 2019)</p>
         <p>Worked on many internal projects, including <a target="_blank" href="https://artmark.ro" rel="noreferrer">Artmark.ro</a>, and <a target="_blank" href="https://artsafari.ro" rel="noreferrer">Artsafari.ro</a> and <a target="_blank" href="https://www.sothebysrealty.ro/" rel="noreferrer">Sotheby's Realty Romania</a> .</p>
-        <p>Started working on Artmark since it's beginning, to the end. Worked solo on many internal projects.</p>
+        <p>Started working on Artmark since its beginning, to the end. Worked solo on many internal projects.</p>
         <p>Gained valuable experience with Laravel, Laravel Nova (also building Resource Tools), Laravel Scout, Vue.js, Vuex, Websockets, AWS services and Elasticsearch.</p>
 
         <p className="mt-2"><span className="text-blue-700"> ► Junior Web Developer</span> at <a href="https://machteamsoft.ro/" target="_blank" rel="noreferrer">Machteamsoft</a> (Apr 2018 - Jul 2018)</p>
